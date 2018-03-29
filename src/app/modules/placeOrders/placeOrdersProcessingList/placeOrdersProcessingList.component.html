@@ -1,0 +1,30 @@
+<app-processingListToolbar></app-processingListToolbar>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><input type="checkbox" aria-label="Checkbox for following text input" style = "height:25px;width:25px;" (click) = "checkToggle()"></th>
+      <th scope="col">Description</th>
+      <th scope="col">Group</th>
+      <th scope="col">Category</th>
+      <th scope="col">Quantity Available</th>
+      <th scope="col">Quantity To Order</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let material of materials.materials">
+      <th scope="row"><input type="checkbox" aria-label="Select to Order" style = "height:25px;width:25px;" checked = "{{ checked }}"></th>
+      <td>{{ material.description }}</td>
+      <td>{{ material.group }}</td>
+      <td>{{ material.category }}</td>
+      <td>{{ material.quantityRemaining }}</td>
+      <td>
+      	<div class="input-group input-group-sm mb-3">
+			<div class="input-group-prepend">
+		    	<span class="input-group-text" id="inputGroup-sizing-sm">QTY</span>
+		  	</div>
+		  	<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value = "{{ material.quantityRemaining }}">
+		</div>
+	  </td>
+    </tr>
+  </tbody>
+</table>

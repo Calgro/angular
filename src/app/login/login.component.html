@@ -1,0 +1,29 @@
+<div class="row align-items-center justify-content-center" *ngIf = "!authService.isAuthenticated()">
+	<div class = "col-xs-12 col-sm 10 col-md-3" style = "text-align:center;">
+		<form class="form-signin" (ngSubmit) = "onSignIn(form)" #form = "ngForm">
+			<h1 class="h3 mb-3 font-weight-normal">Welcome</h1>
+		    <label for="email" class="sr-only" style = "">Email address</label>
+		    <input 
+		    	type="email" 
+		    	id="email" 
+		    	class="form-control" 
+		    	placeholder="Email address / Username" 
+		    	required="" 
+		    	autofocus="" 
+		    	style = "margin-bottom:20px;" 
+		    	ngModel 
+		    	name = "email">
+		    <label for="password" class="sr-only" style = "margin-bottom:20px;">Password</label>
+		    <input 
+		    	type="password" 
+		    	id="password" 
+		    	class="form-control"
+		    	placeholder="Password" 
+		    	required="" 
+		    	style = "margin-bottom:20px;" 
+		    	ngModel 
+		    	name = "password">
+		    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</form>
+	</div>
+</div>
