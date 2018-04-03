@@ -115,7 +115,7 @@ export class PlaceOrdersDepartmentProcessingListComponent implements OnInit {
       this.orders = new OrderItems('Place Order', []);
       if (!this.ordersForm.valid) {
         alertify.error('You have specified a negative amount. See the field in red.');
-      } else if (this.ordersForm.value.deliveryAddress === 'instruction') { // Hasn't been set
+      } else if (this.ordersForm.value.deliveryAddressID === 'instruction') { // Hasn't been set
         alertify.error('You must specify a delivery address');
       } else {
         alertify.success('Placing Order. You will be notified once complete.');
