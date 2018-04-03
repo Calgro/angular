@@ -5,17 +5,26 @@ import { NgForm } from '@angular/forms';
 export class FilterService {
 
   constructor() { }
-  projectID: string = null;
-  townshipID: string = null;
-  erfID: string = null;
-  PUAID: string = null;
-  buildingID: string = null;
-  unitID: string = null;
-  zoningID: string = null;
-  materialListType: string = null;
-  materialID: string = null;
-  contractorID: string = null;
-  departmentID; string = null;
+  projectID = null;
+  townshipID = null;
+  erfID = null;
+  PUAID = null;
+  buildingID = null;
+  unitID = null;
+  zoningID = null;
+  materialListType = null;
+  materialID = null;
+  contractorID = null;
+  departmentID = null;
 
+  dropdownConvert(optionValue) {
+    if (optionValue === null) {
+      return 'instruction';
+    } else if (optionValue === 'instruction') {
+      return null;
+    } else {
+      return optionValue;
+    }
+}
 
 }

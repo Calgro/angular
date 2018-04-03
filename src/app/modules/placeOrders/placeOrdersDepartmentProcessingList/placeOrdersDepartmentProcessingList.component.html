@@ -20,18 +20,16 @@
 			      <th scope="col">Description</th>
 			      <th scope="col">Group</th>
 			      <th scope="col">Category</th>
-			      <th scope="col">Quantity Available</th>
 			      <th scope="col">Quantity To Order</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr  *ngFor="let OrderItemControl of ordersForm.get('orderItem').controls; let i = index" [formGroupName]="i" >
-			      <td scope="row"><input *ngIf="OrderItemControl.value.quantityRemaining > 0" type="checkbox" (click) = "onOrderCheck(i)" aria-label="Select to Order" style = "height:25px;width:25px;" checked = "{{ checked }}" formControlName="status"></td>
+			      <td scope="row"><input type="checkbox" (click) = "onOrderCheck(i)" aria-label="Select to Order" style = "height:25px;width:25px;" checked = "{{ checked }}" formControlName="status"></td>
 			      <td>{{ OrderItemControl.value.description }}</td>
 			      <td>{{ OrderItemControl.value.group }}</td>
 			      <td>{{ OrderItemControl.value.category }}</td>
-			      <td>{{ OrderItemControl.value.quantityRemaining }}</td>
-			      <td *ngIf="OrderItemControl.value.quantityRemaining > 0">
+			      <td>
 			      	<div class="input-group input-group-sm mb-3" >
 						<div class="input-group-prepend">
 					    	<span class="input-group-text" id="inputGroup-sizing-sm">QTY</span>
@@ -42,17 +40,16 @@
 					  		aria-label="Small"
 					  		aria-describedby="inputGroup-sizing-sm"
 					  		min="0"
-					  		max="{{ OrderItemControl.value.quantityRemaining }}"
 					  		formControlName="quantityOrdered">
 					  	<input 
 					  		type="text"
-					  		formControlName="buildingID" hidden>
+					  		formControlName="departmentID" hidden>
 					  	<input 
 					  		type="text"
-					  		formControlName="materialID" hidden>
+					  		formControlName="productID" hidden>
 					</div>
 				  </td>
-				  <td *ngIf="OrderItemControl.value.quantityRemaining <= 0">{{ OrderItemControl.value.quantityAllowed }}</td>
+				  
 			    </tr>
 			  </tbody>
 			</table>

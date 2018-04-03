@@ -1,5 +1,5 @@
 <div class="row align-items-center justify-content-center">
-	<div class = "col-xs-12 col-sm 10 col-md-3" style = "text-align:center;">
+	<div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6" style = "text-align:center;">
 		<form class="form-filter" (ngSubmit) = "applyFilter(form)" #form = "ngForm">
 			<h1 class="h3 mb-3 font-weight-normal">ORDERING FILTER</h1>
 		    <div class = "row" style = "margin-bottom:20px;">
@@ -16,70 +16,71 @@
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 				<div class="col-lg-12">
-					<select class="custom-select mr-sm-2" id="projectsDD" (change)="projectChange(projectsDD.value)" #projectsDD ngModel name = "projectID">
-				    	<option value = '' selected disabled>Select a Project</option>
-				    	<option *ngFor = "let project of projects.projects" value = "{{ project.projectID }}" [selected]="project.projectID === projectID">{{ project.projectName }}</option>
+					<label for="buildingFilter"><strong>STEP 1</strong><br>Show Buildings Belonging To</label>
+					<select class="custom-select mr-sm-2" id="projectsDD" (change)="projectChange(projectsDD.value)" #projectsDD [(ngModel)]="projectID" name = "projectID">
+				    	<option value = 'instruction' hidden>Select a Project</option>
+				    	<option *ngFor = "let project of projects.projects" value = "{{ project.projectID }}">{{ project.projectName }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 				<div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="townshipsDD" (change)="townshipChange(townshipsDD.value)" #townshipsDD ngModel name = "townshipID">
-				    	<option value = '' selected>Select a Township</option>
-				    	<option value = '' selected>None</option>
-				    	<option *ngFor = "let township of townships.townships" value = "{{ township.townshipID }}" [selected]="township.townshipID === townshipID">{{ township.name }}{{ townshipID }}</option>
+				    <select class="custom-select mr-sm-2" id="townshipsDD" (change)="townshipChange(townshipsDD.value)" #townshipsDD [(ngModel)]="townshipID" name = "townshipID">
+				    	<option value = 'instruction' hidden>Select a Township</option>
+				    	<option *ngFor = "let township of townships.townships" value = "{{ township.townshipID }}">{{ township.name }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="ervenDD" (change)="erfChange(ervenDD.value)" #ervenDD ngModel name = "erfID">
-				    	<option value = '' selected>Select an Erf</option>
+				    <select class="custom-select mr-sm-2" id="ervenDD" (change)="erfChange(ervenDD.value)" #ervenDD [(ngModel)]="erfID" name = "erfID">
+				    	<option value = 'instruction' hidden>Select an Erf</option>
 				    	<option value = '' selected>None</option>
-				    	<option *ngFor = "let erf of erven.erven" value = "{{ erf.erfID }}" [selected]="erf.erfID === erfID">{{ erf.name }}</option>
+				    	<option *ngFor = "let erf of erven.erven" value = "{{ erf.erfID }}">{{ erf.name }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="PUADD" (change)="PUAChange(puaDD.value)" #puaDD ngModel name = "PUAID">
-				    	<option value = '' selected>Select a Private Use Area</option>
+				    <select class="custom-select mr-sm-2" id="PUADD" (change)="PUAChange(puaDD.value)" #puaDD [(ngModel)]="PUAID" name = "PUAID">
+				    	<option value = 'instruction' hidden>Select a Private Use Area</option>
 				    	<option value = '' selected>None</option>
-				    	<option *ngFor = "let PUA of privateUseAreas.privateUseAreas" value = "{{ PUA.PUAID }}" [selected]="PUA.PUAID === PUAID">{{ PUA.name }}</option>
+				    	<option *ngFor = "let PUA of privateUseAreas.privateUseAreas" value = "{{ PUA.PUAID }}">{{ PUA.name }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingsDD.value)" #buildingsDD ngModel name = "buildingID">
-				    	<option value = '' selected>Select a Building</option>
+				    <select class="custom-select mr-sm-2" id="zoningsDD" (change)="zoningChange(zoningsDD.value)" #zoningsDD [(ngModel)]="zoningID" name = "zoningID">
+				    	<option value = 'instruction' hidden>Select a Zoning</option>
 				    	<option value = '' selected>None</option>
-				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}" [selected]="building.buildingID === buildingID">{{ building.name }}</option>
+				    	<option *ngFor = "let zoning of zonings.zonings" value = "{{ zoning.zoningID }}">{{ zoning.name }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="zoningsDD" ngModel name = "zoningID">
-				    	<option value = '' selected>Select a Zoning</option>
+				    <select class="custom-select mr-sm-2" id="contractorsDD"  (change)="contractorChange(contractorsDD.value)" #contractorsDD [(ngModel)]="contractorID" name = "contractorID">
+				    	<option value = 'instruction' hidden>Select a Contractor</option>
 				    	<option value = '' selected>None</option>
-				    	<option *ngFor = "let zoning of zonings.zonings" value = "{{ zoning.zoningID }}" [selected]="zoning.zoningID === zoningID">{{ zoning.name }}</option>
+				    	<option *ngFor = "let contractor of contractors.contractors" value = "{{ contractor.contractorID }}">{{ contractor.name }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="contractorsDD" ngModel name = "contractorID">
-				    	<option value = '' selected>Select a Contractor</option>
-				    	<option value = '' selected>None</option>
-				    	<option *ngFor = "let contractor of contractors.contractors" value = "{{ contractor.contractorID }}" [selected]="contractor.contractorID === contractorID">{{ contractor.name }}</option>
+					<label for="buildingFilter"><strong>STEP 2</strong><br>Select The Buildings To Order For</label>
+					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingID)" #buildingsDD [(ngModel)]="buildingID" name = "buildingID">
+				    	<option value = 'instruction' disabled>Select a Building</option>
+				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.name }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="materialListTypeDD" ngModel name = "materialListType">
-				    	<option value = ''>Select a Material List Type</option>
+				    <label for="buildingFilter"><strong>STEP 3</strong><br>Specify The Materials To Show</label>
+					<select class="custom-select mr-sm-2" id="materialListTypeDD" [(ngModel)]="materialListType" name = "materialListType">
+				    	<option value = 'instruction' hidden>Select a Material List Type</option>
 				    	<option value = 'combined' >Combined Material List</option>
 				    	<option value = 'detailed'>Detailed Material List</option>
 				    </select>
@@ -87,18 +88,19 @@
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="materialsDD" ngModel name = "materialID">
-				    	<option value = '' selected>Select a Material</option>
+				    <select class="custom-select mr-sm-2" id="materialsDD" (change)="materialChange(materialsDD.value)" #materialsDD [(ngModel)]="materialID" name = "materialID">
+				    	<option value = 'instruction' hidden>Select a Material</option>
 				    	<option value = ''>None</option>
-				    	<option *ngFor = "let material of materials.materials" value = "{{ material.materialID }}" [selected]="material.materialID === materialID">{{ material.description }}</option>
+				    	<option *ngFor = "let material of materials.materials" value = "{{ material.materialID }}">{{ material.description }}</option>
 				    </select>
 				</div>
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = !buildingMode>
 			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="departmentsDD" ngModel name = "departmentID">
-				    	<option value = '' selected>Select a Department</option>
-				    	<option *ngFor = "let department of departments.departments" value = "{{ department.departmentID }}" [selected]="department.departmentID === departmentID">{{ department.name }}</option>
+				    <select class="custom-select mr-sm-2" id="departmentsDD" (change) = "departmentChange(departmentsDD.value)" #departmentsDD [(ngModel)]="departmentID" name = "departmentID">
+				    	<option value = 'instruction' hidden>Select a Department</option>
+				    	<option value = ''>All Departments</option>
+				    	<option *ngFor = "let department of departments.departments" value = "{{ department.departmentID }}" >{{ department.name }}</option>
 				    </select>
 				</div>
 			</div>

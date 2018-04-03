@@ -30,6 +30,7 @@ import { MaterialsService } from '../../../services/materials.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
+const alertify = require('alertify.js');
 
 @Component({
   selector: 'app-placeordersfilter',
@@ -77,35 +78,43 @@ export class PlaceOrdersFilterComponent implements OnInit {
   defaultProject: ProjectShort = new ProjectShort('', 'Loading Projects', '', '');
   projects: Projects = new Projects([this.defaultProject]);
 
-  projectID = this.filterService.projectID;
-  townshipID = this.filterService.townshipID;
-  erfID = this.filterService.erfID;
-  PUAID = this.filterService.PUAID;
-  buildingID = this.filterService.buildingID;
-  materialListType = this.filterService.materialListType;
-  materialID = this.filterService.materialID;
-  departmentID = this.filterService.departmentID;
-  contractorID = this.filterService.contractorID;
-  zoningID = this.filterService.zoningID;
 
+
+
+  projectID = this.filterService.dropdownConvert(this.filterService.projectID);
+  townshipID = this.filterService.dropdownConvert(this.filterService.townshipID);
+  erfID = this.filterService.dropdownConvert(this.filterService.erfID);
+  PUAID = this.filterService.dropdownConvert(this.filterService.PUAID);
+  buildingID = this.filterService.dropdownConvert(this.filterService.buildingID);
+  materialListType = this.filterService.dropdownConvert(this.filterService.materialListType);
+  materialID = this.filterService.dropdownConvert(this.filterService.materialID);
+  departmentID = this.filterService.dropdownConvert(this.filterService.departmentID);
+  contractorID = this.filterService.dropdownConvert(this.filterService.contractorID);
+  zoningID = this.filterService.dropdownConvert(this.filterService.zoningID);
+  buildingsArray;
   buildingMode = true;
+
+
     ngOnInit() {
+      this.filterService.materialListType = 'combined';
+      this.materialListType = 'combined';
+      // PROJECTS
       this.projectsService.projectListChanged.subscribe(
         (projects: Projects) => {
           this.projects = projects;
           }
       );
-
       this.projectsService.fetchProjects();
 
+      // DEPARTMENTS
       this.departmentsService.departmentListChanged.subscribe(
         (departments: Departments) => {
           this.departments = departments;
           }
       );
-
       this.departmentsService.fetchDepartments();
 
+      // TOWNSHIPS
       this.townshipsService.townshipListChanged.subscribe(
         (townships: Townships) => {
           this.townships = townships;
@@ -113,34 +122,55 @@ export class PlaceOrdersFilterComponent implements OnInit {
       );
       if (this.projectID !== null) {
         this.townshipsService.fetchTownships(this.projectID);
-        console.log('townshipID: ' + this.townshipID);
       }
 
+      // ERVEN
       this.ervenService.erfListChanged.subscribe(
         (erven: Erven) => {
           this.erven = erven;
           }
       );
+      if (this.townshipID !== null) {
+        this.ervenService.fetchErven(this.townshipID);
+      }
 
-
+      // PRIVATE USE AREAS
       this.puaService.puaListChanged.subscribe(
         (privateUseAreas: PrivateUseAreas) => {
           this.privateUseAreas = privateUseAreas;
           }
       );
+      if (this.erfID !== null) {
+        this.puaService.fetchPUA(this.erfID);
+      }
 
+      // BUILDINGS
       this.buildingsService.buildingListChanged.subscribe(
         (buildings: Buildings) => {
           this.buildings = buildings;
-          }
+          this.buildingsArray = this.buildings.buildings;
+        }
       );
+      if ((this.filterService.projectID !== null) || (this.filterService.contractorID !== null)) {
+        this.updateBuildings(
+        this.filterService.dropdownConvert(this.projectID),
+        this.filterService.dropdownConvert(this.townshipID),
+        this.filterService.dropdownConvert(this.erfID),
+        this.filterService.dropdownConvert(this.PUAID),
+        this.filterService.dropdownConvert(this.zoningID),
+        this.filterService.dropdownConvert(this.contractorID),
+        500,
+        0);
+      }
 
       this.townplanningService.zoningListChanged.subscribe(
         (zonings: Zonings) => {
           this.zonings = zonings;
           }
       );
-
+      if (this.filterService.townshipID !== null) {
+        this.updateZoning(this.filterService.townshipID);
+      }
       this.contractorsService.contractorListChanged.subscribe(
         (contractors: Contractors) => {
           this.contractors = contractors;
@@ -153,63 +183,204 @@ export class PlaceOrdersFilterComponent implements OnInit {
           this.materials = materials;
           }
       );
+      if (this.buildingID !== null) {
+        this.materialsService.fetchMaterials(this.buildingID, 'combined', null);
+      }
     }
 
+    // PROJECTS
+    projectChange(projectID) {
+      this.updateTownships(projectID);
+      this.filterService.projectID = projectID;
+      this.projectID = projectID;
+      this.filterService.townshipID = null;
+      this.townshipID = 'instruction';
+      this.filterService.erfID = null;
+      this.erfID = 'instruction';
+      this.filterService.PUAID = null;
+      this.PUAID = 'instruction';
+      this.filterService.buildingID = null;
+      this.buildingID = 'instruction';
+      this.filterService.zoningID = null;
+      this.zoningID = 'instruction';
+      this.filterService.contractorID = null;
+      this.contractorID = 'instruction';
+      this.filterService.materialID = null;
+      this.materialID = 'instruction';
+      this.updateBuildings(
+        projectID,
+        null,
+        null,
+        null,
+        this.filterService.dropdownConvert(this.zoningID),
+        this.filterService.dropdownConvert(this.contractorID),
+        500,
+        0);
+    }
+
+    // TOWNSHIP
+   townshipChange(townshipID) {
+      this.updateErven(townshipID);
+      this.updateZoning(townshipID);
+      this.contractorsService.fetchContractors(null, townshipID, null, null, null);
+      this.filterService.townshipID = townshipID;
+      this.townshipID = townshipID;
+      this.filterService.erfID = null;
+      this.erfID = 'instruction';
+      this.filterService.PUAID = null;
+      this.PUAID = 'instruction';
+      this.filterService.buildingID = null;
+      this.buildingID = 'instruction';
+      this.filterService.zoningID = null;
+      this.zoningID = 'instruction';
+      this.filterService.contractorID = null;
+      this.contractorID = 'instruction';
+      this.filterService.materialID = null;
+      this.materialID = 'instruction';
+      this.updateBuildings(
+        null,
+        townshipID,
+        null,
+        null,
+        this.filterService.dropdownConvert(this.zoningID),
+        this.filterService.dropdownConvert(this.contractorID),
+        500,
+        0);
+    }
     updateTownships(projectID) {
       this.townshipsService.fetchTownships(projectID);
       this.erven = new Erven([this.defaultErf]);
       this.contractorsService.fetchContractors(projectID, null, null, null, null);
     }
-    townshipChange(townshipID) {
-      this.updateErven(townshipID);
-      this.updateZoning(townshipID);
-      this.contractorsService.fetchContractors(null, townshipID, null, null, null);
-      this.townshipsService.setTownship(townshipID);
+
+    // ERF
+    erfChange(erfID) {
+      this.updatePrivateUseAreas(erfID);
+      this.filterService.buildingID = null;
+      this.buildingID = 'instruction';
+      this.filterService.zoningID = null;
+      this.zoningID = 'instruction';
+      this.filterService.contractorID = null;
+      this.contractorID = 'instruction';
+      this.filterService.materialID = null;
+      this.materialID = 'instruction';
+      this.updateBuildings(
+          null,
+          null,
+          erfID,
+          null,
+          this.filterService.dropdownConvert(this.zoningID),
+          this.filterService.dropdownConvert(this.contractorID),
+          500,
+          0);
+      this.erfID = erfID;
+      this.filterService.erfID = erfID;
     }
     updateErven(townshipID) {
       this.ervenService.fetchErven(townshipID);
       this.privateUseAreas = new PrivateUseAreas([this.defaultPUA]);
     }
-    updateZoning(townshipID) {
-      this.townplanningService.fetchZonings(townshipID);
-    }
-    erfChange(erfID) {
-      this.updatePrivateUseAreas(erfID);
-      this.updateBuildings(erfID, null);
-      this.ervenService.setErf(erfID);
-    }
-    projectChange(projectID) {
-      this.updateTownships(projectID);
-      this.projectsService.setProject(projectID);
-    }
+
+    // PUA
     PUAChange(PUAID) {
-      this.puaService.setPUA(PUAID);
-      this.updateBuildings(null, PUAID);
+      this.filterService.PUAID = PUAID;
+      this.filterService.buildingID = null;
+      this.buildingID = 'instruction';
+      this.filterService.zoningID = null;
+      this.zoningID = 'instruction';
+      this.filterService.contractorID = null;
+      this.contractorID = 'instruction';
+      this.filterService.materialID = null;
+      this.materialID = 'instruction';
+      this.PUAID = PUAID;
+      this.updateBuildings(
+        null,
+        null,
+        null,
+        PUAID,
+        this.filterService.dropdownConvert(this.zoningID),
+        this.filterService.dropdownConvert(this.contractorID),
+        500,
+        0);
     }
     updatePrivateUseAreas(erfID) {
       this.puaService.fetchPUA(erfID);
       this.contractorsService.fetchContractors(null, null, erfID, null, null);
     }
-    updateBuildings(erfID, PUAID) {
-      this.buildingsService.fetchBuildings(erfID, PUAID);
+
+    // BUILDINGS
+    updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
+      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset);
       this.contractorsService.fetchContractors(null, null, erfID, PUAID, null);
     }
     buildingChange(buildingID) {
-      this.materialsService.fetchMaterials(buildingID, 'combined');
-      this.buildingsService.setBuilding(buildingID);
+      console.log(buildingID);
+      this.materialsService.fetchMaterials(buildingID, 'combined', null);
+      this.filterService.buildingID = buildingID;
+      this.buildingID = buildingID;
     }
+
+    // ZONING
+    zoningChange(zoningID) {
+      this.filterService.zoningID = zoningID;
+      this.zoningID = zoningID;
+      this.updateBuildings(
+        this.filterService.dropdownConvert(this.projectID),
+        this.filterService.dropdownConvert(this.townshipID),
+        this.filterService.dropdownConvert(this.erfID),
+        this.filterService.dropdownConvert(this.PUAID),
+        zoningID,
+        this.filterService.dropdownConvert(this.contractorID),
+        500,
+        0);
+    }
+    updateZoning(townshipID) {
+      this.townplanningService.fetchZonings(townshipID);
+    }
+    // CONTRACTOR
+    contractorChange(contractorID) {
+      console.log(this.projectID);
+      this.filterService.contractorID = contractorID;
+      this.contractorID = contractorID;
+      this.updateBuildings(
+        this.filterService.dropdownConvert(this.projectID),
+        this.filterService.dropdownConvert(this.townshipID),
+        this.filterService.dropdownConvert(this.erfID),
+        this.filterService.dropdownConvert(this.PUAID),
+        this.filterService.dropdownConvert(this.zoningID),
+        contractorID,
+        500,
+        0);
+    }
+
+    // MATERIALS
+    materialChange(materialID) {
+      this.filterService.materialID = materialID;
+      this.materialID = materialID;
+      console.log(materialID);
+    }
+  
+    // DEPARTMENT
+    departmentChange(departmentID) {
+      if (departmentID === '') {
+        departmentID = null;
+      }
+      this.filterService.departmentID = departmentID;
+    }
+
     toggleMode() {
       this.buildingMode = !this.buildingMode;
     }
     applyFilter(form: NgForm) {
-      this.filterService.projectID = form.value.projectID;
-      this.filterService.townshipID = form.value.townshipID;
-      this.filterService.erfID = form.value.erfID;
-      this.filterService.PUAID = form.value.PUAID;
-      this.filterService.buildingID = form.value.buildingID;
-      this.filterService.materialListType = form.value.materialListType;
-      this.filterService.materialID = form.value.materialID;
-      this.filterService.departmentID = form.value.departmentID;
-      this.router.navigate(['/admin/placeOrders/processingList']);
+      if (this.buildingMode) {
+        if (this.filterService.buildingID === null) {
+          alertify.error('Building must be set');
+        } else {
+          this.router.navigate(['/admin/placeOrders/processingList']);
+        }
+      } else {
+        this.router.navigate(['/admin/placeOrders/departmentProcessingList']);
+      }
     }
+  
 }

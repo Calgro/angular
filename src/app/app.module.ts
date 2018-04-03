@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Http, HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,6 +18,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { MenusService } from './services/menus.service';
 import { PlaceOrdersFilterComponent } from './modules/placeOrders/placeOrdersFilter/placeOrdersFilter.component';
 import { PlaceOrdersProcessingListComponent } from './modules/placeOrders/placeOrdersProcessingList/placeOrdersProcessingList.component';
+import { AddressService } from './services/address.service';
 import { BuildingsService } from './services/buildings.service';
 import { ContractorsService } from './services/contractors.service';
 import { DepartmentsService } from './services/departments.service';
@@ -29,6 +30,9 @@ import { PuaService } from './services/pua.service';
 import { TownplanningService } from './services/townplanning.service';
 import { TownshipsService } from './services/townships.service';
 import { ProcessingListToolbarComponent } from './toolbars/processingListToolbar/processingListToolbar.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { PlaceOrdersDepartmentProcessingListComponent } from './modules/placeOrders/placeOrdersDepartmentProcessingList/placeOrdersDepartmentProcessingList.component';
+import { ProductsService } from './services/products.service';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -37,13 +41,14 @@ const appRoutes: Routes = [
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
 //  ] },
-  { path: 'admin', component: AdminComponent, children :[
-    { path: 'placeOrders', children :[
+  { path: 'admin', component: AdminComponent, children : [
+    { path: 'placeOrders', children : [
       { path: 'filter', component: PlaceOrdersFilterComponent},
-      { path: 'processingList', component: PlaceOrdersProcessingListComponent}
+      { path: 'processingList', component: PlaceOrdersProcessingListComponent},
+      { path: 'departmentProcessingList', component: PlaceOrdersDepartmentProcessingListComponent}
     ]},
   ] },
-  
+
 ];
 
 @NgModule({
@@ -55,14 +60,17 @@ const appRoutes: Routes = [
     DropdownDirective,
     PlaceOrdersFilterComponent,
     PlaceOrdersProcessingListComponent,
-    ProcessingListToolbarComponent
+    ProcessingListToolbarComponent,
+    PlaceOrdersDepartmentProcessingListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularMultiSelectModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuardService,
@@ -75,11 +83,13 @@ const appRoutes: Routes = [
     PuaService,
     BuildingsService,
     TownplanningService,
-    ContractorsService,,
+    ContractorsService, ,
     MaterialsService,
     DepartmentsService,
     FilterService,
     MenusService,
+    AddressService,
+    ProductsService,
    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

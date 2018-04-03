@@ -1,86 +1,74 @@
-import { AuthService } from '../../../auth/auth.service';
-import { DeliveryAddressDetail } from '../../../models/deliveryAddressDetail.model';
-import { DeliveryAddresses } from '../../../models/deliveryAddresses.model';
-import { MaterialDetail } from '../../../models/materialDetail.model';
-import { Materials } from '../../../models/materials.model';
-import { OrderItem } from '../../../models/orderItem.model';
-import { OrderItems } from '../../../models/orderItems.model';
-import { Outcome } from '../../../models/outcome.model';
+import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../../../services/filter.service';
-import { MaterialsService } from '../../../services/materials.service';
+import { ProductsService } from '../../../services/products.service';
 import { AddressService } from '../../../services/address.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { Outcome } from '../../../models/outcome.model';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { OrderItem } from '../../../models/orderItem.model';
+import { OrderItems } from '../../../models/orderItems.model';
+import { DeliveryAddressDetail } from '../../../models/deliveryAddressDetail.model';
+import { DeliveryAddresses } from '../../../models/deliveryAddresses.model';
+import { ProductDetail } from '../../../models/productDetail.model';
+import { Products } from '../../../models/products.model';
 import { Router } from '@angular/router';
-const alertify = require('alertify.js');
 
+const alertify = require('alertify.js');
 @Component({
-  selector: 'app-placeordersprocessinglist',
-  templateUrl: './placeordersprocessinglist.component.html',
-  styleUrls: ['./placeordersprocessinglist.component.css']
+  selector: 'app-placeordersdepartmentprocessinglist',
+  templateUrl: './placeOrdersDepartmentProcessingList.component.html',
+  styleUrls: ['./placeOrdersDepartmentProcessingList.component.css']
 })
-export class PlaceOrdersProcessingListComponent implements OnInit {
+export class PlaceOrdersDepartmentProcessingListComponent implements OnInit {
   ordersForm: FormGroup;
   orders: OrderItems = new OrderItems(null, []);
-
+  
   constructor(
-    private materialsService: MaterialsService,
+    private productsService: ProductsService,
     private filterService: FilterService,
     private addressService: AddressService,
     private http: HttpClient,
     private router: Router
     ) { }
 
-    defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null);
-    materials: Materials = new Materials([this.defaultMaterial]);
-    defaultAddress: DeliveryAddressDetail = new DeliveryAddressDetail(null, null, null);
-    addresses: DeliveryAddresses = new DeliveryAddresses([this.defaultAddress]);
-    checked = '';
-    projectID = this.filterService.projectID;
-    townshipID = this.filterService.townshipID;
-    erfID = this.filterService.erfID;
-    PUAID = this.filterService.PUAID;
-    buildingID = this.filterService.buildingID;
-    materialListType = this.filterService.materialListType;
-    materialID = this.filterService.materialID;
-    departmentID = this.filterService.departmentID;
-
-    ngOnInit() {
-      this.ordersForm = new FormGroup({
+  products: Products = new Products([]);
+  addresses: DeliveryAddresses = new DeliveryAddresses([]);
+  checked = '';
+  departmentID = this.filterService.departmentID;
+  
+  ngOnInit() {
+    this.ordersForm = new FormGroup({
                   'deliveryAddressID': new FormControl('instruction'),
                   'orderItem': new FormArray([])
               });
 
 
-      // MATERIALS
-      this.materialsService.materialListChanged.subscribe(
-          (materials: Materials) => {
-              this.materials = new Materials([]);
-              this.materials = materials;
+      // PRODUCTS
+      this.productsService.productListChanged.subscribe(
+          (products: Products) => {
+              this.products = new Products([]);
+              this.products = products;
               this.ordersForm = new FormGroup({
                   'deliveryAddressID': new FormControl('instruction'),
                   'orderItem': new FormArray([])
               });
               let i: number;
-              for (i = 0; i <= (this.materials.materials.length) - 1; i++) {
+              for (i = 0; i <= (this.products.products.length) - 1; i++) {
                   const controlGroup = new FormGroup({
                                                         'status': new FormControl(false),
-                                                        'materialID': new FormControl(this.materials.materials[i].materialID),
-                                                        'buildingID': new FormControl(this.materials.materials[i].buildingID),
-                                                        'quantityAllowed': new FormControl(this.materials.materials[i].quantityAllowed),
-                                                        'quantityOrdered': new FormControl({value: this.materials.materials[i].quantityAllowed, disabled: true}, [Validators.max(this.materials.materials[i].quantityAllowed),Validators.min(0)]),
-                                                        'quantityRemaining': new FormControl(this.materials.materials[i].quantityRemaining),
-                                                        'description': new FormControl(this.materials.materials[i].description),
-                                                        'group': new FormControl(this.materials.materials[i].group),
-                                                        'category': new FormControl(this.materials.materials[i].category)
+                                                        'productID': new FormControl(this.products.products[i].productID),
+                                                        'departmentID': new FormControl(this.products.products[i].departmentID),
+                                                        'quantityOrdered': new FormControl({value: 0, disabled: true}, [Validators.min(0)]),
+                                                        'description': new FormControl(this.products.products[i].description),
+                                                        'group': new FormControl(this.products.products[i].group),
+                                                        'category': new FormControl(this.products.products[i].category)
                                                     });
                   (<FormArray>this.ordersForm.get('orderItem')).push(controlGroup);
               }
             }
         );
-      this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
+      this.productsService.fetchProducts(this.departmentID);
 
       // ADDRESSES
       this.addressService.deliveryAddressListChanged.subscribe(
@@ -89,9 +77,9 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
             }
         );
       this.addressService.fetchDeliveryAddresses();
-    }
+  }
 
-    // CHECK ALL BOXES
+   // CHECK ALL BOXES
     checkToggle() {
       const formData = this.ordersForm.value.orderItem;
       let i: number;
@@ -126,7 +114,7 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
     placeOrder() {
       this.orders = new OrderItems('Place Order', []);
       if (!this.ordersForm.valid) {
-        alertify.error('You have specified an amount over the limit. See the field in red.');
+        alertify.error('You have specified a negative amount. See the field in red.');
       } else if (this.ordersForm.value.deliveryAddress === 'instruction') { // Hasn't been set
         alertify.error('You must specify a delivery address');
       } else {
@@ -134,28 +122,27 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
         let i: number;
         const formData = this.ordersForm.value.orderItem;
         for (i = 0; i <= (formData.length) - 1; i++) {
-            if ((formData[i].status) && (formData[i].quantityOrdered <= formData[i].quantityRemaining) && (formData[i].quantityOrdered > 0)) {
+            if ((formData[i].status) && (formData[i].quantityOrdered > 0)) {
             this.orders.orderItems.push(
               new OrderItem(
-                formData[i].materialID,
                 null,
-                formData[i].buildingID,
+                formData[i].productID,
+                null,
                 formData[i].description,
                 formData[i].group,
                 formData[i].category,
                 formData[i].quantityOrdered,
                 this.ordersForm.value.deliveryAddressID,
-                null));
+                formData[i].departmentID));
           }
         }
         console.log(this.orders);
-        this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
+        this.productsService.fetchProducts(this.departmentID);
         this.http.post('https://www.calgrois.co.za/api/v1/orders', this.orders).subscribe(
               (resp: Outcome) => {
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
-
-                 }
+               }
               },
               (error: HttpErrorResponse) => {
                 alertify.error(error.status + ' - ' + error.statusText);
@@ -164,5 +151,4 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
         this.router.navigate(['/admin/placeOrders/filter']);
       }
     }
-
 }

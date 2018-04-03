@@ -4,11 +4,11 @@ export class MaterialDetail {
   public description: string;
   public group: string;
   public category: string;
-  public quantityAllowed: string;
-  public quantityRemaining: string;
-  public rate: string;
+  public quantityAllowed: number;
+  public quantityRemaining: number;
+  public rate: number;
   
-  constructor (materialID: string, buildingID: string, description: string, group: string, category: string, quantityAllowed: string, quantityRemaining: string, rate: string) {
+  constructor (materialID: string, buildingID: string, description: string, group: string, category: string, quantityAllowed: number, quantityRemaining: number, rate: number) {
     this.materialID = materialID;
     this.buildingID = buildingID;
     this.description = description;

@@ -12,7 +12,19 @@ export class BuildingsService {
   currentBuildingID = '';
   constructor(private http: HttpClient) { }
 
-  fetchBuildings(erfID, PUAID) {
+  fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
+    if (projectID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'projectID=' + projectID;
+    }
+    if (townshipID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'townshipID=' + townshipID;
+    }
     if (erfID !== null) {
       if (this.query !== '?') {
         this.query += '&';
@@ -25,6 +37,26 @@ export class BuildingsService {
       }
       this.query += 'PUAID=' + PUAID;
     }
+    if (zoningID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'zoningID=' + zoningID;
+    }
+    if (contractorID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'contractorID=' + contractorID;
+    }
+    if ((limit !== null) && (offset !== null)) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'limit=' + limit;
+      this.query += '&offset=' + offset;
+    }
+    console.log('https://www.calgrois.co.za/api/v1/buildings/' + this.query);
     this.http.get<BuildingShort[]>('https://www.calgrois.co.za/api/v1/buildings/' + this.query).subscribe(
       resp => {
         this.query = '?';
