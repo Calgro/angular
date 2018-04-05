@@ -22,7 +22,13 @@
 
 
 .btn-white-blue:active {
-    background-color: #FFFFFF;
-    color: #182853;
-    border-color: #FFFFFF;
+    background-color: #182853;
+    color: #FFFFFF;
+    border-color: #182853;
+}
+
+.btn-white-blue:onclick {
+    background-color: #182853;
+    color: #FFFFFF;
+    border-color: #182853;
 }
