@@ -1,3 +1,2 @@
-<app-navigation></app-navigation>
-<app-login></app-login>
-<app-admin></app-admin>
+<app-login *ngIf = "!authService.isAuthenticated()"></app-login>
+<app-admin *ngIf = "authService.isAuthenticated()"></app-admin>
