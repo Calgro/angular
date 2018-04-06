@@ -22,7 +22,7 @@ const alertify = require('alertify.js');
 })
 export class PlaceOrdersDepartmentProcessingListComponent implements OnInit {
   ordersForm: FormGroup;
-  orders: OrderItems = new OrderItems(null, []);
+  orders: OrderItems = new OrderItems(null, [] ,null);
   
   constructor(
     private productsService: ProductsService,
@@ -112,7 +112,7 @@ export class PlaceOrdersDepartmentProcessingListComponent implements OnInit {
 
     }
     placeOrder() {
-      this.orders = new OrderItems('Place Order', []);
+      this.orders = new OrderItems('Place Order', [], null);
       if (!this.ordersForm.valid) {
         alertify.error('You have specified a negative amount. See the field in red.');
       } else if (this.ordersForm.value.deliveryAddressID === 'instruction') { // Hasn't been set

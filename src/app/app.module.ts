@@ -34,6 +34,8 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { PlaceOrdersDepartmentProcessingListComponent } from './modules/placeOrders/placeOrdersDepartmentProcessingList/placeOrdersDepartmentProcessingList.component';
 import { ProductsService } from './services/products.service';
 import { ProcessOrdersComponent } from './modules/processOrders/processOrders.component';
+import { OrdersService } from './services/orders.service';
+import { SuppliersService } from './services/suppliers.service';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -93,6 +95,8 @@ const appRoutes: Routes = [
     MenusService,
     AddressService,
     ProductsService,
+    OrdersService,
+    SuppliersService,
    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
