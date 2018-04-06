@@ -1,0 +1,40 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="noOrders" style = "padding-top:10px;">
+	<div class="alert alert-danger" role="alert">
+	  <strong>No Orders:</strong> There are no orders to process at this time. Check again later.
+	</div>
+</div>
+<div class="row" style = "padding-top:10px" *ngIf = "chartDataLoaded && !noOrders">
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<h4 class ="text-center">ORDER SUMMARY</h4>
+		<div style="display: block">
+		  <canvas baseChart 
+		              [data]="overallOrders"
+		              [labels]="overallOrdersLabel"
+		              [chartType]="doughnutChartType"
+		              (chartHover)="chartHovered($event)"
+		              (chartClick)="chartClicked($event)"></canvas>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<h4 class ="text-center">INTERNAL ORDER SUMMARY</h4>
+		<div style="display: block">
+		  <canvas baseChart 
+		              [data]="internalOrders"
+		              [labels]="internalOrdersLabel"
+		              [chartType]="doughnutChartType"
+		              (chartHover)="chartHovered($event)"
+		              (chartClick)="chartClicked($event)"></canvas>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<h4 class ="text-center">EXTERNAL ORDER SUMMARY</h4>
+		<div style="display: block">
+		  <canvas baseChart 
+		              [data]="externalOrders"
+		              [labels]="externalOrdersLabel"
+		              [chartType]="doughnutChartType"
+		              (chartHover)="chartHovered($event)"
+		              (chartClick)="chartClicked($event)"></canvas>
+		</div>
+	</div>
+</div>

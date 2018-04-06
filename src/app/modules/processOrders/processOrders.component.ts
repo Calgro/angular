@@ -10,6 +10,7 @@ import { OrderItem } from '../../models/orderItem.model';
 import { ProcessOrder } from '../../models/processOrder.model';
 import { OrderApprovalItem } from '../../models/orderApprovalItem.model';
 import { OrderList } from '../../models/orderList.model';
+import { Outcome } from '../../models/outcome.model';
 import { ProjectOrder } from '../../models/projectOrder.model';
 import { Suppliers } from '../../models/suppliers.model';
 import { OrdersService } from '../../services/orders.service';
@@ -282,45 +283,4 @@ export class ProcessOrdersComponent implements OnInit {
             );
     }
  }
-      
-      //this.orders = new OrderItems('Place Order', [], null);
-//      if (!this.ordersForm.valid) {
-//        alertify.error('You have specified an amount over the limit. See the field in red.');
-//      } else if (this.ordersForm.value.deliveryAddressID === 'instruction') { // Hasn't been set
-//        alertify.error('You must specify a delivery address');
-//      } else {
-//        alertify.success('Placing Order. You will be notified once complete.');
-//        let i: number;
-//        const formData = this.ordersForm.value.orderItem;
-//        for (i = 0; i <= (formData.length) - 1; i++) {
-//            if ((formData[i].status) && (formData[i].quantityOrdered <= formData[i].quantityRemaining) && (formData[i].quantityOrdered > 0)) {
-//            this.orders.orderItems.push(
-//              new OrderItem(
-//                formData[i].materialID,
-//                null,
-//                formData[i].buildingID,
-//                formData[i].description,
-//                formData[i].group,
-//                formData[i].category,
-//                formData[i].quantityOrdered,
-//                this.ordersForm.value.deliveryAddressID,
-//                null));
-//          }
-//        }
-//        console.log(this.orders);
-//        this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
-//        this.http.post('https://www.calgrois.co.za/api/v1/orders', this.orders).subscribe(
-//              (resp: Outcome) => {
-//                if (resp.statusCode === '200') {
-//                  alertify.success(resp.message);
-//
-//                 }
-//              },
-//              (error: HttpErrorResponse) => {
-//                alertify.error(error.status + ' - ' + error.statusText);
-//               }
-//            );
-//        this.router.navigate(['/admin/placeOrders/filter']);
-//      }
-    }
-}
+ 

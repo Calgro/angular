@@ -36,7 +36,12 @@ import { ProductsService } from './services/products.service';
 import { ProcessOrdersComponent } from './modules/processOrders/processOrders.component';
 import { OrdersService } from './services/orders.service';
 import { SuppliersService } from './services/suppliers.service';
-
+import { OrdersDashboardComponent } from './modules/orders/ordersdashboard/ordersDashboard.component';
+import { OrderslistComponent } from './modules/orders/orderslist/orderslist.component';
+import { OrderdetailComponent } from './modules/orders/orderdetail/orderdetail.component';
+import { OrderssupplierformComponent } from './modules/orders/orderssupplierform/orderssupplierform.component';
+import { OrderseditformComponent } from './modules/orders/orderseditform/orderseditform.component';
+import { ChartsModule } from 'ng2-charts';
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'login', component: LoginComponent},
@@ -46,11 +51,16 @@ const appRoutes: Routes = [
 //  ] },
   { path: 'admin', children : [
     { path: 'placeOrders', children : [
-      { path: 'filter', component: PlaceOrdersFilterComponent},
-      { path: 'processingList', component: PlaceOrdersProcessingListComponent},
-      { path: 'departmentProcessingList', component: PlaceOrdersDepartmentProcessingListComponent}
+          { path: 'filter', component: PlaceOrdersFilterComponent},
+          { path: 'processingList', component: PlaceOrdersProcessingListComponent},
+          { path: 'departmentProcessingList', component: PlaceOrdersDepartmentProcessingListComponent}
     ]},
-    { path: 'processOrders', component: ProcessOrdersComponent}
+    { path: 'processOrders', component: ProcessOrdersComponent},
+    { path: 'orders', children : [
+          { path: 'dashboard', component: OrdersDashboardComponent},
+          { path: 'processingList', component: PlaceOrdersProcessingListComponent},
+          { path: 'departmentProcessingList', component: PlaceOrdersDepartmentProcessingListComponent}
+    ]},
   ] },
 
 ];
@@ -66,7 +76,12 @@ const appRoutes: Routes = [
     PlaceOrdersProcessingListComponent,
     ProcessingListToolbarComponent,
     PlaceOrdersDepartmentProcessingListComponent,
-    ProcessOrdersComponent
+    ProcessOrdersComponent,
+    OrdersDashboardComponent,
+    OrderslistComponent,
+    OrderdetailComponent,
+    OrderssupplierformComponent,
+    OrderseditformComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +90,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     AngularMultiSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     AuthGuardService,
