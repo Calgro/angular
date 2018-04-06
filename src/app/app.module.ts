@@ -37,7 +37,7 @@ import { ProcessOrdersComponent } from './modules/processOrders/processOrders.co
 import { OrdersService } from './services/orders.service';
 import { SuppliersService } from './services/suppliers.service';
 import { OrdersDashboardComponent } from './modules/orders/ordersdashboard/ordersDashboard.component';
-import { OrderslistComponent } from './modules/orders/orderslist/orderslist.component';
+import { OrdersListComponent } from './modules/orders/orderslist/ordersList.component';
 import { OrderdetailComponent } from './modules/orders/orderdetail/orderdetail.component';
 import { OrderssupplierformComponent } from './modules/orders/orderssupplierform/orderssupplierform.component';
 import { OrderseditformComponent } from './modules/orders/orderseditform/orderseditform.component';
@@ -78,7 +78,7 @@ const appRoutes: Routes = [
     PlaceOrdersDepartmentProcessingListComponent,
     ProcessOrdersComponent,
     OrdersDashboardComponent,
-    OrderslistComponent,
+    OrdersListComponent,
     OrderdetailComponent,
     OrderssupplierformComponent,
     OrderseditformComponent

@@ -70,5 +70,7 @@ export class OrdersDashboardComponent implements OnInit {
       
       this.ordersService.fetchOrders(null, 'Dashboard');
   }
-
+  loadInternal() {
+    console.log('load internal');
+  }
 }
