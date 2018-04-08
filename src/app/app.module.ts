@@ -37,10 +37,11 @@ import { ProcessOrdersComponent } from './modules/processOrders/processOrders.co
 import { OrdersService } from './services/orders.service';
 import { SuppliersService } from './services/suppliers.service';
 import { OrdersDashboardComponent } from './modules/orders/ordersdashboard/ordersDashboard.component';
-import { OrdersListComponent } from './modules/orders/orderslist/ordersList.component';
-import { OrderdetailComponent } from './modules/orders/orderdetail/orderdetail.component';
+import { OrdersListComponent } from './modules/orders/ordersList/ordersList.component';
+import { OrderDetailComponent } from './modules/orders/orderDetail/orderDetail.component';
 import { OrderssupplierformComponent } from './modules/orders/orderssupplierform/orderssupplierform.component';
 import { OrderseditformComponent } from './modules/orders/orderseditform/orderseditform.component';
+import { DevService } from './services/dev.service';
 import { ChartsModule } from 'ng2-charts';
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -58,8 +59,9 @@ const appRoutes: Routes = [
     { path: 'processOrders', component: ProcessOrdersComponent},
     { path: 'orders', children : [
           { path: 'dashboard', component: OrdersDashboardComponent},
-          { path: 'processingList', component: PlaceOrdersProcessingListComponent},
-          { path: 'departmentProcessingList', component: PlaceOrdersDepartmentProcessingListComponent}
+          { path: 'list', component: OrdersListComponent},
+          { path: 'detail', component: OrderDetailComponent}
+          
     ]},
   ] },
 
@@ -79,7 +81,7 @@ const appRoutes: Routes = [
     ProcessOrdersComponent,
     OrdersDashboardComponent,
     OrdersListComponent,
-    OrderdetailComponent,
+    OrderDetailComponent,
     OrderssupplierformComponent,
     OrderseditformComponent
   ],
@@ -113,6 +115,7 @@ const appRoutes: Routes = [
     ProductsService,
     OrdersService,
     SuppliersService,
+    DevService,
    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

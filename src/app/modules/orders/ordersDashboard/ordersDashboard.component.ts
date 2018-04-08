@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../../services/orders.service';
 import { OrderDashboard } from '../../../models/orderDashboard.model';
-import {SimpleChanges} from '@angular/core';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-ordersdashboard',
   templateUrl: './ordersDashboard.component.html',
@@ -22,7 +23,7 @@ export class OrdersDashboardComponent implements OnInit {
   externalOrdersLabel:string[] = [];
   externalOrders:number[] = [];
   doughnutChartType:string = 'doughnut';
- 
+  ordersSubscription;
   // events
   chartClicked(e:any):void {
     console.log(e);
@@ -34,13 +35,15 @@ export class OrdersDashboardComponent implements OnInit {
  
     constructor(
       private ordersService: OrdersService,
+      private router: Router
+    
     ) {}
     
 
   ngOnInit() {
     
     // ORDERS
-      this.ordersService.orderListChanged.subscribe(
+      this.ordersSubscription = this.ordersService.orderListChanged.subscribe(
           (orders: OrderDashboard) => {
               console.log(orders);
               if (orders !== null) {
@@ -70,7 +73,15 @@ export class OrdersDashboardComponent implements OnInit {
       
       this.ordersService.fetchOrders(null, 'Dashboard');
   }
+  ngOnDestroy() {
+    this.ordersSubscription.unsubscribe();
+  }
   loadInternal() {
-    console.log('load internal');
+    this.ordersService.listMode = 'Orders';
+    this.router.navigate(['/admin/orders/list']);
+  }
+  loadExternal() {
+    this.ordersService.listMode = 'purchaseOrders';
+    this.router.navigate(['/admin/orders/list']);
   }
 }
