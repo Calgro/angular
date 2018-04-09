@@ -1,85 +1,49 @@
 <nav class="navbar navbar-default">
 	<!-- NavBar Section 1 -->
-	<div class="container-fluid">
-		<div class="col-md-9"></div>
-		<div class="col-md-1">
-			<div>Fleurhof/Ext 22</div> <!-- Breadcrumbs -->
+	<div class="container-fluid" style="text-align:right">
+<!-- Breadcrumbs -->
+		<div class="col-md-9"> 
+			<div>Fleurhof/Ext 22/Building 17/Unit 98</div> 
 		</div>
-		<div class="col-md-1">
-			<div>Dominique Cooper</div> <!-- User -->
+<!-- User -->		
+		<div class="col-md-2">
+			<div>Dominique Cooper</div> 
 		</div>
-		<div class="col-md-1">
-			<button type="button" class="btn btn-white-blue">LOGOUT</button>
-		</div>
+  			<i class="fa fa-power-off fa-fw"></i> 
 	</div>
 	
+	
 	<!-- NavBar Section 2 -->
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding:10px">
+ <!-- Map Logo -->
 		<div class="col-md-3">
 			<div class="thumbnail">
-			    <img src="/Technology/CIS/Theme Design 2018/Logo/LogoPng.png" alt="LogoPng" style="width:100%"> <!-- Logo -->
+			    <img src="/Technology/CIS/Theme Design 2018/Logo/LogoPng.png" alt="LogoPng" style="width:100%">
 			</div>
 	    </div>  
-	    <div class="col-md-7"></div>
+	    <div class="col-md-7">
+	    </div>
+<!-- Map Slogan -->	    
 	    <div class="col-md-2">
 	    	<div class="thumbnail">
-				<img src="/Technology/CIS/Theme Design 2018/Logo/SloganPng.png" alt="SloganPng" style="width:100%"> <!-- Slogan -->
+				<img src="/Technology/CIS/Theme Design 2018/Logo/SloganPng.png" alt="SloganPng" style="width:100%"> 
 			</div>
 	    </div>
     </div>
     
     
     <!-- NavBar Section 3 -->
-	<div class="container-fluid">
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarsExample04">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" routerLink = "/admin">Home <span class="sr-only">(current)</span></a>
-			  	</li>
+<!-- Burger Menu -->
+	<nav class="navbar navbar-expand-md" role="navigation" style="width:100%;" id="NavBarMenuOptions">
+		<div class="navbar-header" style="width:100%">
+			<ul class="right" style="display:inline-flex; margin:0px; padding:0px; overflow:hidden; list-style:none;">
 			  	<li class="nav-item navbar-right" *ngFor = "let menuGroup of menuGroups" appDropdown style = "cursor:pointer;">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuGroup.name }}</a>
+					<a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuGroup.name }}</a>
 					<div class="dropdown-menu" style = "right:auto;left:auto;">
 						<a class="dropdown-item"  *ngFor = "let menu of menuGroup.menus" routerLink = "{{ menu.route }}">{{ menu.name }}</a>
 					</div>
 			  	</li>
 			</ul>
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<a class="nav-link" routerLink = "/filter">Filter</a>
-			  	</li>
-			</ul>
 		</div>
-    </div>	
-	
+	</nav>
 </nav>
-
-<!-- 
-
-<nav class="navbar navbar-expand-md">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarsExample04">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" routerLink = "/admin">Home <span class="sr-only">(current)</span></a>
-		  	</li>
-		  	<li class="nav-item navbar-right" *ngFor = "let menuGroup of menuGroups" appDropdown style = "cursor:pointer;">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuGroup.name }}</a>
-				<div class="dropdown-menu" style = "right:auto;left:auto;">
-					<a class="dropdown-item"  *ngFor = "let menu of menuGroup.menus" routerLink = "{{ menu.route }}">{{ menu.name }}</a>
-				</div>
-		  	</li>
-		</ul>
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a class="nav-link" routerLink = "/filter">Filter</a>
-		  	</li>
-		</ul>
-	</div>
- 
-</nav>
- -->
