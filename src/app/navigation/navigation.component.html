@@ -9,7 +9,9 @@
 		<div class="col-md-2">
 			<div>Dominique Cooper</div> 
 		</div>
-  			<i class="fa fa-power-off fa-fw"></i> 
+		<div style="align:right">
+			<i class="fa fa-power-off fa-fw"></i>
+		</div>
 	</div>
 	
 	
@@ -30,20 +32,26 @@
 			</div>
 	    </div>
     </div>
-    
-    
-    <!-- NavBar Section 3 -->
-<!-- Burger Menu -->
-	<nav class="navbar navbar-expand-md" role="navigation" style="width:100%;" id="NavBarMenuOptions">
-		<div class="navbar-header" style="width:100%">
-			<ul class="right" style="display:inline-flex; margin:0px; padding:0px; overflow:hidden; list-style:none;">
-			  	<li class="nav-item navbar-right" *ngFor = "let menuGroup of menuGroups" appDropdown style = "cursor:pointer;">
-					<a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuGroup.name }}</a>
-					<div class="dropdown-menu" style = "right:auto;left:auto;">
-						<a class="dropdown-item"  *ngFor = "let menu of menuGroup.menus" routerLink = "{{ menu.route }}">{{ menu.name }}</a>
-					</div>
-			  	</li>
-			</ul>
-		</div>
-	</nav>
 </nav>
+    
+    
+<!-- NavBar Section 3 -->		
+<nav class="navbar navbar-expand-md navbar-light">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item navbar-right" *ngFor = "let menuGroup of menuGroups" appDropdown style = "cursor:pointer;">
+				<a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuGroup.name }}</a>
+	        	<div class="dropdown-menu" style = "right:auto;left:auto;">
+					<a class="dropdown-item"  *ngFor = "let menu of menuGroup.menus" routerLink = "{{ menu.route }}">{{ menu.name }}</a>
+				</div>
+			</li>
+      	</ul>
+	</div>  
+</nav>
+<br>
+
+
+
