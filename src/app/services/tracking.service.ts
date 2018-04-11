@@ -1,4 +1,5 @@
-import { DeliveryAddressDetail } from '../models/deliveryAddressDetail.model';
+import { UserShort } from '../models/userShort.model';
+import { Users } from '../models/users.model';
 import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -7,19 +8,18 @@ import { Injectable, EventEmitter } from '@angular/core';
 const alertify = require('alertify.js');
 
 @Injectable()
-export class AddressService {
-  deliveryAddressListChanged = new EventEmitter<DeliveryAddressDetail[]>();
+export class TrackingService {
+  placedByListChanged = new EventEmitter<Users>();
 
   constructor(private http: HttpClient, private devService: DevService) { }
 
-  fetchDeliveryAddresses() {
-    this.http.get<DeliveryAddressDetail[]>('https://' + this.devService.domain + '/api/v1/deliveryAddresses/').subscribe(
+  fetchPlacedBy() {
+    this.http.get<Users>('https://' + this.devService.domain + '/api/v1/orders/?mode=placedBy').subscribe(
       resp => {
-        console.log(resp);
         if (resp) {
-          this.deliveryAddressListChanged.emit(resp);
+          this.placedByListChanged.emit(resp);
         } else {
-          this.deliveryAddressListChanged.emit([new DeliveryAddressDetail('', 'None Found', '')]);
+          this.placedByListChanged.emit(null);
         }
       },
       (error: HttpErrorResponse) => {

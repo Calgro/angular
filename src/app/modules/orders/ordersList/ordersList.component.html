@@ -3,6 +3,13 @@
 		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 	</div>
 </div> 
+<div class="row" style = "padding:5px" *ngIf="ordersLoaded">
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<button class = "btn btn-primary btn-sm btn-block" (click) = 'loadFilter()'>FILTER</button>
+	</div>
+</div>
 <div *ngIf="ordersLoaded">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="noOrders" style = "padding-top:10px;">
 		<div class="alert alert-danger" role="alert">
@@ -10,16 +17,33 @@
 		</div>
 	</div>
 	
-	<main role="main" class="container">
+	<main role="main" class="container" *ngIf = "listMode === 'Orders'">
      	<div class="my-3 p-3 bg-white rounded box-shadow" *ngFor="let project of orders.projectOrders;" style ="cursor:pointer;">
         	<h6 class="border-bottom border-gray pb-2 mb-0">{{ project.project }}</h6>
         	<div class="media text-muted pt-3 order" (click) = "loadDetailed(order.orderID)" *ngFor="let order of project.orders">
-          		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: red;" *ngIf = "order.state === 'Unprocessed' || order.state === 'Created'"></div>
+          		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: red;" *ngIf = "order.state === 'Unprocessed'"></div>
          		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: blue;" *ngIf = "order.state === 'Partially Ordered'"></div>
          		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: green;" *ngIf = "order.state === 'Ordered'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: orange;" *ngIf = "order.state === 'Checked-In'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: black;" *ngIf = "order.state === 'Checked-Out'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: gray;" *ngIf = "order.state === 'Delivered'"></div>
          		<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            		<strong class="d-block text-gray-dark" *ngIf = "listMode === 'Orders'">{{ order.datePlaced }}: {{ order.orderID }}</strong>
-            		<strong class="d-block text-gray-dark" *ngIf = "listMode === 'purchaseOrders'">{{ order.datePlaced }}: PO{{ order.PONumber }}</strong>
+            		<strong class="d-block text-gray-dark">{{ order.datePlaced }}: {{ order.orderID }}</strong>
+            		{{ order.state }}
+          		</p>
+        	</div>
+        	<!-- <small class="d-block text-right mt-3">
+         		<a href="#">ALL</a>
+        	</small> -->
+      	</div>
+	</main>
+	<main role="main" class="container" *ngIf = "listMode === 'purchaseOrders' || listMode === 'Stock'">
+     	<div class="my-3 p-3 bg-white rounded box-shadow" *ngFor="let project of orders.projectOrders;" style ="cursor:pointer;">
+        	<h6 class="border-bottom border-gray pb-2 mb-0">{{ project.project }}</h6>
+        	<div class="media text-muted pt-3 order" (click) = "loadDetailed(order.PONumber)" *ngFor="let order of project.orders">
+          		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: red;" *ngIf = "order.state === 'Created'"></div>
+         		<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            		<strong class="d-block text-gray-dark" >{{ order.datePlaced }}: PO{{ order.PONumber }}</strong>
             		{{ order.state }}
           		</p>
         	</div>

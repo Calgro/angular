@@ -1,4 +1,5 @@
 import { PrivateUseAreaShort } from '../models/privateUseAreaShort.model';
+import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
@@ -9,11 +10,11 @@ const alertify = require('alertify.js');
 export class PuaService {
   puaListChanged = new EventEmitter<PrivateUseAreaShort[]>();
   currentPUAID = '';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchPUA(erfID) {
     //console.log('PUA Updated');
-    this.http.get<PrivateUseAreaShort[]>('https://www.calgrois.co.za/api/v1/privateUseAreas/?erfID=' + erfID).subscribe(
+    this.http.get<PrivateUseAreaShort[]>('https://' + this.devService.domain + '/api/v1/privateUseAreas/?erfID=' + erfID).subscribe(
       resp => {
         //console.log(resp);
         if (resp) {

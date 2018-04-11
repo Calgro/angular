@@ -1,4 +1,4 @@
-<div class="row" style = "padding:5px" *ngIf="!ordersLoaded && !noOrders">
+<div class="row" style = "padding:5px" *ngIf="ordersLoaded && !noOrders">
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><button class = "btn btn-primary btn-sm btn-block" (click) = 'deleteItems()' *ngIf="itemsSelected > 0">DELETE SELECTED ITEMS</button></div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 		<button class = "btn btn-primary btn-sm btn-block" (click) = 'showDetailToggle()' *ngIf="!showDetail">SHOW DETAIL</button>
@@ -38,6 +38,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" formArrayName="breakdown" *ngIf="showDetail" style = "padding-bottom:20px;">
 							<div class="row" style = "font-weight:bold;">
+								<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 								<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">PROJECT</div>
 								<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">TOWNSHIP</div>
 								<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">ERF</div>

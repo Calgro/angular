@@ -12,13 +12,45 @@ const alertify = require('alertify.js');
 export class OrdersService {
   orderListChanged = new EventEmitter<OrderList>();
   orderDetailLoader = new EventEmitter<Order>();
-  query = '';
+  query = '?';
   listMode = 'Orders';
-  orderID = null;
+  orderID = '1522752908121';
+  detailMode = 'Order';
   domain = this.devService.domain;
   constructor(private http: HttpClient, private devService: DevService) { }
 
-  fetchOrders(state, mode) {
+  fetchOrders(state, mode, projectID, townshipID, erfID, PUAID, buildingID) {
+    console.log(this.query);
+    if (projectID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'projectID=' + projectID;
+    }
+    if (townshipID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'townshipID=' + townshipID;
+    }
+    if (erfID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'erfID=' + erfID;
+    }
+    if (PUAID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'PUAID=' + PUAID;
+    }
+    if (buildingID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'buildingID=' + buildingID;
+    }
     if (state !== null) {
       if (this.query !== '') {
         this.query += '&';
@@ -31,10 +63,10 @@ export class OrdersService {
       }
       this.query += 'mode=' + mode;
     }
-    console.log('https://' + this.domain + '/api/v1/orders/?' + this.query);
-      this.http.get<OrderList>('https://' + this.domain + '/api/v1/orders/?' + this.query).subscribe(
+    console.log('https://' + this.domain + '/api/v1/orders/' + this.query);
+      this.http.get<OrderList>('https://' + this.domain + '/api/v1/orders/' + this.query).subscribe(
         resp => {
-          this.query = '';
+          this.query = '?';
           if (resp) {
             this.orderListChanged.emit(resp);
           } else {
@@ -47,11 +79,28 @@ export class OrdersService {
          }
       );
   }
-  fetchDetailedOrder(mode) {
-    console.log('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/' + this.query);
-      this.http.get<Order>('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/' + this.query).subscribe(
+  fetchDetailedOrder() {
+    console.log('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/mode=' + this.detailMode);
+      this.http.get<Order>('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/mode=' +  this.detailMode).subscribe(
         resp => {
-          this.query = '';
+          this.query = '?';
+          if (resp) {
+            this.orderDetailLoader.emit(resp);
+          } else {
+            this.orderDetailLoader.emit(null);
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          alertify.error(error.status + ' - ' + error.statusText);
+         }
+      );
+  }
+  fetchCheckOutStock(placedBy, projectID) {
+    console.log('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/mode=CheckOutStock&placedBy=' + placedBy + '&projectID=' + projectID);
+      this.http.get<Order>('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/mode=CheckOutStock&placedBy=' + placedBy + '&projectID=' + projectID).subscribe(
+        resp => {
+          this.query = '?';
           if (resp) {
             this.orderDetailLoader.emit(resp);
           } else {

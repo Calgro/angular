@@ -11,6 +11,7 @@
 		              [data]="overallOrders"
 		              [labels]="overallOrdersLabel"
 		              [chartType]="doughnutChartType"
+		              [colors]="overallOrdersColors"
 		              (chartHover)="chartHovered($event)"></canvas>
 		</div>
 	</div>
@@ -30,6 +31,18 @@
 		  <canvas baseChart 
 		              [data]="externalOrders"
 		              [labels]="externalOrdersLabel"
+		              [chartType]="doughnutChartType"
+		              (chartHover)="chartHovered($event)"></canvas>
+		</div>
+	</div>
+</div>
+<div class="row" style = "padding-top:10px" *ngIf = "chartDataLoaded && !noOrders" style = "cursor:pointer;" (click) = 'loadDeliveries()'>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<h4 class ="text-center">DELIVERIES</h4>
+		<div style="display: block">
+		  <canvas baseChart 
+		              [data]="deliveries"
+		              [labels]="deliveriesLabel"
 		              [chartType]="doughnutChartType"
 		              (chartHover)="chartHovered($event)"></canvas>
 		</div>

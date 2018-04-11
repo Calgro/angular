@@ -1,4 +1,5 @@
 import { ErfShort } from '../models/erfShort.model';
+import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
@@ -9,10 +10,10 @@ const alertify = require('alertify.js');
 export class ErvenService {
   erfListChanged = new EventEmitter<ErfShort[]>();
   currentErfID = '';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchErven(townshipID) {
-    this.http.get<ErfShort[]>('https://www.calgrois.co.za/api/v1/erven/?townshipID=' + townshipID).subscribe(
+    this.http.get<ErfShort[]>('https://' + this.devService.domain + '/api/v1/erven/?townshipID=' + townshipID).subscribe(
       resp => {
         if (resp) {
           this.erfListChanged.emit(resp);

@@ -10,18 +10,38 @@ import { Router } from '@angular/router';
 })
 
 export class OrdersDashboardComponent implements OnInit {
-  orders: OrderDashboard = new OrderDashboard(null, null, null, null);
+  orders: OrderDashboard = new OrderDashboard(null, null, null, null, null, null, null);
   noOrders = false;
   chartDataLoaded = false;
   // Overall Orders
   overallOrdersLabel:string[] = [];
   overallOrders:number[] = [];
+  public overallOrdersColors:Array<any> = [{ // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // dark grey
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    }
+  ];
   // Internal Sales
   internalOrdersLabel:string[] = [];
   internalOrders:number[] = [];
   // External Sales
   externalOrdersLabel:string[] = [];
   externalOrders:number[] = [];
+  // Deliveries
+  deliveriesLabel:string[] = [];
+  deliveries:number[] = [];
   doughnutChartType:string = 'doughnut';
   ordersSubscription;
   // events
@@ -48,6 +68,14 @@ export class OrdersDashboardComponent implements OnInit {
               console.log(orders);
               if (orders !== null) {
                 this.orders = orders;
+                this.deliveriesLabel[0] = 'Ordered';
+                this.deliveriesLabel[1] = 'Delivered';
+                this.deliveriesLabel[2] = 'Checked-Out';
+                
+                
+                this.deliveries[0] = this.orders.qtyOrdered;
+                this.deliveries[1] = this.orders.qtyDelivered;
+                this.deliveries[2] = this.orders.qtyCheckedOut;
                 this.overallOrdersLabel[0] = 'Internal Orders';
                 this.overallOrdersLabel[1] = 'External Orders';
                 this.overallOrders[0] = this.orders.internalOrderTotal;
@@ -71,17 +99,24 @@ export class OrdersDashboardComponent implements OnInit {
            }
         );
       
-      this.ordersService.fetchOrders(null, 'Dashboard');
+      this.ordersService.fetchOrders(null, 'Dashboard', null, null, null, null, null);
   }
   ngOnDestroy() {
     this.ordersSubscription.unsubscribe();
   }
   loadInternal() {
     this.ordersService.listMode = 'Orders';
+    this.ordersService.detailMode = 'Order';
     this.router.navigate(['/admin/orders/list']);
   }
   loadExternal() {
     this.ordersService.listMode = 'purchaseOrders';
+    this.ordersService.detailMode = 'PurchaseOrder';
     this.router.navigate(['/admin/orders/list']);
+  }
+  loadDeliveries() {
+    this.ordersService.listMode = 'Stock';
+    this.ordersService.detailMode = 'PurchaseOrder';
+    this.router.navigate(['/admin/orders/filter']);
   }
 }

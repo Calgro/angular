@@ -7,10 +7,13 @@ export class Item {
   public group: string;
   public category: string;
   public quantity: number;
+  public quantityDelivered: number;
+  public quantityCheckedOut: number;
   public deliveryAddress: string;
   public departmentID: string;
   public breakdown: ItemBreakdown[];
   public rate: number;
+  public PONumber: string;
 
   constructor (
       materialID: string,
@@ -23,7 +26,10 @@ export class Item {
       deliveryAddress: string,
       departmentID: string,
       rate: number,
-      breakdown: ItemBreakdown[]) {
+      breakdown: ItemBreakdown[],
+      PONumber: string,
+      quantityDelivered: number,
+      quantityCheckedOut: number) {
     this.materialID = materialID;
     this.productID = productID;
     this.buildingID = buildingID;
@@ -35,5 +41,8 @@ export class Item {
     this.departmentID = departmentID;
     this.rate = rate;
     this.breakdown = breakdown;
+    this.PONumber = PONumber;
+    this.quantityDelivered = quantityDelivered;
+    this.quantityCheckedOut = quantityCheckedOut;
   }
 }

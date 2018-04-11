@@ -16,7 +16,8 @@ export class FilterService {
   materialID = null;
   contractorID = null;
   departmentID = null;
-
+  stockMode = 'Check-In';
+  placedBy = null;
   dropdownConvert(optionValue) {
     if (optionValue === null) {
       return 'instruction';

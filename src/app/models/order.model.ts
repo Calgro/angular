@@ -8,13 +8,15 @@ export class Order {
   public supplier: string;
   public state: string;
   public items: Item[];
+  public orderedBy: string;
   
-  constructor (orderID: string, PONumber: string, deliveryAddress: string, supplier: string, state: string, items: Item[], datePlaced: string) {
+  constructor (orderID: string, PONumber: string, deliveryAddress: string, supplier: string, state: string, items: Item[], datePlaced: string, orderedBy: string) {
     this.orderID = orderID;
     this.PONumber = PONumber;
     this.deliveryAddress = deliveryAddress;
     this.supplier = supplier;
     this.items = items;
     this.datePlaced = datePlaced;
+    this.orderedBy = orderedBy;
     }
 }

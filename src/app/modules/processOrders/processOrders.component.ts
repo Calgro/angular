@@ -1,4 +1,4 @@
-import { Order } from '../../models/Order.model';
+import { Order } from '../../models/order.model';
 import { Item } from '../../models/item.model';
 import { ItemBreakdown } from '../../models/itemBreakdown.model';
 import { Component, OnInit } from '@angular/core';
@@ -13,8 +13,10 @@ import { OrderList } from '../../models/orderList.model';
 import { Outcome } from '../../models/outcome.model';
 import { ProjectOrder } from '../../models/projectOrder.model';
 import { Suppliers } from '../../models/suppliers.model';
+import { DevService } from '../../services/dev.service';
 import { OrdersService } from '../../services/orders.service';
 import { SuppliersService } from '../../services/suppliers.service';
+import { Router } from '@angular/router';
 const alertify = require('alertify.js');
 @Component({
   selector: 'app-processorders',
@@ -29,11 +31,13 @@ export class ProcessOrdersComponent implements OnInit {
   showDetail = false;
   noOrders = false;
   itemsSelected = 0;
+  ordersSubscription;
   constructor(
     private ordersService: OrdersService,
     private suppliersService: SuppliersService,
     private http: HttpClient,
-    
+    private devService: DevService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -46,7 +50,7 @@ export class ProcessOrdersComponent implements OnInit {
 
 
     // ORDERS
-      this.ordersService.orderListChanged.subscribe(
+      this.ordersSubscription = this.ordersService.orderListChanged.subscribe(
           (orders: OrderList) => {
               console.log(orders);
               if (orders !== null) {
@@ -94,7 +98,7 @@ export class ProcessOrdersComponent implements OnInit {
             }
         );
       
-      this.ordersService.fetchOrders(null, 'UnprocessedOrders');
+      this.ordersService.fetchOrders(null, 'UnprocessedOrders', null, null, null, null, null);
     // SUPPLIERS
       this.suppliersService.supplierListChanged.subscribe(
           (suppliers: Suppliers) => {
@@ -213,12 +217,12 @@ export class ProcessOrdersComponent implements OnInit {
           }
         }
       console.log(processOrder);
-      this.http.post('https://www.calgrois.co.za/api/v1/orders', processOrder).subscribe(
+      this.http.post('https://' + this.devService.domain + '/api/v1/orders', processOrder).subscribe(
               (resp: Outcome) => {
                 console.log(resp);
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
-                  this.ordersService.fetchOrders(null, 'UnprocessedOrders');
+                  this.router.navigate(['/admin/orders/dashboard']); 
                  }
               },
               (error: HttpErrorResponse) => {
@@ -268,19 +272,21 @@ export class ProcessOrdersComponent implements OnInit {
           }
         }
       console.log(processOrder);
-      this.http.post('https://www.calgrois.co.za/api/v1/orders', processOrder).subscribe(
+      this.http.post('https://' + this.devService.domain + '/api/v1/orders', processOrder).subscribe(
               (resp: Outcome) => {
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
-                  this.ordersService.fetchOrders(null, 'UnprocessedOrders');
                  }
               },
               (error: HttpErrorResponse) => {
                 alertify.error(error.status + ' - ' + error.statusText);
                 this.ordersLoaded = true;
-                  
+                
                }
             );
     }
+    ngOnDestroy() {
+    this.ordersSubscription.unsubscribe();
+  }
  }
  

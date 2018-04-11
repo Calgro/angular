@@ -1,3 +1,84 @@
-<p>
-  orderdetail works!
-</p>
+<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!orderLoaded" style = "padding:10px;">
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+	</div>
+</div> 
+<div class="row" style = "padding:5px" *ngIf="orderLoaded">
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<button class = "btn btn-primary btn-sm btn-block" (click) = 'showDetailToggle()' *ngIf="!showDetail">SHOW DETAIL</button>
+		<button class = "btn btn-primary btn-sm btn-block" (click) = 'showDetailToggle()' *ngIf="showDetail">HIDE DETAIL</button>
+	</div>
+</div>
+<div *ngIf="orderLoaded">
+	<div class="row" style = "padding:10px;">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  *ngIf = "listMode === 'Orders'">
+			<h4>ORDER NUMBER: {{ order.orderID }}</h4>
+			<h6>DATE ORDERED: {{ order.datePlaced }}</h6>
+			<h6>ORDERED BY: {{ order.orderedBy }}</h6>
+			<h6>STATE: {{ order.state }}</h6>
+			<h6>DETAILS:</h6>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<ul class="list-group mb-3">
+		            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of order.items">
+		              <div>
+		                <h6 class="my-0">{{ item.description }}</h6>
+		                <small class="text-muted">Included in Purchase Order(s): PO{{ item.PONumber }}</small>
+		              </div>
+		              <span class="text-muted">{{ item.quantity }} @ R{{ item.rate }}</span>
+		              <ul class="list-group mb-3" *ngIf="showDetail">
+				            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let breakdown of item.breakdown">
+				              <div>
+				                <h6 class="my-0">{{ breakdown.project }} {{ breakdown.township }} {{ breakdown.erf }} {{ breakdown.privateUseArea }}: {{ breakdown.building }}</h6>
+				                <small class="text-muted">
+				                	{{ breakdown.group }} {{ breakdown.category }}<br>
+				                	Contract Allocation: {{ breakdown.contractAllocation }}</small>
+				              </div>
+				              <span class="text-muted">{{ breakdown.quantity }} @ R{{ breakdown.rate }}</span>
+				            </li>
+	          			</ul>	
+		            </li>
+	            	
+				
+				
+				</ul>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  *ngIf = "listMode === 'purchaseOrders'">
+			<h4>PO NUMBER: {{ order.PONumber }}</h4>
+			<h6 *ngIf = "(order.state === 'Created' || order.state === 'Ordered')">SUPPLIER: <a class = "editItem" (click) = "editSupplier()">{{ order.supplier }}</a></h6>
+			<h6 *ngIf = "order.state === 'Delivered'">SUPPLIER: <a class = "editItem" (click) = "editSupplier()">{{ order.supplier }}</a></h6>
+			<h6>DATE ORDERED: {{ order.datePlaced }}</h6>
+			<h6 *ngIf = "(order.state === 'Created' || order.state === 'Ordered')">DELIVERY ADDRESS: <a class = "editItem" (click) = "editDelivery()">{{ order.deliveryAddress }}</a></h6>
+			<h6 *ngIf = "order.state === 'Delivered'">DELIVERY ADDRESS: <a class = "editItem" (click) = "editDelivery()">{{ order.deliveryAddress }}</a></h6>
+			<h6>STATE: {{ order.state }}</h6>
+			<h6>DETAILS:</h6>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<ul class="list-group mb-3">
+		            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of order.items">
+		              <div>
+		                <h6 class="my-0">{{ item.description }}</h6>
+		                <small class="text-muted">{{ item.quantityDelivered }}/{{ item.quantity }} Delivered</small>
+		              </div>
+		              <span class="text-muted">{{ item.quantity }} @ R{{ item.rate }}</span>
+		              <ul class="list-group mb-3" *ngIf="showDetail">
+				            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let breakdown of item.breakdown">
+				              <div>
+				                <h6 class="my-0">{{ breakdown.project }} {{ breakdown.township }} {{ breakdown.erf }} {{ breakdown.privateUseArea }}: {{ breakdown.building }}</h6>
+				                <small class="text-muted">
+				                	{{ breakdown.group }} {{ breakdown.category }}<br>
+				                	Contract Allocation: {{ breakdown.contractAllocation }}</small>
+				              </div>
+				              <span class="text-muted">{{ breakdown.quantity }} @ R{{ breakdown.rate }}</span>
+				            </li>
+	          			</ul>	
+		            </li>
+	            	
+				
+				
+				</ul>
+			</div>
+		</div>	
+	</div>
+</div>

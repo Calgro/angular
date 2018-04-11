@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./orderDetail.component.css']
 })
 export class OrderDetailComponent implements OnInit {
-  order: Order = new Order(null, null, null, null, null, null, null);
+  order: Order = new Order(null, null, null, null, null, null, null, null);
   orderLoaded = false;
+  showDetail = false;
+  listMode = this.ordersService.listMode;
   constructor(
     private ordersService: OrdersService,
     private router: Router
@@ -27,7 +29,15 @@ export class OrderDetailComponent implements OnInit {
            }
         );
       
-      this.ordersService.fetchDetailedOrder('Orders');
+      this.ordersService.fetchDetailedOrder();
   }
-
+  showDetailToggle(){
+      this.showDetail = !this.showDetail;
+    }
+  editSupplier() {
+    this.router.navigate(['/admin/orders/editSupplier']);
+  }
+  editDelivery() {
+    this.router.navigate(['/admin/orders/editDelivery']);
+  }
 }
