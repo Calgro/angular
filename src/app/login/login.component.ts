@@ -43,7 +43,7 @@ constructor(private http: HttpClient, private router: Router, private authServic
         }
       },
       (error: HttpErrorResponse) => {
-        //alertify.error(error.status + ' - ' + error.statusText);
+        alertify.error(error.status + ' - ' + error.statusText);
        }
     );
 
