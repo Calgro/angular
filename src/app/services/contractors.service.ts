@@ -1,4 +1,5 @@
 import { ContractorShort } from '../models/contractorShort.model';
+import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
@@ -10,7 +11,7 @@ export class ContractorsService {
   contractorListChanged = new EventEmitter<ContractorShort[]>();
   query = '?';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchContractors(projectID, townshipID, erfID, PUAID, buildingID) {
     if (projectID !== null) {
@@ -43,8 +44,8 @@ export class ContractorsService {
       }
       this.query += 'buildingID=' + buildingID;
     }
-    console.log('https://www.calgrois.co.za/api/v1/contractors/' + this.query);
-    this.http.get<ContractorShort[]>('https://www.calgrois.co.za/api/v1/contractors/' + this.query).subscribe(
+    console.log('https://' + this.devService.domain + '/api/v1/contractors/' + this.query);
+    this.http.get<ContractorShort[]>('https://' + this.devService.domain + '/api/v1/contractors/' + this.query).subscribe(
       resp => {
         console.log(resp);
         if (resp) {

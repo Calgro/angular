@@ -1,4 +1,5 @@
 import { ZoningShort } from '../models/zoningShort.model';
+import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
@@ -9,10 +10,10 @@ const alertify = require('alertify.js');
 export class TownplanningService {
   zoningListChanged = new EventEmitter<ZoningShort[]>();
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchZonings(townshipID) {
-    this.http.get<ZoningShort[]>('https://www.calgrois.co.za/api/v1/townPlanningRights/?townshipID=' + townshipID).subscribe(
+    this.http.get<ZoningShort[]>('https://' + this.devService.domain + '/api/v1/townPlanningRights/?townshipID=' + townshipID).subscribe(
       resp => {
         console.log(resp);
         if (resp) {

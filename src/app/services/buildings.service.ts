@@ -1,4 +1,5 @@
 import { BuildingShort } from '../models/buildingShort.model';
+import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
@@ -10,7 +11,7 @@ export class BuildingsService {
   buildingListChanged = new EventEmitter<BuildingShort[]>();
   query = '?';
   currentBuildingID = '';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
     if (projectID !== null) {
@@ -56,8 +57,8 @@ export class BuildingsService {
       this.query += 'limit=' + limit;
       this.query += '&offset=' + offset;
     }
-    console.log('https://www.calgrois.co.za/api/v1/buildings/' + this.query);
-    this.http.get<BuildingShort[]>('https://www.calgrois.co.za/api/v1/buildings/' + this.query).subscribe(
+    console.log('https://' + this.devService.domain + '/api/v1/buildings/' + this.query);
+    this.http.get<BuildingShort[]>('https://' + this.devService.domain + '/api/v1/buildings/' + this.query).subscribe(
       resp => {
         this.query = '?';
         console.log(resp);

@@ -1,0 +1,102 @@
+<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!ordersLoaded" style = "padding:10px;">
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+	</div>
+</div>
+<form class="form-filter" [formGroup]="ordersForm" (ngSubmit)="saveChanges()" *ngIf="ordersLoaded" >
+	<div class="container">
+		<div class="row">
+			<div class="col-sm"></div>
+			<div class="col-sm"></div>
+			<div class="col-sm"><button class = "btn btn-primary btn-sm btn-block">SAVE CHANGES</button></div>
+		</div>
+	</div>
+	<div class="row align-items-center justify-content-center" formArrayName="items" *ngIf="stockMode === 'Check-In'">
+		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col"><input type="checkbox" aria-label="Checkbox for following text input" style = "height:25px;width:25px;" (click) = "checkToggle()"></th>
+			      <th scope="col">Description</th>
+			      <th scope="col">Quantity Ordered</th>
+			      <th scope="col">Quantity Remaining</th>
+			      <th scope="col">Quantity Delivered</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr  *ngFor="let itemControl of ordersForm.get('items').controls; let i = index" [formGroupName]="i" >
+			      <td scope="row"><input *ngIf="itemControl.value.quantityRemaining > 0" type="checkbox" aria-label="Select to Mark as Arrived" style = "height:25px;width:25px;" checked = "{{ checked }}" formControlName="state"></td>
+			      <td>{{ itemControl.value.description }}</td>
+			      <td>{{ itemControl.value.quantityOrdered }}</td>
+			      <td>{{ itemControl.value.quantityRemaining }}</td>
+			      <td *ngIf="itemControl.value.quantityRemaining > 0">
+			      	<div class="input-group input-group-sm mb-3" >
+						<div class="input-group-prepend">
+					    	<span class="input-group-text" id="inputGroup-sizing-sm">QTY</span>
+					  	</div>
+					  	<input 
+					  		type="number"
+					  		class="form-control"
+					  		aria-label="Small"
+					  		aria-describedby="inputGroup-sizing-sm"
+					  		min="0"
+					  		max="{{ itemControl.value.quantityRemaining }}"
+					  		formControlName="quantityDelivered" (click) = "onChange(i)">
+					  	<div class = "btn btn-primary btn-sm btn-block" (click) = "onAll(i)">ALL</div>
+					  	<input 
+					  		type="text"
+					  		formControlName="materialID" hidden>
+					  	
+					</div>
+				  </td>
+				  <td *ngIf="itemControl.value.quantityRemaining <= 0">Fully Delivered</td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+		</div>
+	</div>
+	<div class="row align-items-center justify-content-center" formArrayName="items" *ngIf="stockMode === 'Check-Out'">
+		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">Description</th>
+			      <th scope="col">Quantity Ordered</th>
+			      <th scope="col">Quantity Available</th>
+			      <th scope="col">Quantity Issued</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr  *ngFor="let itemControl of ordersForm.get('items').controls; let i = index" [formGroupName]="i" >
+			      <td>{{ itemControl.value.description }}</td>
+			      <td>{{ itemControl.value.quantityOrdered }}</td>
+			      <td>{{ itemControl.value.quantityRemaining }}</td>
+			      <td *ngIf="itemControl.value.quantityRemaining > 0">
+			      	<div class="input-group input-group-sm mb-3" >
+						<div class="input-group-prepend">
+					    	<span class="input-group-text" id="inputGroup-sizing-sm">QTY</span>
+					  	</div>
+					  	<input 
+					  		type="number"
+					  		class="form-control"
+					  		aria-label="Small"
+					  		aria-describedby="inputGroup-sizing-sm"
+					  		min="0"
+					  		max="{{ itemControl.value.quantityRemaining }}"
+					  		formControlName="quantityIssued" (click) = "onChange(i)">
+					  	<div class = "btn btn-primary btn-sm btn-block" (click) = "onAll(i)">ALL</div>
+					  	<input 
+					  		type="text"
+					  		formControlName="materialID" hidden>
+					  	
+					</div>
+				  </td>
+				  <td *ngIf="itemControl.value.quantityRemaining <= 0">Fully Issued</td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+		</div>
+	</div>
+</form>

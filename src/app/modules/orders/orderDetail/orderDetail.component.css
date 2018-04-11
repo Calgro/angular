@@ -1,0 +1,5 @@
+.editItem {
+	cursor: pointer;
+	color: blue !important;
+	font-weight: bold;
+}

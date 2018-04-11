@@ -12,6 +12,7 @@ import { DeliveryAddressDetail } from '../../../models/deliveryAddressDetail.mod
 import { DeliveryAddresses } from '../../../models/deliveryAddresses.model';
 import { ProductDetail } from '../../../models/productDetail.model';
 import { Products } from '../../../models/products.model';
+import { DevService } from '../../../services/dev.service';
 import { Router } from '@angular/router';
 
 const alertify = require('alertify.js');
@@ -29,7 +30,8 @@ export class PlaceOrdersDepartmentProcessingListComponent implements OnInit {
     private filterService: FilterService,
     private addressService: AddressService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private devService: DevService
     ) { }
 
   products: Products = new Products([]);
@@ -133,12 +135,12 @@ export class PlaceOrdersDepartmentProcessingListComponent implements OnInit {
                 formData[i].category,
                 formData[i].quantityOrdered,
                 this.ordersForm.value.deliveryAddressID,
-                formData[i].departmentID));
+                formData[i].departmentID, null, null));
           }
         }
         console.log(this.orders);
         this.productsService.fetchProducts(this.departmentID);
-        this.http.post('https://www.calgrois.co.za/api/v1/orders', this.orders).subscribe(
+        this.http.post('https://' + this.devService.domain + '/api/v1/orders', this.orders).subscribe(
               (resp: Outcome) => {
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
