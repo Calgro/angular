@@ -1,40 +1,36 @@
 <nav class="navbar navbar-default">
 	<!-- NavBar Section 1 -->
-	<div class="container-fluid" style="text-align:right">
-<!-- Breadcrumbs -->
-		<div class="col-md-9"> 
+	<div class="container-fluid" style="text-align:right;padding:0px;">
+		<div class="col-md-6" style = "padding:0px;">
+		</div>
+<!-- Breadcrumbs -->		
+		<div class="col-md-3" style = "padding:0px;"> 
 			<div>Fleurhof/Ext 22/Building 17/Unit 98</div> 
 		</div>
 <!-- User -->		
-		<div class="col-md-2">
+		<div class="col-sm-12 col-md-2" style = "padding:0px;">
 			<div>Dominique Cooper</div> 
-		</div>
-		<div style="align:right">
-			<i class="fa fa-power-off fa-fw"></i>
 		</div>
 	</div>
 	
 	
 	<!-- NavBar Section 2 -->
 	<div class="container-fluid" style="padding:10px">
- <!-- Map Logo -->
-		<div class="col-md-3">
-			<div class="thumbnail">
-			    <img src="/Technology/CIS/Theme Design 2018/Logo/LogoPng.png" alt="LogoPng" style="width:100%">
+		<div class="col-md-3" style = "padding:0px;">
+			<div>
+				<img id = "logo" [src]="logo"/>
 			</div>
-	    </div>  
-	    <div class="col-md-7">
-	    </div>
-<!-- Map Slogan -->	    
-	    <div class="col-md-2">
+		</div>  
+		<div class="col-md-7">
+		</div>
+		<div class="col-md-2" style = "padding:0px;">
 	    	<div class="thumbnail">
-				<img src="/Technology/CIS/Theme Design 2018/Logo/SloganPng.png" alt="SloganPng" style="width:100%"> 
+				<img id = "slogan" [src]="slogan" alt="Slogan"> 
 			</div>
-	    </div>
+		</div>
     </div>
 </nav>
-    
-    
+
 <!-- NavBar Section 3 -->		
 <nav class="navbar navbar-expand-md navbar-light">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -42,16 +38,16 @@
 	</button>
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item navbar-right" *ngFor = "let menuGroup of menuGroups" appDropdown style = "cursor:pointer;">
+			<li class="nav-item navbar-right" *ngFor = "let menuGroup of menuGroups" style = "cursor:pointer;">
 				<a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuGroup.name }}</a>
-	        	<div class="dropdown-menu" style = "right:auto;left:auto;">
+				<div class="dropdown-menu" style = "right:auto;left:auto;">
 					<a class="dropdown-item"  *ngFor = "let menu of menuGroup.menus" routerLink = "{{ menu.route }}">{{ menu.name }}</a>
 				</div>
 			</li>
-      	</ul>
+			<li class="nav-item navbar-right" style = "cursor:pointer;">
+				<a class="nav-link" aria-haspopup="true" aria-expanded="false">Logout</a>
+			</li>
+		</ul>
 	</div>  
 </nav>
 <br>
-
-
-

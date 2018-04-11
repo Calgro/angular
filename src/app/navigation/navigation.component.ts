@@ -14,7 +14,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
   constructor(private authService: AuthService, private menusService: MenusService, private http: HttpClient) { }
-
+  private logo = require('../images/logo.jpg');
+  private slogan = require('../images/slogan.png');
   menuGroups: MenuGroup[];
 
   ngOnInit() {

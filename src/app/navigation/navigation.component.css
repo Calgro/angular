@@ -1,0 +1,17 @@
+@media (min-width: 0px) {
+  #logo {
+    width: 200px;
+  }
+  #slogan {
+    width: 200px;
+  }
+}
+
+@media (min-width: 1000px) {
+  #logo {
+    width: 50%;
+  }
+  #slogan {
+    width: 100%;
+  }
+}
