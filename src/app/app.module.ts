@@ -33,6 +33,9 @@ import { ProcessingListToolbarComponent } from './toolbars/processingListToolbar
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { PlaceOrdersDepartmentProcessingListComponent } from './modules/placeOrders/placeOrdersDepartmentProcessingList/placeOrdersDepartmentProcessingList.component';
 import { ProductsService } from './services/products.service';
+import { ProcessOrdersComponent } from './modules/processOrders/processOrders.component';
+import { OrdersService } from './services/orders.service';
+import { SuppliersService } from './services/suppliers.service';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent},
@@ -41,12 +44,13 @@ const appRoutes: Routes = [
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
 //  ] },
-  { path: 'admin', component: AdminComponent, children : [
+  { path: 'admin', children : [
     { path: 'placeOrders', children : [
       { path: 'filter', component: PlaceOrdersFilterComponent},
       { path: 'processingList', component: PlaceOrdersProcessingListComponent},
       { path: 'departmentProcessingList', component: PlaceOrdersDepartmentProcessingListComponent}
     ]},
+    { path: 'processOrders', component: ProcessOrdersComponent}
   ] },
 
 ];
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
     PlaceOrdersFilterComponent,
     PlaceOrdersProcessingListComponent,
     ProcessingListToolbarComponent,
-    PlaceOrdersDepartmentProcessingListComponent
+    PlaceOrdersDepartmentProcessingListComponent,
+    ProcessOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +95,8 @@ const appRoutes: Routes = [
     MenusService,
     AddressService,
     ProductsService,
+    OrdersService,
+    SuppliersService,
    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -98,4 +105,6 @@ const appRoutes: Routes = [
  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private authService: AuthService) { }
+ }
