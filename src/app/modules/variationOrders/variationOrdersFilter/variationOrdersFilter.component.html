@@ -1,0 +1,56 @@
+<div class="row align-items-center justify-content-center">
+	<div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6" style = "text-align:center;">
+		<form class="form-filter" (ngSubmit) = "applyFilter(form)" #form = "ngForm">
+			<h1 class="h3 mb-3 font-weight-normal">VARIATION ORDERS FILTER</h1>
+			<div class = "row" style = "margin-bottom:20px;">
+				<div class="col-lg-12">
+					<select class="custom-select mr-sm-2" id="projectsDD" (change)="projectChange(projectsDD.value)" #projectsDD [(ngModel)]="projectID" name = "projectID">
+				    	<option value = 'instruction' hidden>Select a Project</option>
+				    	<option *ngFor = "let project of projects.projects" value = "{{ project.projectID }}">{{ project.projectName }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;">
+				<div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="townshipsDD" (change)="townshipChange(townshipsDD.value)" #townshipsDD [(ngModel)]="townshipID" name = "townshipID">
+				    	<option value = 'instruction' hidden>Select a Township</option>
+				    	<option value = '' selected>None</option>
+				    	<option *ngFor = "let township of townships.townships" value = "{{ township.townshipID }}">{{ township.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="ervenDD" (change)="erfChange(ervenDD.value)" #ervenDD [(ngModel)]="erfID" name = "erfID">
+				    	<option value = 'instruction' hidden>Select an Erf</option>
+				    	<option value = '' selected>None</option>
+				    	<option *ngFor = "let erf of erven.erven" value = "{{ erf.erfID }}">{{ erf.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="PUADD" (change)="PUAChange(puaDD.value)" #puaDD [(ngModel)]="PUAID" name = "PUAID">
+				    	<option value = 'instruction' hidden>Select a Private Use Area</option>
+				    	<option value = '' selected>None</option>
+				    	<option *ngFor = "let PUA of privateUseAreas.privateUseAreas" value = "{{ PUA.PUAID }}">{{ PUA.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingID)" #buildingsDD [(ngModel)]="buildingID" name = "buildingID">
+				    	<option value = 'instruction' disabled>Select a Building</option>
+				    	<option value = '' selected>None</option>
+				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+				    <button class="btn btn-lg btn-primary btn-block" type="submit">Load Variation Orders</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
