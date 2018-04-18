@@ -1,29 +1,31 @@
-<div class="row align-items-center justify-content-center">
-	<div class = "col-xs-12 col-sm 10 col-md-3" style = "text-align:center;">
-		<form class="form-signin" (ngSubmit) = "onSignIn(form)" #form = "ngForm">
+<div class="row" [ngStyle]="{'background-image': 'url('+login+')'}" *ngIf = "!authService.isAuthenticated()" style="height:100vh; background-position:center; background-repeat:no-repeat; background-size:cover;">
+	<div class="col-xs-1 col-sm-1 col-md-8">
+	</div>
+	<div class="col-xs-10 col-sm-10 col-md-3" style="padding:20vh 0; text-align:center; background:whitesmoke; background:linear-gradient(rgba(245,245,245,1), rgba(255,0,0,0)); padding-left:5px; padding-right:5px;">  
+		<form class="form-signing" (ngSubmit) = "onSignIn(form)" #form = "ngForm">
 			<h1 class="h3 mb-3 font-weight-normal">Welcome</h1>
-		    <label for="email" class="sr-only" style = "">Email address</label>
-		    <input 
-		    	type="email" 
-		    	id="email" 
-		    	class="form-control" 
-		    	placeholder="Email address / Username" 
-		    	required="" 
-		    	autofocus="" 
-		    	style = "margin-bottom:20px;" 
-		    	ngModel 
-		    	name = "email">
-		    <label for="password" class="sr-only" style = "margin-bottom:20px;">Password</label>
-		    <input 
-		    	type="password" 
-		    	id="password" 
-		    	class="form-control"
-		    	placeholder="Password" 
-		    	required="" 
-		    	style = "margin-bottom:20px;" 
-		    	ngModel 
-		    	name = "password">
-		    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<label for="email" class="sr-only" style = "">Email address</label>
+			<input 
+				type="email" 
+				id="email" 
+				class="form-control" 
+				placeholder="Email address / Username" 
+				required="" 
+				autofocus="" 
+				style = "margin-bottom:20px;" 
+				ngModel 
+				name = "email">
+			<label for="password" class="sr-only" style = "margin-bottom:20px;">Password</label>
+			<input 
+				type="password" 
+				id="password" 
+				class="form-control"
+				placeholder="Password" 
+				required="" 
+				style = "margin-bottom:20px;" 
+				ngModel 
+				name = "password">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 		</form>
 	</div>
-</div>
+</div>	
