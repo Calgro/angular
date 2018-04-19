@@ -41,7 +41,6 @@
 			    <div class="col-lg-12">
 					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingID)" #buildingsDD [(ngModel)]="buildingID" name = "buildingID">
 				    	<option value = 'instruction' disabled>Select a Building</option>
-				    	<option value = '' selected>None</option>
 				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.name }}</option>
 				    </select>
 				</div>

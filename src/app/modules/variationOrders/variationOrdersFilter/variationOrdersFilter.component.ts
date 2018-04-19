@@ -34,9 +34,9 @@ export class VariationOrdersFilterComponent implements OnInit {
     private buildingsService: BuildingsService,
     private filterService: FilterService,
     private router: Router) { }
-  
-  
-  // defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '');
+
+
+  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '');
   buildings: Buildings = new Buildings([this.defaultBuilding]);
 
   defaultPUA: PrivateUseAreaShort = new PrivateUseAreaShort('', 'Select an Erf First');
@@ -50,7 +50,7 @@ export class VariationOrdersFilterComponent implements OnInit {
 
   defaultProject: ProjectShort = new ProjectShort('', 'Loading Projects', '', '');
   projects: Projects = new Projects([this.defaultProject]);
-  
+
 
   projectID = this.filterService.dropdownConvert(this.filterService.projectID);
   townshipID = this.filterService.dropdownConvert(this.filterService.townshipID);
@@ -117,7 +117,7 @@ export class VariationOrdersFilterComponent implements OnInit {
     }
 
   }
-  
+
   // PROJECTS
   projectChange(projectID) {
     this.updateTownships(projectID);
@@ -131,7 +131,6 @@ export class VariationOrdersFilterComponent implements OnInit {
     this.PUAID = 'instruction';
     this.filterService.buildingID = null;
     this.buildingID = 'instruction';
-    this.filterService.zoningID = null;
     this.updateBuildings(
       projectID,
       null,
@@ -152,7 +151,6 @@ export class VariationOrdersFilterComponent implements OnInit {
     this.PUAID = 'instruction';
     this.filterService.buildingID = null;
     this.buildingID = 'instruction';
-    this.filterService.zoningID = null;
     this.updateBuildings(
       null,
       townshipID,
@@ -204,9 +202,9 @@ export class VariationOrdersFilterComponent implements OnInit {
     this.puaService.fetchPUA(erfID);
   }
 
-  // BUILDINGS 
-  updateBuildings(projectID, townshipID, erfID, PUAID) {
-    this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID);
+  // BUILDINGS
+  updateBuildings(projectID, townshipID, erfID, PUAID, limit, offset) {
+    this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, null, null, limit, offset);
   }
   buildingChange(buildingID) {
     console.log(buildingID);
@@ -218,7 +216,7 @@ export class VariationOrdersFilterComponent implements OnInit {
     if (this.filterService.buildingID === null) {
       alertify.error('Building must be set');
     } else {
-      this.router.navigate(['/admin/placeOrders/processingList']); 
+      this.router.navigate(['/admin/placeOrders/processingList']);
     }
   }
 

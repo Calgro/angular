@@ -49,7 +49,7 @@ import { StockComponent } from './modules/stock/stock.component';
 import { VariationOrdersFilterComponent } from './modules/variationOrders/variationOrdersFilter/variationOrdersFilter.component';
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
-  //{ path: 'login', component: LoginComponent},
+ // { path: 'login', component: LoginComponent},
 //  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children :[
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
@@ -69,7 +69,7 @@ const appRoutes: Routes = [
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
           { path: 'stock', component: StockComponent}
-          
+
     ]},
     { path: 'variationOrders', children : [
           { path: 'dashboard', component: OrdersDashboardComponent},
