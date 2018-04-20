@@ -47,6 +47,7 @@ import { OrdersFilterComponent } from './modules/orders/ordersFilter/ordersFilte
 import { TrackingService } from './services/tracking.service';
 import { StockComponent } from './modules/stock/stock.component';
 import { VariationOrdersFilterComponent } from './modules/variationOrders/variationOrdersFilter/variationOrdersFilter.component';
+import { VariationOrdersListComponent } from './modules/variationOrders/variationOrdersList/variationOrdersList.component';
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
  // { path: 'login', component: LoginComponent},
@@ -73,7 +74,7 @@ const appRoutes: Routes = [
     ]},
     { path: 'variationOrders', children : [
           { path: 'dashboard', component: OrdersDashboardComponent},
-          { path: 'list', component: OrdersListComponent},
+          { path: 'list', component: VariationOrdersListComponent},
           { path: 'detail', component: OrderDetailComponent},
           { path: 'filter', component: VariationOrdersFilterComponent}
      ]},
@@ -101,6 +102,7 @@ const appRoutes: Routes = [
     OrdersFilterComponent,
     StockComponent,
     VariationOrdersFilterComponent,
+    VariationOrdersListComponent,
   ],
   imports: [
     BrowserModule,
