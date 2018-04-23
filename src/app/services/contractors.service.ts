@@ -59,4 +59,27 @@ export class ContractorsService {
        }
     );
   }
+
+  fetchContractor(contractorID) {
+    if (contractorID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'contractorID=' + contractorID;
+    }
+    console.log('https://' + this.devService.domain + '/api/v1/contractors/' + this.query);
+    this.http.get<ContractorShort[]>('https://' + this.devService.domain + '/api/v1/contractors/' + this.query).subscribe(
+      resp => {
+        console.log(resp);
+        if (resp) {
+          this.contractorListChanged.emit(resp);
+        } else {
+          this.contractorListChanged.emit([new ContractorShort('', 'None Found')]);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        alertify.error(error.status + ' - ' + error.statusText);
+       }
+    );
+  }
 }
