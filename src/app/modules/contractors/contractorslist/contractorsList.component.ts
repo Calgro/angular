@@ -8,11 +8,8 @@ import { Router } from '@angular/router';
   templateUrl: './contractorsList.component.html',
   styleUrls: ['./contractorsList.component.css']
 })
-  
+
 export class ContractorsListComponent implements OnInit {
-
-  
-
 
   constructor() { }
 

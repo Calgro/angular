@@ -13,8 +13,8 @@ export class AuthService {
   constructor() { }
 
   public isAuthenticated(): boolean {
-   return this.token != null && !this.jwtHelper.isTokenExpired(this.token);
-    //return true;// DEV ONLY!
+   // return this.token != null && !this.jwtHelper.isTokenExpired(this.token);
+   return true;// DEV ONLY!
   }
 
   public decodeToken() {
