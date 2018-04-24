@@ -9,7 +9,10 @@
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-		<button class = "btn btn-primary btn-sm btn-block" (click) = 'contractorAdd()'>ADD</button>
+		<!-- DEV WIP
+			<button class = "btn btn-primary btn-sm btn-block" (click) = 'contractorAdd()'>ADD</button> 
+		-->
+		<button class = "btn btn-primary btn-sm btn-block" >ADD</button>
 	</div>
 </div>
 
@@ -20,16 +23,17 @@
 		</div>
 	</div>
 	
-	<main role="main" class="container" *ngIf = "listMode === 'Contractors'">
-		<div class="my-3 p-3 bg-white rounded box-shadow" *ngFor="let contractor of contractors.contractors" style ="cursor:pointer;">
-			<h6 class="border-bottom border-gray pb-2 mb-0">{{contractor.contractor }}</h6>
-			<div class="media text-muted pt-3 order" (click) = "contractorDetail(contractor.contractorID)" *ngFor="let contractor of contractor.contractors">
-				<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: pink;" *ngIf = "contractor.name !== ''"></div>
-				<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<strong class="d-block text-gray-dark">{{ contractor.name }}</strong>
-				</p>
-			</div>
+	<main role="main" class="container">
+		<!--  DEV WIP
+			<div class="media text-muted pt-3 order" (click) = "contractorDetail(contractor.contractorID)" *ngFor="let contractor of contractors.contractors">
+		 -->
+		 <div class="media text-muted pt-3 order" *ngFor="let contractor of contractors.contractors">
+			<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: pink;" *ngIf = "contractor.name !== ''"></div>
+			<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+				<strong class="d-block text-gray-dark">{{ contractor.name }}</strong>
+			</p>
 		</div>
 	</main>
+	
 </div>
 
