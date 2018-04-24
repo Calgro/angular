@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contractors } from '../../../models/contractors.model';
+import { ContractorShort } from '../../../models/contractorShort.model';
 import { ContractorsService } from '../../../services/contractors.service';
 import { Router } from '@angular/router';
 

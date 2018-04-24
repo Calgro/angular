@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contractors } from '../../../models/contractors.model';
+import { ContractorShort } from '../../../models/contractorShort.model';
 import { ContractorsService } from '../../../services/contractors.service';
 import { FilterService } from '../../../services/filter.service';
 import { Router } from '@angular/router';
@@ -40,6 +41,10 @@ export class ContractorsListComponent implements OnInit {
            }
         );
       this.contractorsService.fetchContractors(null, null, null, null, null);
+  }
+  loadDetailed(contractorID) {
+    this.contractorsService.contractorID = contractorID;
+      this.router.navigate(['/admin/contractors/detail']);
   }
 
 }
