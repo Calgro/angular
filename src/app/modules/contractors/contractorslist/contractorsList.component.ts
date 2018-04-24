@@ -10,6 +10,12 @@ import { Router } from '@angular/router';
 })
 
 export class ContractorsListComponent implements OnInit {
+  contractorsForm: FormGroup;
+  order: Order = new Order(null, null, null, null, null, null, null, null);
+  contractorsLoaded = false;
+  showDetail = false;
+  listMode = this.ordersService.listMode;
+  stockMode = this.filterService.stockMode;
 
   constructor() { }
 
