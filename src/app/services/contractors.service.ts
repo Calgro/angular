@@ -9,6 +9,7 @@ const alertify = require('alertify.js');
 @Injectable()
 export class ContractorsService {
   contractorListChanged = new EventEmitter<ContractorShort[]>();
+  contractorDetailLoader = new EventEmitter<ContractorShort[]>();
   query = '?';
 
   constructor(private http: HttpClient, private devService: DevService) { }
@@ -72,9 +73,9 @@ export class ContractorsService {
       resp => {
         console.log(resp);
         if (resp) {
-          this.contractorListChanged.emit(resp);
+          this.contractorDetailLoader.emit(resp);
         } else {
-          this.contractorListChanged.emit([new ContractorShort('', 'None Found')]);
+          this.contractorDetailLoader.emit([new ContractorShort('', 'None Found')]);
         }
       },
       (error: HttpErrorResponse) => {
