@@ -25,11 +25,11 @@ export class ContractorsListComponent implements OnInit {
     private router: Router
   )  { }
 
-
+  contractorsSubscription;
 
   ngOnInit() {
       // Load a list of all of the contractors
-      this.contractorsService.contractorListChanged.subscribe(
+      this.contractorsSubscription = this.contractorsService.contractorListChanged.subscribe(
           (contractors: Contractors) => {
               console.log(contractors);
               if (contractors !== null) {
@@ -45,6 +45,9 @@ export class ContractorsListComponent implements OnInit {
   loadDetailed(contractorID) {
     this.contractorsService.contractorID = contractorID;
       this.router.navigate(['/admin/contractors/detail']);
+  }
+  ngOnDestroy() {
+    this.contractorsSubscription.unsubscribe();
   }
 
 }
