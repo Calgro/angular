@@ -1,3 +1,21 @@
 <p>
-  contractorsdetail works!
+  contractors detail  {{ contractorID  }}
 </p>
+ 
+ 
+<h4>ORDER NUMBER: {{ contractor.name }}</h4>
+<h4>ORDER NUMBER: {{ contractorID  }}</h4>
+<h4>ORDER NUMBER: {{ this.contractorID  }}</h4>
+
+
+
+
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="contractorsDD" #contractorsDD [(ngModel)]="contractorID" name = "contractorID">
+				    	<option value = 'instruction' hidden>Select a Contractor</option>
+				    	<option value = '' selected>None</option>
+				    	<!-- <option *ngFor = "let contractor of contractors.contractors" value = "{{ contractor.contractorID }}">{{ contractor.name }}</option>   -->
+				    </select>
+				</div>
+			</div>

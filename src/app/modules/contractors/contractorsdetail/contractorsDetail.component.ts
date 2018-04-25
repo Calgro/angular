@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./contractorsDetail.component.css']
 })
 export class ContractorsDetailComponent implements OnInit {
-  contractors: Contractors = new Contractors(null);
+  contractor: Contractors = new Contractors(null);
   contractorsLoaded = false;
 
   constructor(
@@ -18,18 +18,21 @@ export class ContractorsDetailComponent implements OnInit {
     private router: Router
   ) { }
 
+  contractorID = this.contractorsService.contractorID;
+  contractorName = this.contractorsService.name;
+
   ngOnInit() {
     // Load the details of a specific contractor
     this.contractorsService.contractorDetailLoader.subscribe(
-        (contractors: Contractors) => {
-            console.log(contractors);
-            if (contractors !== null) {
-              this.contractors = contractors;
+        (contractor: Contractors) => {
+            console.log(contractor);
+            if (contractor !== null) {
+              this.contractor = contractor;
             }
             this.contractorsLoaded = true;
          }
       );
-    this.contractorsService.fetchContractor(this.contractorsService.contractorID);
+    this.contractorsService.fetchContractor(this.contractorID);
   }
 
 }

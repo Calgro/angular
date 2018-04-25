@@ -11,7 +11,8 @@ export class ContractorsService {
   contractorListChanged = new EventEmitter<ContractorShort[]>();
   contractorDetailLoader = new EventEmitter<ContractorShort[]>();
   query = '?';
-  contractorID;
+  contractorID = '3';
+  name = 'Hannes Venter Bouers';
 
   constructor(private http: HttpClient, private devService: DevService) { }
 
@@ -62,15 +63,9 @@ export class ContractorsService {
     );
   }
 
-  fetchContractor(contractorID) {
-    if (contractorID !== null) {
-      if (this.query !== '?') {
-        this.query += '&';
-      }
-      this.query += 'contractorID=' + contractorID;
-    }
-    console.log('https://' + this.devService.domain + '/api/v1/contractors/' + this.query);
-    this.http.get<ContractorShort[]>('https://' + this.devService.domain + '/api/v1/contractors/' + this.query).subscribe(
+    fetchContractor(contractorID) {
+    console.log('https://' + this.devService.domain + '/api/v1/contractors/' + contractorID);
+    this.http.get<ContractorShort[]>('https://' + this.devService.domain + '/api/v1/contractors/' + contractorID).subscribe(
       resp => {
         console.log(resp);
         if (resp) {
