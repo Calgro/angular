@@ -11,28 +11,35 @@ import { Router } from '@angular/router';
 })
 export class ContractorsDetailComponent implements OnInit {
   contractor: Contractors = new Contractors(null);
-  contractorsLoaded = false;
+  contractorLoaded = false;
+  noContractor = false;
 
   constructor(
     private contractorsService: ContractorsService,
     private router: Router
   ) { }
 
+  contractorSubscription;
   contractorID = this.contractorsService.contractorID;
   contractorName = this.contractorsService.name;
 
   ngOnInit() {
     // Load the details of a specific contractor
-    this.contractorsService.contractorDetailLoader.subscribe(
+    this.contractorSubscription = this.contractorsService.contractorDetailLoader.subscribe(
         (contractor: Contractors) => {
             console.log(contractor);
             if (contractor !== null) {
               this.contractor = contractor;
+            } else {
+              this.noContractor = true;
             }
-            this.contractorsLoaded = true;
+            this.contractorLoaded = true;
          }
       );
     this.contractorsService.fetchContractor(this.contractorID);
+  }
+  ngOnDestroy() {
+    this.contractorSubscription.unsubscribe();
   }
 
 }
