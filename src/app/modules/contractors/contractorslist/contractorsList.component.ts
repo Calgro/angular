@@ -42,10 +42,15 @@ export class ContractorsListComponent implements OnInit {
         );
       this.contractorsService.fetchContractors(null, null, null, null, null);
   }
+  contractorAdd() {
+    this.router.navigate(['/admin/contractors/add']);
+  }
+
   loadDetailed(contractorID) {
     this.contractorsService.contractorID = contractorID;
       this.router.navigate(['/admin/contractors/detail']);
   }
+
   ngOnDestroy() {
     this.contractorsSubscription.unsubscribe();
   }
