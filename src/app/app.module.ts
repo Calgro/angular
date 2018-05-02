@@ -48,6 +48,7 @@ import { TrackingService } from './services/tracking.service';
 import { StockComponent } from './modules/stock/stock.component';
 import { ContractorsListComponent } from './modules/contractors/contractorslist/contractorsList.component';
 import { ContractorsDetailComponent } from './modules/contractors/contractorsdetail/contractorsDetail.component';
+import { ContractorsAddComponent } from './modules/contractors/contractorsadd/contractorsAdd.component';
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
   //{ path: 'login', component: LoginComponent},
@@ -75,6 +76,7 @@ const appRoutes: Routes = [
     { path: 'contractors', children : [
           { path: 'list', component: ContractorsListComponent},
           { path: 'detail', component: ContractorsDetailComponent},
+          { path: 'add', component: ContractorsAddComponent},
           
     ]},
   ] },
@@ -101,7 +103,8 @@ const appRoutes: Routes = [
     OrdersFilterComponent,
     StockComponent,
     ContractorsListComponent,
-    ContractorsDetailComponent
+    ContractorsDetailComponent,
+    ContractorsAddComponent
   ],
   imports: [
     BrowserModule,

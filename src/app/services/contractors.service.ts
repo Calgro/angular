@@ -14,6 +14,7 @@ export class ContractorsService {
   contractorDetailLoader = new EventEmitter<ContractorShort[]>();
   query = '?';
   contractorID = '3';
+  name;
 
   constructor(private http: HttpClient, private devService: DevService) { }
 
