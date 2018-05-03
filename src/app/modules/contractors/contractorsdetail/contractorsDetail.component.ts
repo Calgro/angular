@@ -38,6 +38,12 @@ export class ContractorsDetailComponent implements OnInit {
       );
     this.contractorsService.fetchContractor(this.contractorID);
   }
+
+  contractorEdit(contractorID) {
+    this.contractorsService.contractorID = contractorID;
+      this.router.navigate(['/admin/contractors/edit']);
+  }
+
   ngOnDestroy() {
     this.contractorSubscription.unsubscribe();
   }
