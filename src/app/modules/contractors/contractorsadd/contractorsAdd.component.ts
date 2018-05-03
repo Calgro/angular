@@ -25,81 +25,35 @@ export class ContractorsAddComponent {
     private devService: DevService
   ) { }
 
-
   contractorSubscription;
-
-
 
   onSave(form: NgForm) {
     const name = form.value.ContractorName;
-    const formData: FormData = new FormData();
-    formData.append('name', name);
 
-console.log(name);
-console.log(formData);
+    if (name === '') {
+      alertify.error('Contractor\'s name is required');
+    } else {
+      alertify.success('Saving contractor.  You will be notified once complete.');
 
-    this.contractorSubscription = this.contractorsService.name = name;
+      const contractorAdd = {
+        'name': name
+      };
 
-
-console.log(this.contractorsService.name);
-
-
-//    if (this.contractorsService.name === null) {
-//      alertify.error('Name of constructor is required');
-//    } else {
-//        alertify.success('Saving contractor.  You will be notified once complete.');
-//// Send JSON object to DB
-//        console.log(this.contractorsService.name);
-//        this.http.put('https://' + this.devService.domain + '/api/v1/contractors', this.contractorsService.name).subscribe(
-//          (resp: Outcome) => {
-//            if (resp.statusCode === '200') {
-//              alertify.success(resp.message);
-//            }
-//          },
-//          (error: HttpErrorResponse) => {
-//            alertify.error(error.status + ' - ' + error.statusText);
-//          }
-//        );
-//
-//
-//// Get message from API
-//
-//
-//     // this.router.navigate(['/admin/contractors/list']);
-//    }
-
+      this.contractorSubscription = this.http.post('https://' + this.devService.domain + '/api/v1/contractors', contractorAdd).subscribe(
+          (resp: Outcome) => {
+            if (resp.statusCode === '200') {
+              alertify.success(resp.message);
+              this.router.navigate(['/admin/contractors/list']);
+            }
+          },
+          (error: HttpErrorResponse) => {
+            alertify.error(error.status + ' - ' + error.statusText);
+          }
+        );
+    }
   }
-
-//  contractorSave(contractorName) {
-//    this.contractorSubscription = this.contractorsService.name = contractorName;
-//    if (this.contractorsService.name === null) {
-//      alertify.error('Name of constructor is required');
-//    } else {
-//        alertify.success('Saving contractor.  You will be notified once complete.');
-//// Send JSON object to DB
-//        console.log(this.contractorsService.name);
-//        this.http.put('https://' + this.devService.domain + '/api/v1/contractors', this.contractorsService.name).subscribe(
-//          (resp: Outcome) => {
-//            if (resp.statusCode === '200') {
-//              alertify.success(resp.message);
-//            }
-//          },
-//          (error: HttpErrorResponse) => {
-//            alertify.error(error.status + ' - ' + error.statusText);
-//          }
-//        );
-//
-//
-//// Get message from API
-//
-//
-//      this.router.navigate(['/admin/contractors/list']);
-//    }
-//  }
-
 
   ngOnDestroy() {
     this.contractorSubscription.unsubscribe();
   }
-
 }
