@@ -49,6 +49,7 @@ import { StockComponent } from './modules/stock/stock.component';
 import { ContractorsListComponent } from './modules/contractors/contractorslist/contractorsList.component';
 import { ContractorsDetailComponent } from './modules/contractors/contractorsdetail/contractorsDetail.component';
 import { ContractorsAddComponent } from './modules/contractors/contractorsadd/contractorsAdd.component';
+import { ContractorsEditComponent } from './modules/contractors/contractorsedit/contractorsEdit.component';
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
   //{ path: 'login', component: LoginComponent},
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
           { path: 'list', component: ContractorsListComponent},
           { path: 'detail', component: ContractorsDetailComponent},
           { path: 'add', component: ContractorsAddComponent},
+          { path: 'edit', component: ContractorsEditComponent},
           
     ]},
   ] },
@@ -104,7 +106,8 @@ const appRoutes: Routes = [
     StockComponent,
     ContractorsListComponent,
     ContractorsDetailComponent,
-    ContractorsAddComponent
+    ContractorsAddComponent,
+    ContractorsEditComponent,
   ],
   imports: [
     BrowserModule,
