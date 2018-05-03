@@ -72,14 +72,14 @@ const appRoutes: Routes = [
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
           { path: 'stock', component: StockComponent}
-          
+
     ]},
     { path: 'contractors', children : [
           { path: 'list', component: ContractorsListComponent},
           { path: 'detail', component: ContractorsDetailComponent},
           { path: 'add', component: ContractorsAddComponent},
           { path: 'edit', component: ContractorsEditComponent},
-          
+
     ]},
   ] },
 
