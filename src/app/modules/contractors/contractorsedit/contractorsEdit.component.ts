@@ -16,9 +16,9 @@ const alertify = require('alertify.js');
     templateUrl: './contractorsEdit.component.html',
     styleUrls: ['./contractorsEdit.component.css']
 })
-  
+
 export class ContractorsEditComponent implements OnInit {
-    contractor: ContractorShort;
+    contractor: ContractorShort = new ContractorShort(null, null);
     contractorLoaded = false;
     noContractor = false;
 
@@ -28,8 +28,8 @@ export class ContractorsEditComponent implements OnInit {
         private http: HttpClient,
         private devService: DevService
     ) { }
-    
-    contractorSubscription;  
+
+    contractorSubscription;
     contractorID = this.contractorsService.contractorID;
 
     ngOnInit() {
@@ -46,21 +46,21 @@ export class ContractorsEditComponent implements OnInit {
 
         this.contractorsService.fetchContractor(this.contractorID);
     }
-  
+
     onSave(form: NgForm) {
         const name = form.value.ContractorName;
         const contractorID = this.contractor.contractorID;
-    
+
         if (name === '') {
             alertify.error('Contractor\'s name is required');
         } else {
             alertify.success('Updating contractor.  You will be notified once complete.');
-      
+
             const contractorUpdate = {
-                'name': name
+                'name': name,
                 'contractorID': contractorID
             };
-      
+
             this.http.put('https://' + this.devService.domain + '/api/v1/contractors', contractorUpdate).subscribe(
                 (resp: Outcome) => {
                     if (resp.statusCode === '200') {
@@ -74,9 +74,9 @@ export class ContractorsEditComponent implements OnInit {
             );
         }
     }
-  
+
     ngOnDestroy() {
         this.contractorSubscription.unsubscribe();
-    }  
+    }
 
 }
