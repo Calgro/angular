@@ -46,6 +46,17 @@ import { OrdersDeliveryFormComponent } from './modules/orders/ordersDeliveryForm
 import { OrdersFilterComponent } from './modules/orders/ordersFilter/ordersFilter.component';
 import { TrackingService } from './services/tracking.service';
 import { StockComponent } from './modules/stock/stock.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+ // Change this to your upload POST address:
+  url: 'https://www.calgrois.com/api/v1/upload',
+  maxFilesize: 50,
+  acceptedFiles: 'image/*'
+};
+
+
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
   //{ path: 'login', component: LoginComponent},
@@ -102,7 +113,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularMultiSelectModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    DropzoneModule,
+    SignaturePadModule,
   ],
   providers: [
     AuthGuardService,
@@ -126,10 +139,14 @@ const appRoutes: Routes = [
     SuppliersService,
     DevService,
     TrackingService,
-   {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG
     }
  ],
   bootstrap: [AppComponent]

@@ -4,12 +4,12 @@
 		<div class="col-md-6" style = "padding:0px;">
 		</div>
 <!-- Breadcrumbs -->		
-		<div class="col-md-3" style = "padding:0px;"> 
-			<div>INSERT BREADCRUMB HERE</div> 
+		<div class="col-md-4" style = "padding:0px;"> 
+			<div>{{ breadcrumb }}</div> 
 		</div>
 <!-- User -->		
 		<div class="col-sm-12 col-md-2" style = "padding:0px;">
-			<div>Development User</div> 
+			<div>{{ userName }}<br><strong>(CIS V4.0.0)</strong></div> 
 		</div>
 	</div>
 	
@@ -45,7 +45,7 @@
 				</div>
 			</li>
 			<li class="nav-item navbar-right" style = "cursor:pointer;">
-				<a class="nav-link" aria-haspopup="true" aria-expanded="false">Logout</a>
+				<a class="nav-link" aria-haspopup="true" aria-expanded="false" (click) = "logout()">Logout</a>
 			</li>
 		</ul>
 	</div>  

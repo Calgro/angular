@@ -69,7 +69,7 @@ export class BuildingsService {
         }
       },
       (error: HttpErrorResponse) => {
-        alertify.error(error.status + ' - ' + error.statusText);
+      //  alertify.error(error.status + ' - ' + error.statusText);
        }
     );
   }

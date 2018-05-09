@@ -21,7 +21,7 @@ export class ProjectsService {
         this.projectListChanged.emit(resp);
       },
       (error: HttpErrorResponse) => {
-        alertify.error(error.status + ' - ' + error.statusText);
+       // alertify.error(error.status + ' - ' + error.statusText);
        }
     );
   }

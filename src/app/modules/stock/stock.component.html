@@ -6,13 +6,21 @@
 <form class="form-filter" [formGroup]="ordersForm" (ngSubmit)="saveChanges()" *ngIf="ordersLoaded" >
 	<div class="container">
 		<div class="row">
-			<div class="col-sm"></div>
-			<div class="col-sm"></div>
+			<div class="col-sm" *ngIf="stockMode === 'Check-Out'"><div class = "btn btn-primary btn-sm btn-block" (click) = "toggleSignature()">SIGN</div></div>
+			<div class="col-sm" *ngIf="stockMode === 'Check-In'"><dropzone [config]="DZConfig" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone></div>
+			<div class="col-sm" style = "border:1px solid grey;border-radius:15px;"  *ngIf="openSignature">
+				<signature-pad [options]="signaturePadOptions" id="signatureCanvas" drag-content="false"></signature-pad>
+				<div class="row">
+					<div class="col-sm-6"><div class = "btn btn-primary btn-sm btn-block" (click) = "saveSignature()">SAVE SIGNATURE</div></div>
+					<div class="col-sm-6"><div class = "btn btn-primary btn-sm btn-block" (click) = "clearSignature()">CLEAR</div></div>
+				</div>
+			</div>
 			<div class="col-sm"><button class = "btn btn-primary btn-sm btn-block">SAVE CHANGES</button></div>
 		</div>
 	</div>
 	<div class="row align-items-center justify-content-center" formArrayName="items" *ngIf="stockMode === 'Check-In'">
 		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		
 			<table class="table table-striped">
 			  <thead>
 			    <tr>

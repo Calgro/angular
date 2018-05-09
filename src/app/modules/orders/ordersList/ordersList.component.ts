@@ -13,7 +13,7 @@ export class OrdersListComponent implements OnInit {
   noOrders = false;
   ordersLoaded = false;
   listMode = this.ordersService.listMode;
-  
+  ordersSubscription;
   constructor(
     private ordersService: OrdersService,
     private router: Router,
@@ -24,7 +24,7 @@ export class OrdersListComponent implements OnInit {
    
     console.log(this.listMode);
     // ORDERS
-      this.ordersService.orderListChanged.subscribe(
+      this.ordersSubscription = this.ordersService.orderListChanged.subscribe(
           (orders: OrderList) => {
               console.log(orders);
               if (orders !== null) {
@@ -56,5 +56,8 @@ export class OrdersListComponent implements OnInit {
   }
   loadFilter() {
     this.router.navigate(['/admin/orders/filter']);
+  }
+  ngOnDestroy() {
+    this.ordersSubscription.unsubscribe();
   }
 }

@@ -38,7 +38,7 @@ export class OrdersDeliveryFormComponent implements OnInit {
               this.addresses = addresses;
             }
         );
-      this.addressService.fetchDeliveryAddresses();
+      this.addressService.fetchDeliveryAddresses(null);
   }
   updateDelivery(form: NgForm) {
     console.log(form.value.deliveryAddressID);

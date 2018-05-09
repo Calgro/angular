@@ -22,6 +22,7 @@
 		              [data]="internalOrders"
 		              [labels]="internalOrdersLabel"
 		              [chartType]="doughnutChartType"
+		              [colors]="internalOrdersColors"
 		              (chartHover)="chartHovered($event)"></canvas>
 		</div>
 	</div>
@@ -32,6 +33,7 @@
 		              [data]="externalOrders"
 		              [labels]="externalOrdersLabel"
 		              [chartType]="doughnutChartType"
+		              [colors]="externalOrdersColors"
 		              (chartHover)="chartHovered($event)"></canvas>
 		</div>
 	</div>
@@ -44,6 +46,7 @@
 		              [data]="deliveries"
 		              [labels]="deliveriesLabel"
 		              [chartType]="doughnutChartType"
+		              [colors]="deliveriesOrdersColors"
 		              (chartHover)="chartHovered($event)"></canvas>
 		</div>
 	</div>

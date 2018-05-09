@@ -22,11 +22,11 @@
         	<h6 class="border-bottom border-gray pb-2 mb-0">{{ project.project }}</h6>
         	<div class="media text-muted pt-3 order" (click) = "loadDetailed(order.orderID)" *ngFor="let order of project.orders">
           		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: red;" *ngIf = "order.state === 'Unprocessed'"></div>
-         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: blue;" *ngIf = "order.state === 'Partially Ordered'"></div>
-         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: green;" *ngIf = "order.state === 'Ordered'"></div>
-         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: orange;" *ngIf = "order.state === 'Checked-In'"></div>
-         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: black;" *ngIf = "order.state === 'Checked-Out'"></div>
-         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: gray;" *ngIf = "order.state === 'Delivered'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: #FF8000;" *ngIf = "order.state === 'Partially Ordered'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: #FFCC99;" *ngIf = "order.state === 'Ordered'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: #99FF99;" *ngIf = "order.state === 'Checked-In'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: green;" *ngIf = "order.state === 'Checked-Out'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: #CCFFCC;" *ngIf = "order.state === 'Delivered'"></div>
          		<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
             		<strong class="d-block text-gray-dark">{{ order.datePlaced }}: {{ order.orderID }}</strong>
             		{{ order.state }}
@@ -42,6 +42,8 @@
         	<h6 class="border-bottom border-gray pb-2 mb-0">{{ project.project }}</h6>
         	<div class="media text-muted pt-3 order" (click) = "loadDetailed(order.PONumber)" *ngFor="let order of project.orders">
           		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: red;" *ngIf = "order.state === 'Created'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: #FF8000;" *ngIf = "order.state === 'Checked-In'"></div>
+         		<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: green;" *ngIf = "order.state === 'Delivered'"></div>
          		<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
             		<strong class="d-block text-gray-dark" >{{ order.datePlaced }}: PO{{ order.PONumber }}</strong>
             		{{ order.state }}

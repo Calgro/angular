@@ -9,11 +9,18 @@ const alertify = require('alertify.js');
 @Injectable()
 export class AddressService {
   deliveryAddressListChanged = new EventEmitter<DeliveryAddressDetail[]>();
-
+  query = '?';
+  
   constructor(private http: HttpClient, private devService: DevService) { }
 
-  fetchDeliveryAddresses() {
-    this.http.get<DeliveryAddressDetail[]>('https://' + this.devService.domain + '/api/v1/deliveryAddresses/').subscribe(
+  fetchDeliveryAddresses(projectID) {
+    if (projectID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'projectID=' + projectID;
+    }
+    this.http.get<DeliveryAddressDetail[]>('https://' + this.devService.domain + '/api/v1/deliveryAddresses' + this.query).subscribe(
       resp => {
         console.log(resp);
         if (resp) {

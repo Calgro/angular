@@ -56,6 +56,7 @@ export class ProcessOrdersComponent implements OnInit {
               if (orders !== null) {
                 this.orders = new OrderList(null, null);
                 this.orders = orders;
+                this.ordersForm = null;
                 this.ordersForm = new FormGroup({
                   projects: new FormArray([]),
                 });
@@ -207,9 +208,11 @@ export class ProcessOrdersComponent implements OnInit {
                 if (breakdown.contractAllocation !== '') {
                   let approval: boolean;
                   if (breakdown.outcome === null) {
-                    approval = true;
-                    const orderApprovalItem = new OrderApprovalItem(breakdown.itemID, approval, null, item.supplier);
-                    processOrder.orderApprovalItems.push(orderApprovalItem);
+                    if (item.supplier !== 'instruction') {
+                      approval = true;
+                      const orderApprovalItem = new OrderApprovalItem(breakdown.itemID, approval, null, item.supplier);
+                      processOrder.orderApprovalItems.push(orderApprovalItem);
+                    }
                   }
                 }
               }
@@ -263,9 +266,9 @@ export class ProcessOrdersComponent implements OnInit {
               if (breakdown.contractAllocation !== '') {
                 let approval: boolean;
                 if (breakdown.outcome === true) {
-                  approval = false;
-                  const orderApprovalItem = new OrderApprovalItem(breakdown.itemID, approval, null, item.supplier);
-                  processOrder.orderApprovalItems.push(orderApprovalItem);
+                    approval = false;
+                    const orderApprovalItem = new OrderApprovalItem(breakdown.itemID, approval, null, item.supplier);
+                    processOrder.orderApprovalItems.push(orderApprovalItem);
                 }
               }
             }
@@ -276,6 +279,7 @@ export class ProcessOrdersComponent implements OnInit {
               (resp: Outcome) => {
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
+                  this.ordersService.fetchOrders(null, 'UnprocessedOrders', null, null, null, null, null);
                  }
               },
               (error: HttpErrorResponse) => {

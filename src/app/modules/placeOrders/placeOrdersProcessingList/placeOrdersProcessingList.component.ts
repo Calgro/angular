@@ -90,7 +90,7 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
               this.addresses = addresses;
             }
         );
-      this.addressService.fetchDeliveryAddresses();
+      this.addressService.fetchDeliveryAddresses(this.projectID);
     }
 
     // CHECK ALL BOXES

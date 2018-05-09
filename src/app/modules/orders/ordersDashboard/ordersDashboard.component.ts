@@ -16,32 +16,22 @@ export class OrdersDashboardComponent implements OnInit {
   // Overall Orders
   overallOrdersLabel:string[] = [];
   overallOrders:number[] = [];
-  public overallOrdersColors:Array<any> = [{ // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    }
-  ];
+  public overallOrdersColors:Array<any> = [{backgroundColor: ["#FFCC99", "#3ebf9b"]}];
   // Internal Sales
   internalOrdersLabel:string[] = [];
   internalOrders:number[] = [];
+  public internalOrdersColors:Array<any> = [{backgroundColor: ["#FFCC99", "#3ebf9b","#FF8000","#e84351"]}];
+  
   // External Sales
   externalOrdersLabel:string[] = [];
   externalOrders:number[] = [];
+  public externalOrdersColors:Array<any> = [{backgroundColor: ["#FFCC99", "#3ebf9b"]}];
+   
   // Deliveries
   deliveriesLabel:string[] = [];
   deliveries:number[] = [];
+  public deliveriesOrdersColors:Array<any> = [{backgroundColor: ["#e84351", "#FFCC99", "#3ebf9b"]}];
+  
   doughnutChartType:string = 'doughnut';
   ordersSubscription;
   // events

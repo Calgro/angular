@@ -22,7 +22,7 @@ export class ErvenService {
         }
       },
       (error: HttpErrorResponse) => {
-        alertify.error(error.status + ' - ' + error.statusText);
+       // alertify.error(error.status + ' - ' + error.statusText);
        }
     );
   }

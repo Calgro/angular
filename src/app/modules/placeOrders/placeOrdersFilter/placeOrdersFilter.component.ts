@@ -189,9 +189,10 @@ export class PlaceOrdersFilterComponent implements OnInit {
     }
 
     // PROJECTS
-    projectChange(projectID) {
+    projectChange(projectID, projectName) {
       this.updateTownships(projectID);
       this.filterService.projectID = projectID;
+      this.filterService.updateProjectName(projectName);
       this.projectID = projectID;
       this.filterService.townshipID = null;
       this.townshipID = 'instruction';
@@ -216,36 +217,43 @@ export class PlaceOrdersFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.contractorID),
         500,
         0);
+      this.filterService.updateBreadcrumb();
     }
 
     // TOWNSHIP
-   townshipChange(townshipID) {
-      this.updateErven(townshipID);
-      this.updateZoning(townshipID);
-      this.contractorsService.fetchContractors(null, townshipID, null, null, null);
-      this.filterService.townshipID = townshipID;
-      this.townshipID = townshipID;
-      this.filterService.erfID = null;
-      this.erfID = 'instruction';
-      this.filterService.PUAID = null;
-      this.PUAID = 'instruction';
-      this.filterService.buildingID = null;
-      this.buildingID = 'instruction';
-      this.filterService.zoningID = null;
-      this.zoningID = 'instruction';
-      this.filterService.contractorID = null;
-      this.contractorID = 'instruction';
-      this.filterService.materialID = null;
-      this.materialID = 'instruction';
-      this.updateBuildings(
-        null,
-        townshipID,
-        null,
-        null,
-        this.filterService.dropdownConvert(this.zoningID),
-        this.filterService.dropdownConvert(this.contractorID),
-        500,
-        0);
+   townshipChange(townshipID, townshipName) {
+      if (townshipID === 'none') {
+        this.projectChange(this.projectID, this.filterService.projectName)
+      } else {
+        this.updateErven(townshipID);
+        this.updateZoning(townshipID);
+        this.contractorsService.fetchContractors(null, townshipID, null, null, null);
+        this.filterService.townshipID = townshipID;
+        this.townshipID = townshipID;
+        this.filterService.updateTownshipName(townshipName);
+        this.filterService.erfID = null;
+        this.erfID = 'instruction';
+        this.filterService.PUAID = null;
+        this.PUAID = 'instruction';
+        this.filterService.buildingID = null;
+        this.buildingID = 'instruction';
+        this.filterService.zoningID = null;
+        this.zoningID = 'instruction';
+        this.filterService.contractorID = null;
+        this.contractorID = 'instruction';
+        this.filterService.materialID = null;
+        this.materialID = 'instruction';
+        this.updateBuildings(
+          null,
+          townshipID,
+          null,
+          null,
+          this.filterService.dropdownConvert(this.zoningID),
+          this.filterService.dropdownConvert(this.contractorID),
+          500,
+          0);
+       this.filterService.updateBreadcrumb();
+     }
     }
     updateTownships(projectID) {
       this.townshipsService.fetchTownships(projectID);
@@ -254,27 +262,33 @@ export class PlaceOrdersFilterComponent implements OnInit {
     }
 
     // ERF
-    erfChange(erfID) {
-      this.updatePrivateUseAreas(erfID);
-      this.filterService.buildingID = null;
-      this.buildingID = 'instruction';
-      this.filterService.zoningID = null;
-      this.zoningID = 'instruction';
-      this.filterService.contractorID = null;
-      this.contractorID = 'instruction';
-      this.filterService.materialID = null;
-      this.materialID = 'instruction';
-      this.updateBuildings(
-          null,
-          null,
-          erfID,
-          null,
-          this.filterService.dropdownConvert(this.zoningID),
-          this.filterService.dropdownConvert(this.contractorID),
-          500,
-          0);
-      this.erfID = erfID;
-      this.filterService.erfID = erfID;
+    erfChange(erfID, erfName) {
+      if (erfID === 'none') {
+        this.townshipChange(this.townshipID, this.filterService.townshipName)
+      } else {
+        this.updatePrivateUseAreas(erfID);
+        this.filterService.buildingID = null;
+        this.buildingID = 'instruction';
+        this.filterService.zoningID = null;
+        this.zoningID = 'instruction';
+        this.filterService.updateErfName(erfName);
+        this.filterService.contractorID = null;
+        this.contractorID = 'instruction';
+        this.filterService.materialID = null;
+        this.materialID = 'instruction';
+        this.updateBuildings(
+            null,
+            null,
+            erfID,
+            null,
+            this.filterService.dropdownConvert(this.zoningID),
+            this.filterService.dropdownConvert(this.contractorID),
+            500,
+            0);
+        this.erfID = erfID;
+        this.filterService.erfID = erfID;
+        this.filterService.updateBreadcrumb();
+      }
     }
     updateErven(townshipID) {
       this.ervenService.fetchErven(townshipID);
@@ -282,26 +296,32 @@ export class PlaceOrdersFilterComponent implements OnInit {
     }
 
     // PUA
-    PUAChange(PUAID) {
-      this.filterService.PUAID = PUAID;
-      this.filterService.buildingID = null;
-      this.buildingID = 'instruction';
-      this.filterService.zoningID = null;
-      this.zoningID = 'instruction';
-      this.filterService.contractorID = null;
-      this.contractorID = 'instruction';
-      this.filterService.materialID = null;
-      this.materialID = 'instruction';
-      this.PUAID = PUAID;
-      this.updateBuildings(
-        null,
-        null,
-        null,
-        PUAID,
-        this.filterService.dropdownConvert(this.zoningID),
-        this.filterService.dropdownConvert(this.contractorID),
-        500,
-        0);
+    PUAChange(PUAID, PUAName) {
+      if (PUAID === 'none') {
+        this.erfChange(this.erfID, this.filterService.erfName)
+      } else {
+          this.filterService.PUAID = PUAID;
+          this.filterService.buildingID = null;
+          this.buildingID = 'instruction';
+          this.filterService.zoningID = null;
+          this.zoningID = 'instruction';
+          this.filterService.contractorID = null;
+          this.contractorID = 'instruction';
+          this.filterService.materialID = null;
+          this.materialID = 'instruction';
+          this.PUAID = PUAID;
+          this.filterService.updatePUAName(PUAName);
+          this.updateBuildings(
+            null,
+            null,
+            null,
+            PUAID,
+            this.filterService.dropdownConvert(this.zoningID),
+            this.filterService.dropdownConvert(this.contractorID),
+            500,
+            0);
+          this.filterService.updateBreadcrumb();
+      }
     }
     updatePrivateUseAreas(erfID) {
       this.puaService.fetchPUA(erfID);
@@ -313,11 +333,13 @@ export class PlaceOrdersFilterComponent implements OnInit {
       this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset);
       this.contractorsService.fetchContractors(null, null, erfID, PUAID, null);
     }
-    buildingChange(buildingID) {
+    buildingChange(buildingID, buildingName) {
       console.log(buildingID);
       this.materialsService.fetchMaterials(buildingID, 'combined', null);
       this.filterService.buildingID = buildingID;
+      this.filterService.updateBuildingName(buildingName);
       this.buildingID = buildingID;
+      this.filterService.updateBreadcrumb();
     }
 
     // ZONING

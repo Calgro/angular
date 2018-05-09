@@ -131,6 +131,7 @@ export class OrdersFilterComponent implements OnInit {
   }
   // PROJECTS
     projectChange(projectID) {
+      console.log("TEST");
       this.updateTownships(projectID);
       this.filterService.projectID = projectID;
       this.projectID = projectID;
@@ -151,6 +152,7 @@ export class OrdersFilterComponent implements OnInit {
         null,
         500,
         0);
+      this.filterService.updateBreadcrumb();
     }
 
     // TOWNSHIP

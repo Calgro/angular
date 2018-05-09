@@ -19,8 +19,8 @@ export class TownshipsService {
     console.log('https://' + this.devService.domain + '/api/v1/townships/?projectID=' + projectID);
     this.http.get<TownshipShort[]>('https://' + this.devService.domain + '/api/v1/townships/?projectID=' + projectID).subscribe(
       resp => {
-       /// 
-      //  console.log(resp);
+       
+        console.log(resp);
         if (resp) {
           this.townshipListChanged.emit(resp);
         } else {

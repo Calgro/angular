@@ -48,6 +48,7 @@ export class ContractorsService {
     this.http.get<ContractorShort[]>('https://' + this.devService.domain + '/api/v1/contractors/' + this.query).subscribe(
       resp => {
         console.log(resp);
+        this.query = '?';
         if (resp) {
           this.contractorListChanged.emit(resp);
         } else {
@@ -55,7 +56,7 @@ export class ContractorsService {
         }
       },
       (error: HttpErrorResponse) => {
-        alertify.error(error.status + ' - ' + error.statusText);
+       // alertify.error(error.status + ' - ' + error.statusText);
        }
     );
   }

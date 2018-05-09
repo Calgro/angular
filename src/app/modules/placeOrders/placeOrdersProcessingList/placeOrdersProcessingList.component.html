@@ -4,7 +4,7 @@
 			<div class="col-sm">
 				<select class="custom-select mr-sm-2" formControlName="deliveryAddressID">
 			    	<option value = 'instruction' hidden>Select a Delivery Address</option>
-			    	<option *ngFor = "let deliveryAddress of addresses.deliveryAddresses" value = "{{ deliveryAddress.deliveryAddressID }}">{{ deliveryAddress.address }}</option>
+			    	<option *ngFor = "let deliveryAddress of addresses.deliveryAddresses" value = "{{ deliveryAddress.deliveryAddressID }}">{{ deliveryAddress.name }}: {{ deliveryAddress.address }}</option>
 			    </select>
 			</div>
 			<div class="col-sm"></div>
