@@ -1,3 +1,31 @@
-<p>
-  materiallist works! hello
-</p>
+<form class="form-filter" [formGroup]="materialsForm">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm"></div>
+			<div class="col-sm"></div>
+			<div class="col-sm"><button class = "btn btn-primary btn-sm btn-block">FILTER</button></div>
+		</div>
+	</div>
+	<div class="row align-items-center justify-content-center" formArrayName="materialItem">
+		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">Description</th>
+			      <th scope="col">Group</th>
+			      <th scope="col">Category</th>
+			      <th scope="col">Quantity Allowed</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr  *ngFor="let MaterialItemControl of materialsForm.get('materialItem').controls; let i = index" [formGroupName]="i" >
+			      <td>{{ MaterialItemControl.value.description }}</td>
+			      <td>{{ MaterialItemControl.value.group }}</td>
+			      <td>{{ MaterialItemControl.value.category }}</td>
+			      <td>{{ MaterialItemControl.value.quantityAllowed }}</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</form>
