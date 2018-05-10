@@ -1,11 +1,4 @@
 <form class="form-filter" [formGroup]="materialsForm">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm"></div>
-			<div class="col-sm"></div>
-			<div class="col-sm"><button class = "btn btn-primary btn-sm btn-block">FILTER</button></div>
-		</div>
-	</div>
 	<div class="row align-items-center justify-content-center" formArrayName="materialItem">
 		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<table class="table table-striped">
@@ -15,6 +8,9 @@
 			      <th scope="col">Group</th>
 			      <th scope="col">Category</th>
 			      <th scope="col">Quantity Allowed</th>
+			      <th scope="col">Unit</th>
+			      <th scope="col">Rate</th>
+			      <th scope="col">Type</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -23,6 +19,9 @@
 			      <td>{{ MaterialItemControl.value.group }}</td>
 			      <td>{{ MaterialItemControl.value.category }}</td>
 			      <td>{{ MaterialItemControl.value.quantityAllowed }}</td>
+			      <td>{{ MaterialItemControl.value.unit }}</td>
+			      <td>{{ MaterialItemControl.value.rate }}</td>
+			      <td>{{ MaterialItemControl.value.type }}</td>			      
 			    </tr>
 			  </tbody>
 			</table>

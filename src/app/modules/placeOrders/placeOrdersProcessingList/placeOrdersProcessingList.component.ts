@@ -35,7 +35,7 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
     private devService: DevService
     ) { }
 
-    defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null);
+    defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null, null, null);
     materials: Materials = new Materials([this.defaultMaterial]);
     defaultAddress: DeliveryAddressDetail = new DeliveryAddressDetail(null, null, null);
     addresses: DeliveryAddresses = new DeliveryAddresses([this.defaultAddress]);

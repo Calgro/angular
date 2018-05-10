@@ -54,7 +54,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
   defaultDepartment: DepartmentShort = new DepartmentShort(null, 'Loading Departments', null);
   departments: Departments = new Departments([this.defaultDepartment]);
 
-  defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null);
+  defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null, null, null);
   materials: Materials = new Materials([this.defaultMaterial]);
 
   defaultContractor: ContractorShort = new ContractorShort('', 'Loading Contractors');

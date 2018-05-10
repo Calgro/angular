@@ -37,7 +37,7 @@ export class MaterialsService {
           if (resp) {
             this.materialListChanged.emit(resp);
           } else {
-            this.materialListChanged.emit([new MaterialDetail(null, 'None Found', null, null, null, null, null, null)]);
+            this.materialListChanged.emit([new MaterialDetail(null, 'None Found', null, null, null, null, null, null, null, null)]);
           }
         },
         (error: HttpErrorResponse) => {
@@ -52,7 +52,7 @@ export class MaterialsService {
           if (resp) {
             this.materialListChanged.emit(resp);
           } else {
-            this.materialListChanged.emit([new MaterialDetail(null, 'None Found', null, null, null, null, null, null)]);
+            this.materialListChanged.emit([new MaterialDetail(null, 'None Found', null, null, null, null, null, null, null, null)]);
           }
         },
         (error: HttpErrorResponse) => {
