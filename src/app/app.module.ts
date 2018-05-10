@@ -48,6 +48,7 @@ import { TrackingService } from './services/tracking.service';
 import { StockComponent } from './modules/stock/stock.component';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { MaterialListComponent } from './modules/materials/materiallist/materialList.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -78,9 +79,17 @@ const appRoutes: Routes = [
           { path: 'editSupplier', component: OrdersSupplierFormComponent},
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
-          { path: 'stock', component: StockComponent}
-          
+          { path: 'stock', component: StockComponent},
     ]},
+
+
+
+    { path: 'materials', children : [
+          { path: 'materialList', component: MaterialListComponent}
+    ]},
+
+
+
   ] },
 
 ];
@@ -103,7 +112,8 @@ const appRoutes: Routes = [
     OrdersSupplierFormComponent,
     OrdersDeliveryFormComponent,
     OrdersFilterComponent,
-    StockComponent
+    StockComponent,
+    MaterialListComponent
   ],
   imports: [
     BrowserModule,
