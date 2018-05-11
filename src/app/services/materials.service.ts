@@ -14,6 +14,11 @@ export class MaterialsService {
   constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchMaterials(buildingID, mode, materialID) {
+    console.log('Dominique materials service' + this.query);
+    
+    buildingID = '1472448069';
+          
+
     if (buildingID !== null) {
       if (this.query !== '') {
         this.query += '&';
@@ -29,6 +34,7 @@ export class MaterialsService {
     if (this.query !== '') {
       this.query += '&limit=500&offset=0';
     }
+
     if (materialID === null) {
       console.log('https://' + this.devService.domain + '/api/v1/materials/?' + this.query);
       this.http.get<MaterialDetail[]>('https://' + this.devService.domain + '/api/v1/materials/?' + this.query).subscribe(

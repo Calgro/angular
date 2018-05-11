@@ -35,12 +35,12 @@ export class MaterialListComponent implements OnInit {
     materialListType = this.filterService.materialListType;
     materialID = this.filterService.materialID;
 
-
   ngOnInit() {
     this.materialsForm = new FormGroup({
                 'materialItem': new FormArray([])
             });
 
+console.log('Dominique Test 1');
 
     // MATERIALS
     this.materialsService.materialListChanged.subscribe(
@@ -57,8 +57,6 @@ export class MaterialListComponent implements OnInit {
                                                       'materialID': new FormControl(this.materials.materials[i].materialID),
                                                       'buildingID': new FormControl(this.materials.materials[i].buildingID),
                                                       'quantityAllowed': new FormControl(this.materials.materials[i].quantityAllowed),
-                                                      'quantityOrdered': new FormControl({value: this.materials.materials[i].quantityRemaining, disabled: true}, [Validators.max(this.materials.materials[i].quantityAllowed),Validators.min(0)]),
-                                                      'quantityRemaining': new FormControl(this.materials.materials[i].quantityRemaining),
                                                       'description': new FormControl(this.materials.materials[i].description),
                                                       'group': new FormControl(this.materials.materials[i].group),
                                                       'unit': new FormControl(this.materials.materials[i].unit),
@@ -71,6 +69,7 @@ export class MaterialListComponent implements OnInit {
           }
       );
 
+    console.log('Dominique Test 2');
     console.log(this.buildingID);
     console.log(this.materialListType);
     console.log(this.materialID);
