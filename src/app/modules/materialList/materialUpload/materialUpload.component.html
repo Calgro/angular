@@ -1,0 +1,13 @@
+<div class="row align-items-center justify-content-center">
+	<div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6" style = "text-align:center;">
+		<form class="form-filter" [formGroup]="materialsForm" (ngSubmit)="onUpload()">
+			<h1 class="h3 mb-3 font-weight-normal">MATERIAL LIST UPLOAD FORM</h1>
+			<div class="col-sm"><dropzone [config]="DZConfig" [message]="'Click or drag documents here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone></div>
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+				    <button class="btn btn-lg btn-primary btn-block" type="submit">Upload Material</button>
+				</div>
+			</div>	
+		</form>
+	</div>
+</div>
