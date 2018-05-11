@@ -85,7 +85,7 @@ const appRoutes: Routes = [
 
 
     { path: 'materials', children : [
-          { path: 'materialList', component: MaterialListComponent}
+          { path: 'list', component: MaterialListComponent}
     ]},
 
 

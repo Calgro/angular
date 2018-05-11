@@ -40,8 +40,6 @@ export class MaterialListComponent implements OnInit {
                 'materialItem': new FormArray([])
             });
 
-console.log('Dominique Test 1');
-
     // MATERIALS
     this.materialsService.materialListChanged.subscribe(
         (materials: Materials) => {
@@ -68,11 +66,6 @@ console.log('Dominique Test 1');
             }
           }
       );
-
-    console.log('Dominique Test 2');
-    console.log(this.buildingID);
-    console.log(this.materialListType);
-    console.log(this.materialID);
 
     this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
 
