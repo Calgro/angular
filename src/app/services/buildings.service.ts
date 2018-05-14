@@ -13,7 +13,13 @@ export class BuildingsService {
   currentBuildingID = '';
   constructor(private http: HttpClient, private devService: DevService) { }
 
-  fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
+  fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, orderGroupID, limit, offset) {
+    if (orderGroupID !== null) {
+      if (this.query !== '?') {
+        this.query += '&';
+      }
+      this.query += 'orderGroupID=' + orderGroupID;
+    }
     if (projectID !== null) {
       if (this.query !== '?') {
         this.query += '&';

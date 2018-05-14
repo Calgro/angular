@@ -58,7 +58,7 @@ export class OrdersService {
       this.query += 'state=' + state;
     }
     if (mode !== null) {
-      if (this.query !== '') {
+      if (this.query !== '?') {
         this.query += '&';
       }
       this.query += 'mode=' + mode;

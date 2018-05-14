@@ -225,7 +225,7 @@ export class OrdersFilterComponent implements OnInit {
 
     // BUILDINGS
     updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
-      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset);
+      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, null, limit, offset);
     }
     buildingChange(buildingID) {
       this.filterService.buildingID = buildingID;

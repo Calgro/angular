@@ -46,6 +46,7 @@ import { OrdersDeliveryFormComponent } from './modules/orders/ordersDeliveryForm
 import { OrdersFilterComponent } from './modules/orders/ordersFilter/ordersFilter.component';
 import { TrackingService } from './services/tracking.service';
 import { StockComponent } from './modules/stock/stock.component';
+import { OrderGroupsService } from './services/ordergroups.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 
@@ -138,6 +139,7 @@ const appRoutes: Routes = [
     OrdersService,
     SuppliersService,
     DevService,
+    OrderGroupsService,
     TrackingService,
     {
       provide: HTTP_INTERCEPTORS,

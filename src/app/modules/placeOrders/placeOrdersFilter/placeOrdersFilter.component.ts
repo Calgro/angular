@@ -19,6 +19,7 @@ import { DepartmentShort } from '../../../models/departmentShort.model';
 import { Departments } from '../../../models/departments.model';
 import { Materials } from '../../../models/materials.model';
 import { MaterialDetail } from '../../../models/materialDetail.model';
+import { OrderGroups } from '../../../models/orderGroups.model';
 import { ErvenService } from '../../../services/erven.service';
 import { PuaService } from '../../../services/pua.service';
 import { BuildingsService } from '../../../services/buildings.service';
@@ -27,6 +28,7 @@ import { ContractorsService } from '../../../services/contractors.service';
 import { DepartmentsService } from '../../../services/departments.service';
 import { FilterService } from '../../../services/filter.service';
 import { MaterialsService } from '../../../services/materials.service';
+import { OrderGroupsService } from '../../../services/ordergroups.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -49,6 +51,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
     private contractorsService: ContractorsService,
     private departmentsService: DepartmentsService,
     private filterService: FilterService,
+    private orderGroupsService: OrderGroupsService,
     private router: Router) { }
 
   defaultDepartment: DepartmentShort = new DepartmentShort(null, 'Loading Departments', null);
@@ -78,6 +81,8 @@ export class PlaceOrdersFilterComponent implements OnInit {
   defaultProject: ProjectShort = new ProjectShort('', 'Loading Projects', '', '');
   projects: Projects = new Projects([this.defaultProject]);
 
+  orderGroups: OrderGroups = new OrderGroups(null);
+
 
 
 
@@ -91,6 +96,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
   departmentID = this.filterService.dropdownConvert(this.filterService.departmentID);
   contractorID = this.filterService.dropdownConvert(this.filterService.contractorID);
   zoningID = this.filterService.dropdownConvert(this.filterService.zoningID);
+  orderGroupID = this.filterService.dropdownConvert(this.filterService.orderGroupID);
   buildingsArray;
   buildingMode = true;
 
@@ -98,6 +104,13 @@ export class PlaceOrdersFilterComponent implements OnInit {
     ngOnInit() {
       this.filterService.materialListType = 'combined';
       this.materialListType = 'combined';
+      // ORDER GROUPS
+      this.orderGroupsService.orderGroupsListChanged.subscribe(
+        (orderGroups: OrderGroups) => {
+          this.orderGroups = orderGroups;
+          }
+      );
+      this.orderGroupsService.fetchOrderGroups();
       // PROJECTS
       this.projectsService.projectListChanged.subscribe(
         (projects: Projects) => {
@@ -159,6 +172,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.PUAID),
         this.filterService.dropdownConvert(this.zoningID),
         this.filterService.dropdownConvert(this.contractorID),
+        null,
         500,
         0);
       }
@@ -188,8 +202,41 @@ export class PlaceOrdersFilterComponent implements OnInit {
       }
     }
 
+    // ORDER GROUPS
+    orderGroupChange(orderGroupID) {
+      this.filterService.projectID = null;
+      this.projectID = 'instruction';
+      this.filterService.townshipID = null;
+      this.townshipID = 'instruction';
+      this.filterService.erfID = null;
+      this.erfID = 'instruction';
+      this.filterService.PUAID = null;
+      this.PUAID = 'instruction';
+      this.filterService.buildingID = null;
+      this.buildingID = 'instruction';
+      this.filterService.zoningID = null;
+      this.zoningID = 'instruction';
+      this.filterService.contractorID = null;
+      this.contractorID = 'instruction';
+      this.filterService.materialID = null;
+      this.materialID = 'instruction';
+      this.updateBuildings(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        orderGroupID,
+        500,
+        0);
+      this.filterService.updateBreadcrumb();
+    }
+  
     // PROJECTS
     projectChange(projectID, projectName) {
+      this.filterService.orderGroupID = null;
+      this.orderGroupID = 'instruction';
       this.updateTownships(projectID);
       this.filterService.projectID = projectID;
       this.filterService.updateProjectName(projectName);
@@ -215,6 +262,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
         null,
         this.filterService.dropdownConvert(this.zoningID),
         this.filterService.dropdownConvert(this.contractorID),
+        null,
         500,
         0);
       this.filterService.updateBreadcrumb();
@@ -250,6 +298,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
           null,
           this.filterService.dropdownConvert(this.zoningID),
           this.filterService.dropdownConvert(this.contractorID),
+          null,
           500,
           0);
        this.filterService.updateBreadcrumb();
@@ -283,6 +332,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
             null,
             this.filterService.dropdownConvert(this.zoningID),
             this.filterService.dropdownConvert(this.contractorID),
+            null,
             500,
             0);
         this.erfID = erfID;
@@ -318,6 +368,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
             PUAID,
             this.filterService.dropdownConvert(this.zoningID),
             this.filterService.dropdownConvert(this.contractorID),
+            null,
             500,
             0);
           this.filterService.updateBreadcrumb();
@@ -329,8 +380,8 @@ export class PlaceOrdersFilterComponent implements OnInit {
     }
 
     // BUILDINGS
-    updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
-      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset);
+    updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, orderGroupID, limit, offset) {
+      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, orderGroupID, limit, offset);
       this.contractorsService.fetchContractors(null, null, erfID, PUAID, null);
     }
     buildingChange(buildingID, buildingName) {
@@ -353,6 +404,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.PUAID),
         zoningID,
         this.filterService.dropdownConvert(this.contractorID),
+        null,
         500,
         0);
     }
@@ -371,6 +423,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.PUAID),
         this.filterService.dropdownConvert(this.zoningID),
         contractorID,
+        null,
         500,
         0);
     }

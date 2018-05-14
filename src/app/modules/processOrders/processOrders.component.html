@@ -45,11 +45,10 @@
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">ERF</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">PUA</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">BUILDING</div>
-									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">DESCRIPTION</div>
+									<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">DESCRIPTION</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">GROUP</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">CATEGORY</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">QUANTITY</div>
-									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">RATE</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">CONTRACT ALLOCATION</div>
 								</div>
 								<div class="row" [formGroupName]="l" *ngFor="let breakdown of getBreakdown(item); let l = index">
@@ -61,11 +60,10 @@
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.erf }}</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.PUA }}</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.building }}</div>
-									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.description }}</div>
+									<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">{{ breakdown.value.description }}</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.group }}</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.category }}</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.quantity }}</div>
-									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.rate }}</div>
 									<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ breakdown.value.contractAllocation }}</div>
 								</div>
 							</div>

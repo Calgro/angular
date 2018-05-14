@@ -19,6 +19,7 @@ export class FilterService {
   departmentID = null;
   stockMode = 'Check-In';
   placedBy = null;
+  orderGroupID = null;
   breadcrumb = null;
   projectName = null;
   townshipName = null;
