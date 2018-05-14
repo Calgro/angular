@@ -1,6 +1,8 @@
+import { Outcome } from '../../../models/outcome.model';
 import { DevService } from '../../../services/dev.service';
 import { FilterService } from '../../../services/filter.service';
 import { MaterialsService } from '../../../services/materials.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -16,17 +18,13 @@ const alertify = require('alertify.js');
 
 export class MaterialUploadComponent implements OnInit {
   materialsForm: FormGroup;
-//  order: Order = new Order(null, null, null, null, null, null, null, null);
-//  ordersLoaded = false;
-//  showDetail = false;
-//  listMode = this.ordersService.listMode;
-//  stockMode = this.filterService.stockMode;
 
    // SETTING UP DOCUMENT PROPERTIES
-  documentLocation = 'materialsList';
+  documentLocation = 'Materials List';
   documentUploaded = false;
   documentName: string = null;
   documentType = 'Materials List';
+  buildingID = this.filterService.buildingID[0];
 
   // DROPZONE UPLOAD PROPERTY
   DZConfig: DropzoneConfigInterface = {
@@ -37,16 +35,10 @@ export class MaterialUploadComponent implements OnInit {
 
   checked = '';
   MaterialListData = {
-          'mode': 'Check-In',
-//          'PONumber': this.ordersService.orderID,
-          'documentName': null,
-          'documentLocation': this.documentLocation,
-          'documentType': this.documentType,
-          'materials': [{
-          'materialID': null,
-          'checkedIn': true,
-          'quantity' : null,
-           }]
+    'documentName': null,
+    'documentLocation': this.documentLocation,
+    'documentType': this.documentType,
+    'buildingID': null,
   };
 
   constructor(
@@ -58,35 +50,40 @@ export class MaterialUploadComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.filterService.updateBreadcrumb();
+    this.materialsForm = new FormGroup({});
   }
 
   onUploadSuccess(event) {
+    this.filterService.updateBreadcrumb();
     this.documentUploaded = true;
     this.documentName = event[0].name;
-    console.log(event);
-    // alertify.success(this.documentName);
+    alertify.success(this.documentName + ' Is Ready To Be Uploaded');
   }
 
   onUploadError(event) {
+    this.filterService.updateBreadcrumb();
     this.documentUploaded = false;
-    alertify.error('Document Upload Failed');
+    alertify.error(this.documentName + ' Upload Failed');
   }
 
   onUpload(event) {
-    alertify.success('Upload and save');
-//          this.MaterialListData.documentName = this.documentName;
-//          this.MaterialListData.documentType = this.documentType;
-//          console.log(this.MaterialListData);
-//          this.http.put('https://' + this.devService.domain + '/api/v1/materials', this.MaterialListData).subscribe(
-//            (resp: Outcome) => {
-//              if (resp.statusCode === '200') {
-//                alertify.success(resp.message);
-//               }
-//            },
-//            (error: HttpErrorResponse) => {
-//              alertify.error(error.status + ' - ' + error.statusText);
-//            }
-//          );
-//          this.router.navigate(['/admin/materialList/list']);
+    this.filterService.updateBreadcrumb();
+    this.MaterialListData.documentName = this.documentName;
+    this.MaterialListData.documentLocation = this.documentLocation;
+    this.MaterialListData.documentType = this.documentType;
+    this.MaterialListData.buildingID = this.buildingID;
+    console.log(this.MaterialListData);
+    this.http.post('https://' + this.devService.domain + '/api/v1/materials', this.MaterialListData).subscribe(
+      (resp: Outcome) => {
+        if (resp.statusCode === '200') {
+          alertify.success(resp.message);
+         }
+      },
+      (error: HttpErrorResponse) => {
+        alertify.error(error.status + ' - ' + error.statusText);
+      }
+    );
+    this.router.navigate(['/admin/materialList/list']);
   }
 }
