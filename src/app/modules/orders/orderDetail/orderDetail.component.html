@@ -5,7 +5,10 @@
 </div> 
 <div class="row" style = "padding:5px" *ngIf="orderLoaded">
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
-	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<button *ngIf = "(order.BSPONumber === 'Not Uploaded Into Buildsmart')" class = "btn btn-primary btn-sm btn-block" (click) = 'uploadToBuildsmart()'>UPLOAD TO BUILDSMART</button>
+		<button *ngIf = "(order.BSPONumber !== 'Not Uploaded Into Buildsmart')" class = "btn btn-primary btn-sm btn-block" (click) = 'emailToSupplier()'>EMAIL TO SUPPLIER</button>
+	</div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 		<button class = "btn btn-primary btn-sm btn-block" (click) = 'showDetailToggle()' *ngIf="!showDetail">SHOW DETAIL</button>
 		<button class = "btn btn-primary btn-sm btn-block" (click) = 'showDetailToggle()' *ngIf="showDetail">HIDE DETAIL</button>
@@ -47,6 +50,8 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  *ngIf = "listMode === 'purchaseOrders'">
 			<h4>PO NUMBER: {{ order.PONumber }}</h4>
+			<h6 *ngIf = "(order.BSPONumber === 'Not Uploaded Into Buildsmart')" style = "color:red;">BUILDSMART PO NUMBER: {{ order.BSPONumber }}</h6>
+			<h6 *ngIf = "(order.BSPONumber !== 'Not Uploaded Into Buildsmart')">BUILDSMART PO NUMBER: {{ order.BSPONumber }}</h6>
 			<h6 *ngIf = "(order.state === 'Created' || order.state === 'Ordered')">SUPPLIER: <a class = "editItem" (click) = "editSupplier()">{{ order.supplier }}</a></h6>
 			<h6 *ngIf = "order.state === 'Delivered'">SUPPLIER: <a class = "editItem" (click) = "editSupplier()">{{ order.supplier }}</a></h6>
 			<h6>DATE ORDERED: {{ order.datePlaced }}</h6>

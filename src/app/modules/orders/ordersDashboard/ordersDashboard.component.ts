@@ -102,7 +102,7 @@ export class OrdersDashboardComponent implements OnInit {
   loadExternal() {
     this.ordersService.listMode = 'purchaseOrders';
     this.ordersService.detailMode = 'PurchaseOrder';
-    this.router.navigate(['/admin/orders/list']);
+    this.router.navigate(['/admin/orders/POlist']);
   }
   loadDeliveries() {
     this.ordersService.listMode = 'Stock';

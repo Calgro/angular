@@ -1,6 +1,7 @@
 import { Order } from '../models/order.model';
 import { MaterialDetail } from '../models/materialDetail.model';
 import { OrderList } from '../models/orderList.model';
+import { PurchaseOrderList } from '../models/purchaseOrderList.model';
 import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +13,7 @@ const alertify = require('alertify.js');
 export class OrdersService {
   orderListChanged = new EventEmitter<OrderList>();
   orderDetailLoader = new EventEmitter<Order>();
+  purchaseOrderListChanged = new EventEmitter<PurchaseOrderList>();
   query = '?';
   listMode = 'Orders';
   orderID = '1522752908121';
@@ -19,6 +21,7 @@ export class OrdersService {
   domain = this.devService.domain;
   constructor(private http: HttpClient, private devService: DevService) { }
 
+  
   fetchOrders(state, mode, projectID, townshipID, erfID, PUAID, buildingID) {
     console.log(this.query);
     if (projectID !== null) {
@@ -88,6 +91,23 @@ export class OrdersService {
             this.orderDetailLoader.emit(resp);
           } else {
             this.orderDetailLoader.emit(null);
+          }
+
+        },
+        (error: HttpErrorResponse) => {
+          alertify.error(error.status + ' - ' + error.statusText);
+         }
+      );
+  }
+  fetchPurchaseOrders() {
+    console.log('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/mode=purchaseOrders');
+      this.http.get<PurchaseOrderList>('https://' + this.domain + '/api/v1/orders/' + this.orderID + '/mode=purchaseOrders').subscribe(
+        resp => {
+          this.query = '?';
+          if (resp) {
+            this.purchaseOrderListChanged.emit(resp);
+          } else {
+            this.purchaseOrderListChanged.emit(null);
           }
 
         },

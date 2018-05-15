@@ -26,7 +26,7 @@ export class StockComponent implements OnInit {
   signed = false;
   openSignature = false;
   ordersForm: FormGroup;
-  order: Order = new Order(null, null, null, null, null, null, null, null);
+  order: Order = new Order(null, null, null, null, null, null, null, null, null);
   ordersLoaded = false;
   showDetail = false;
   listMode = this.ordersService.listMode;
