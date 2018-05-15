@@ -50,4 +50,15 @@
 		              (chartHover)="chartHovered($event)"></canvas>
 		</div>
 	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style = "cursor:pointer;" (click) = 'loadOrderSelectView()'>
+		<h4 class ="text-center">SELECT ORDER</h4>
+		<div style="display: block">
+		  <canvas baseChart 
+		              [data]="orderSelectView"
+		              [labels]="orderSelectViewLabel"
+		              [chartType]="doughnutChartType"
+		              [colors]="deliveriesOrdersColors"
+		              (chartHover)="chartHovered($event)"></canvas>
+		</div>
+	</div>	
 </div>
