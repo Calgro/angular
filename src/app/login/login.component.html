@@ -1,10 +1,15 @@
-<div class="row" [ngStyle]="{'background-image': 'url('+login+')'}" *ngIf = "!authService.isAuthenticated()" style="height:100vh; background-position:center; background-repeat:no-repeat; background-size:cover;">
+<div class="row" [ngStyle]="{'background-image': 'url('+login+')'}" *ngIf = "!authService.isAuthenticated()" style=" background-position:center; background-repeat:no-repeat; background-size:cover;">
 	<div class="col-xs-1 col-sm-1 col-md-8">
 	</div>
-	<div class="col-xs-10 col-sm-10 col-md-3" style="padding:20vh 0; text-align:center; background:whitesmoke; background:linear-gradient(rgba(245,245,245,1), rgba(255,0,0,0)); padding-left:5px; padding-right:5px;">  
+	<div class="col-xs-10 col-sm-10 col-md-3" style="padding:20vh 0; text-align:center; background:whitesmoke; background:linear-gradient(rgba(211,211,211,1), rgba(255,0,0,0)); padding-left:5px; padding-right:5px;">  
 		<form class="form-signing" (ngSubmit) = "onSignIn(form)" #form = "ngForm">
-			<h1 class="h3 mb-3 font-weight-normal">Welcome</h1>
-			<p>Please enter your details below <br> to gain access to Calgro M3 Connect</p>
+			<div class="container-fluid" style="padding:10px">
+				<div>
+					<img id = "logo" [src]="logo"/>
+				</div>
+		    </div>
+			<h2 class="h3 mb-3 font-weight-bold" style="color:#182853; font-size:30pt; text-decoration:underline;">Welcome</h2>
+			<p style="color:#182853; font-weight:600;">Please enter your details below <br> to gain access to Calgro M3 Connect</p>
 			<label for="name" class="sr-only" style = "">First Name</label>
 			<input 
 				type="text" 
