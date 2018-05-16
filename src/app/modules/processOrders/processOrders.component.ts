@@ -225,14 +225,14 @@ export class ProcessOrdersComponent implements OnInit {
                 console.log(resp);
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
-                  this.router.navigate(['/admin/orders/dashboard']); 
+                  this.router.navigate(['/admin/orders/POlist']);
                  }
               },
               (error: HttpErrorResponse) => {
                 console.log(error);
                 alertify.error(error.status + ' - ' + error.statusText);
                 this.ordersLoaded = true;
-                  
+                this.router.navigate(['/admin/orders/POlist']);  
                }
             );
     }
