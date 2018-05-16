@@ -21,7 +21,7 @@ export class OrderSelectFilterComponent implements OnInit {
 
 
   loadOrderDetails(form: NgForm) {
-console.log('Testing ' this.orderNumber);
+console.log('Testing ' + this.orderNumber);
 
 //    this.ordersService.listMode = listMode;
 //    this.ordersService.orderID = orderID;
