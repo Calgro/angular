@@ -41,7 +41,12 @@ export class ContractorsDetailComponent implements OnInit {
 
   contractorEdit(contractorID) {
     this.contractorsService.contractorID = contractorID;
-      this.router.navigate(['/admin/contractors/edit']);
+    this.router.navigate(['/admin/contractors/edit']);
+  }
+
+  contractorDelete(contractorID) {
+    this.contractorsService.contractorID = contractorID;
+    this.router.navigate(['/admin/contractors/remove']);
   }
 
   ngOnDestroy() {

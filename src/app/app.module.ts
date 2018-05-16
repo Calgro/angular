@@ -50,9 +50,10 @@ import { ContractorsListComponent } from './modules/contractors/contractorslist/
 import { ContractorsDetailComponent } from './modules/contractors/contractorsdetail/contractorsDetail.component';
 import { ContractorsAddComponent } from './modules/contractors/contractorsadd/contractorsAdd.component';
 import { ContractorsEditComponent } from './modules/contractors/contractorsedit/contractorsEdit.component';
+import { ContractorsRemoveComponent } from './modules/contractors/contractorsRemove/contractorsRemove.component';
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
-  //{ path: 'login', component: LoginComponent},
+ // { path: 'login', component: LoginComponent},
 //  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children :[
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
@@ -79,6 +80,7 @@ const appRoutes: Routes = [
           { path: 'detail', component: ContractorsDetailComponent},
           { path: 'add', component: ContractorsAddComponent},
           { path: 'edit', component: ContractorsEditComponent},
+          { path: 'remove', component: ContractorsRemoveComponent},
 
     ]},
   ] },
@@ -108,6 +110,7 @@ const appRoutes: Routes = [
     ContractorsDetailComponent,
     ContractorsAddComponent,
     ContractorsEditComponent,
+    ContractorsRemoveComponent,
   ],
   imports: [
     BrowserModule,
