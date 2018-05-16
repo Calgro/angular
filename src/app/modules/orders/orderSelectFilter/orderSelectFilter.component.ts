@@ -1,4 +1,6 @@
+import { DevService } from '../../../services/dev.service';
 import { OrdersService } from '../../../services/orders.service';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,22 +11,44 @@ const alertify = require('alertify.js');
   templateUrl: './orderSelectFilter.component.html',
   styleUrls: ['./orderSelectFilter.component.css']
 })
-export class OrderSelectFilterComponent implements OnInit {
+export class OrderSelectFilterComponent  {
   private orderNumber;
 
   constructor(
     private ordersService: OrdersService,
     private router: Router,
+    private http: HttpClient,
+    private devService: DevService,
   ) { }
 
-  ngOnInit() {}
+    purchaseOrder   = true;
+    orderSelectView = null;
 
+    toggleMode() {
+      this.purchaseOrder = !this.purchaseOrder;
+    }
 
-  loadOrderDetails(form: NgForm) {
-console.log('Testing ' + this.orderNumber);
+  loadPurchaseOrderDetails(form: NgForm) {
+    const purchaseOrderNumber = form.value.purchaseOrderNumber;
 
-//    this.ordersService.listMode = listMode;
-//    this.ordersService.orderID = orderID;
-    this.router.navigate(['/admin/orders/detail']);
+    if (purchaseOrderNumber === '') {
+      alertify.error('Order number is required');
+    } else {
+        this.ordersService.orderID  = purchaseOrderNumber;
+        this.ordersService.detailMode = 'PurchaseOrder';
+        this.router.navigate(['/admin/orders/detail']);
+    }
+  }
+
+  loadRequisitionOrderDetails(form: NgForm) {
+    const requisitionOrderNumber = form.value.requisitionOrderNumber;
+
+    if (requisitionOrderNumber === '') {
+      alertify.error('Order number is required');
+    } else {
+        this.ordersService.orderID  = requisitionOrderNumber;
+        this.ordersService.detailMode = 'Order';
+        this.router.navigate(['/admin/orders/detail']);
+    }
   }
 }

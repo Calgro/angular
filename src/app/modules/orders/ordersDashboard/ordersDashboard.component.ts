@@ -109,9 +109,4 @@ export class OrdersDashboardComponent implements OnInit {
     this.ordersService.detailMode = 'PurchaseOrder';
     this.router.navigate(['/admin/orders/filter']);
   }
-  loadOrderSelectView() {
-    this.ordersService.listMode = 'Stock';
-    this.ordersService.detailMode = 'PurchaseOrder';
-    this.router.navigate(['/admin/orders/selectFilter']);
-  }
 }
