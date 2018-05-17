@@ -1,4 +1,17 @@
+import { ContractorShort } from '../../../models/contractorShort.model';
+import { Outcome } from '../../../models/outcome.model';
+import { ContractorsService } from '../../../services/contractors.service';
+import { DevService } from '../../../services/dev.service';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { RequestOptions, Headers } from '@angular/http';
+import { Router } from '@angular/router';
+
+const alertify = require('alertify.js');
 
 @Component({
   selector: 'app-contractorsremove',
@@ -9,7 +22,7 @@ export class ContractorsRemoveComponent implements OnInit {
   contractor: ContractorShort = new ContractorShort(null, null);
   contractorLoaded = false;
   noContractor = false;
-  
+
   constructor(
     private contractorsService: ContractorsService,
     private router: Router,
@@ -19,7 +32,7 @@ export class ContractorsRemoveComponent implements OnInit {
 
   contractorSubscription;
   contractorID = this.contractorsService.contractorID;
-  
+
   ngOnInit() {
     this.contractorSubscription = this.contractorsService.contractorDetailLoader.subscribe(
       (contractor: ContractorShort) => {
@@ -40,11 +53,7 @@ export class ContractorsRemoveComponent implements OnInit {
 
     alertify.success('Deleting contractor.  You will be notified once complete.');
 
-    const contractorDelete = {
-      'contractorID': contractorID
-    };
-
-    this.http.put('https://' + this.devService.domain + '/api/v1/contractors', contractorDelete).subscribe(
+    this.http.delete('https://' + this.devService.domain + '/api/v1/contractors/' + contractorID).subscribe(
       (resp: Outcome) => {
         if (resp.statusCode === '200') {
             alertify.success(resp.message);
@@ -56,9 +65,9 @@ export class ContractorsRemoveComponent implements OnInit {
       }
     );
   }
-  
+
   ngOnDestroy() {
     this.contractorSubscription.unsubscribe();
-  }  
+  }
 
 }
