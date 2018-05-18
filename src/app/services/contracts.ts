@@ -11,6 +11,9 @@ const alertify = require('alertify.js');
 export class ContractsService {
   contractsListChanged = new EventEmitter<ContractsDetail[]>();
   query = '';
+  contractID = '';
+  financeID = '';
+  type = '';
 
   constructor(private http: HttpClient, private devService: DevService) { }
 

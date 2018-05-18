@@ -1,5 +1,5 @@
 import { ContractsDetail } from './contractsDetail.model';
-export class ContractsModel {
+export class Contracts {
   public contracts: ContractsDetail[];
 
   constructor (contracts: ContractsDetail[]) {

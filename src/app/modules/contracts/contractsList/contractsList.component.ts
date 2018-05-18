@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./contractsList.component.css']
 })
 export class ContractsListComponent implements OnInit {
-// CHECK this !
-//  contracts: any;
   contractsForm: FormGroup;
 
   constructor(
@@ -25,7 +23,7 @@ export class ContractsListComponent implements OnInit {
   ) { }
 
     defaultContracts: ContractsDetail = new ContractsDetail(null, null, null);
-    contracts: contracts = new contracts([this.defaultContracts]);
+    contracts: Contracts = new Contracts([this.defaultContracts]);
     contractID = this.contractsService.contractID;
     financeID = this.contractsService.financeID;
     type = this.contractsService.type;
@@ -40,7 +38,7 @@ export class ContractsListComponent implements OnInit {
     this.contractsService.contractsListChanged.subscribe(
         (contracts: Contracts) => {
             this.contracts = new Contracts([]);
-            this.contracts = Contracts;
+            this.contracts = contracts;
             this.contractsForm = new FormGroup({
                 'contractsRecord': new FormArray([])
             });
