@@ -13,7 +13,7 @@
 <div *ngIf="materialsLoaded">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="noMaterials" style = "padding-top:10px;">
 		<div class="alert alert-danger" role="alert">
-		  <strong>No Materials:</strong> There are no materials to process at this time. Check again later.
+		  <strong>No Materials:</strong> There are no materials to view at this time. Check again later.
 		</div>
 	</div>
 	
@@ -33,13 +33,13 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let material of materials.materials;">
-						<td>{{ material.value.description }}</td>
-						<td>{{ material.value.group }}</td>
-						<td>{{ material.value.category }}</td>
-						<td>{{ material.value.quantityAllowed }}</td>
-						<td>{{ material.value.unit }}</td>
-						<td>{{ material.value.rate }}</td>
-						<td>{{ material.value.type }}</td>		
+						<td>{{ material.description }}</td>
+						<td>{{ material.group }}</td>
+						<td>{{ material.category }}</td>
+						<td>{{ material.quantityAllowed }}</td>
+						<td>{{ material.unit }}</td>
+						<td>{{ material.rate }}</td>
+						<td>{{ material.type }}</td>		
 					</tr>
 				</tbody>
 			</table>
