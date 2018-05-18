@@ -50,7 +50,8 @@ import { OrderGroupsService } from './services/ordergroups.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { ContractsListComponent } from './modules/contracts/contractsList/contractsList.component';
-import { ContractsService } from './services/contracts';
+import { ContractsService } from './services/contracts.service';
+
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -61,8 +62,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 
 
 const appRoutes: Routes = [
- // { path: '', component: LoginComponent},
-  //{ path: 'login', component: LoginComponent},
+//  { path: '', component: LoginComponent},
+//  { path: 'login', component: LoginComponent},
 //  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children :[
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
@@ -82,7 +83,7 @@ const appRoutes: Routes = [
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
           { path: 'stock', component: StockComponent}
-          
+
     ]},
     { path: 'contracts', children : [
           { path: 'list', component: ContractsListComponent},

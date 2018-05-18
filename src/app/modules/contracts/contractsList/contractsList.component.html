@@ -1,5 +1,23 @@
-<form class="form-filter" [formGroup]="contractsForm">
-	<div class="row align-items-center justify-content-center" formArrayName="contractsRecord">
+<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!contractsLoaded" style = "padding:10px;">
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+	</div>
+</div> 
+<div class="row" style = "padding:5px" *ngIf="contractsLoaded">
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<button class = "btn btn-primary btn-sm btn-block" (click) = 'loadFilter()'>FILTER</button>
+	</div>
+</div>
+<div *ngIf="contractsLoaded">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="noContracts" style = "padding-top:10px;">
+		<div class="alert alert-danger" role="alert">
+		  <strong>No Contracts:</strong> There are no contracts to process at this time. Check again later.
+		</div>
+	</div>
+	
+	<div class="row align-items-center justify-content-center">
 		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<table class="table table-striped">
 				<thead>
@@ -10,13 +28,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr  *ngFor="let ContractsRecordControl of contractsForm.get('contractsRecord').controls; let i = index" [formGroupName]="i" >
-						<td>{{ ContractsRecordControl.value.contractID }}</td>
-						<td>{{ ContractsRecordControl.value.financeID }}</td>
-						<td>{{ ContractsRecordControl.value.type }}</td>		
+					<tr *ngFor="let contract of contracts.contracts;">
+						<td>{{ contract.contractID }}</td>
+						<td>{{ contract.financeID }}</td>
+						<td>{{ contract.type }}</td>		
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-</form>
+</div>
