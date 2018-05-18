@@ -2,20 +2,20 @@
 	<div class="row align-items-center justify-content-center" formArrayName="contractsRecord">
 		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<table class="table table-striped">
-			  <thead>
-			    <tr>
-			      <th scope="col">Contract ID</th>
-			      <th scope="col">Finance ID</th>
-			      <th scope="col">Type</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr  *ngFor="let ContractsRecordControl of contractsForm.get('contractsRecord').controls; let i = index" [formGroupName]="i" >
-			      <td>{{ ContractsRecordControl.value.contractID }}</td>
-			      <td>{{ ContractsRecordControl.value.financeID }}</td>
-			      <td>{{ ContractsRecordControl.value.type }}</td>			      
-			    </tr>
-			  </tbody>
+				<thead>
+					<tr>
+						<th scope="col">Contract ID</th>
+						<th scope="col">Finance ID</th>
+						<th scope="col">Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  *ngFor="let ContractsRecordControl of contractsForm.get('contractsRecord').controls; let i = index" [formGroupName]="i" >
+						<td>{{ ContractsRecordControl.value.contractID }}</td>
+						<td>{{ ContractsRecordControl.value.financeID }}</td>
+						<td>{{ ContractsRecordControl.value.type }}</td>		
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>

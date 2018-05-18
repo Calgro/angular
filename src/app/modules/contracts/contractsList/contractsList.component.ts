@@ -1,11 +1,14 @@
 import { ContractsDetail } from '../../../models/contractsDetail.model';
 import { Contracts } from '../../../models/contracts.model';
-import { ContractsService } from '../../../services/contracts';
+import { ContractsService } from '../../../services/contracts.service';
+
 import { FilterService } from '../../../services/filter.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+const alertify = require('alertify.js');
 
 @Component({
   selector: 'app-contractslist',
@@ -22,11 +25,11 @@ export class ContractsListComponent implements OnInit {
     private router: Router,
   ) { }
 
-    defaultContracts: ContractsDetail = new ContractsDetail(null, null, null);
-    contracts: Contracts = new Contracts([this.defaultContracts]);
-    contractID = this.contractsService.contractID;
-    financeID = this.contractsService.financeID;
-    type = this.contractsService.type;
+  defaultContracts: ContractsDetail = new ContractsDetail(null, null, null);
+  contracts: Contracts = new Contracts([this.defaultContracts]);
+  contractID = this.contractsService.contractID;
+  financeID = this.contractsService.financeID;
+  type = this.contractsService.type;
 
 
   ngOnInit() {
@@ -34,7 +37,7 @@ export class ContractsListComponent implements OnInit {
       'contractsRecord': new FormArray([])
     });
 
-    // Contracts
+    // CONTRACTS
     this.contractsService.contractsListChanged.subscribe(
         (contracts: Contracts) => {
             this.contracts = new Contracts([]);

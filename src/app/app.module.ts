@@ -50,6 +50,7 @@ import { OrderGroupsService } from './services/ordergroups.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { ContractsListComponent } from './modules/contracts/contractsList/contractsList.component';
+import { ContractsService } from './services/contracts';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -146,6 +147,7 @@ const appRoutes: Routes = [
     DevService,
     OrderGroupsService,
     TrackingService,
+    ContractsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
