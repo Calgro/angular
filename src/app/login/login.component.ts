@@ -15,6 +15,8 @@ const alertify = require('alertify.js');
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  POPIConfirmation = 'null';
+
 
   SignInData = {
     'name': null,
@@ -26,8 +28,6 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private menusService: MenusService) { }
   private login = require('../images/CalgroM3Connect.jpg');
   private logo = require('../images/logo.png');
-
-
 
   onSignIn(form: NgForm) {
     const name    = form.value.name;
