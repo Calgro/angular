@@ -27,11 +27,14 @@ export class LoginComponent {
   private login = require('../images/CalgroM3Connect.jpg');
   private logo = require('../images/logo.png');
 
+
+
   onSignIn(form: NgForm) {
     const name    = form.value.name;
     const surname = form.value.surname;
     const cell    = form.value.cell;
     const email   = form.value.email;
+    const POPIConfirmation = form.value.POPIConfirmation;
 
     if (name === '') {
       alertify.error('First Name is required');
@@ -41,6 +44,8 @@ export class LoginComponent {
         alertify.error('Please enter a valid Cell Number');
     } else if (email === '') {
         alertify.error('Email Address is required');
+    } else if (POPIConfirmation !== true) {
+        alertify.error('Please confirm your agreement to the POPI T&Cs');
     } else {
         this.SignInData.name    = name;
         this.SignInData.surname = surname;
