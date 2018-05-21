@@ -39,10 +39,7 @@ export class MaterialListComponent implements OnInit {
     // CONTRACTS
     this.materialSubscription = this.materialsService.materialListChanged.subscribe(
         (materials: Materials) => {
-
-          console.log('materials ' + materials);
-
-          if (materials !== null) {
+          if (materials.materials !== null) {
             this.materials = materials;
           } else {
             this.noMaterials = true;
@@ -52,41 +49,10 @@ export class MaterialListComponent implements OnInit {
       );
 
     this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
-
-
-//     MATERIALS
-//    this.materialsService.materialListChanged.subscribe(
-//        (materials: Materials) => {
-//            this.materials = new Materials([]);
-//            this.materials = materials;
-//            this.materialsForm = new FormGroup({
-//                'materialItem': new FormArray([])
-//            });
-//            let i: number;
-//            for (i = 0; i <= (this.materials.materials.length) - 1; i++) {
-//                const controlGroup = new FormGroup({
-//                                                      'status': new FormControl(false),
-//                                                      'materialID': new FormControl(this.materials.materials[i].materialID),
-//                                                      'buildingID': new FormControl(this.materials.materials[i].buildingID),
-//                                                      'quantityAllowed': new FormControl(this.materials.materials[i].quantityAllowed),
-//                                                      'description': new FormControl(this.materials.materials[i].description),
-//                                                      'group': new FormControl(this.materials.materials[i].group),
-//                                                      'unit': new FormControl(this.materials.materials[i].unit),
-//                                                      'rate': new FormControl(this.materials.materials[i].rate),
-//                                                      'type': new FormControl(this.materials.materials[i].type),
-//                                                      'category': new FormControl(this.materials.materials[i].category)
-//                                                  });
-//                (<FormArray>this.materialsForm.get('materialItem')).push(controlGroup);
-//            }
-//          }
-//      );
-//
-//    this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
-
   }
 
   loadFilter() {
-
+    this.router.navigate(['/admin/materialList/filter']);
   }
 
 }

@@ -11,13 +11,13 @@
 	</div>
 </div>
 <div *ngIf="materialsLoaded">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="noMaterials" style = "padding-top:10px;">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  *ngIf="noMaterials" style = "padding-top:10px;">
 		<div class="alert alert-danger" role="alert">
 		  <strong>No Materials:</strong> There are no materials to view at this time. Check again later.
 		</div>
 	</div>
 	
-	<div class="row align-items-center justify-content-center">
+	<div class="row align-items-center justify-content-center"  *ngIf="!noMaterials">
 		<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<table class="table table-striped">
 				<thead>
@@ -26,6 +26,7 @@
 						<th scope="col">Group</th>
 						<th scope="col">Category</th>
 						<th scope="col">Quantity Allowed</th>
+						<th scope="col">Quantity Remaining</th>
 						<th scope="col">Unit</th>
 						<th scope="col">Rate</th>
 						<th scope="col">Type</th>
@@ -37,6 +38,7 @@
 						<td>{{ material.group }}</td>
 						<td>{{ material.category }}</td>
 						<td>{{ material.quantityAllowed }}</td>
+						<td>{{ material.quantityRemaining }}</td>
 						<td>{{ material.unit }}</td>
 						<td>{{ material.rate }}</td>
 						<td>{{ material.type }}</td>		
