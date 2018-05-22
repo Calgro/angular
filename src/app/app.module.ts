@@ -50,6 +50,7 @@ import { OrderGroupsService } from './services/ordergroups.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { PurchaseOrderListComponent } from './modules/orders/purchaseOrderList/purchaseOrderList.component';
+import { ConnectLoginComponent } from './modules/CM3Connect/connectLogin/connectLogin.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -61,7 +62,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
-  //{ path: 'login', component: LoginComponent},
+ // { path: 'login', component: LoginComponent},
 //  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children :[
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
@@ -82,7 +83,9 @@ const appRoutes: Routes = [
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
           { path: 'stock', component: StockComponent}
-          
+    ]},
+    { path: 'CM3Connect', children : [
+          { path: 'login', component: ConnectLoginComponent}
     ]},
   ] },
 
@@ -107,7 +110,8 @@ const appRoutes: Routes = [
     OrdersDeliveryFormComponent,
     OrdersFilterComponent,
     StockComponent,
-    PurchaseOrderListComponent
+    PurchaseOrderListComponent,
+    ConnectLoginComponent,
   ],
   imports: [
     BrowserModule,

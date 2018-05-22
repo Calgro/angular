@@ -1,0 +1,71 @@
+<div class="row" [ngStyle]="{'background-image': 'url('+login+')'}" *ngIf = "!authService.isAuthenticated()" style=" background-position:center; background-repeat:no-repeat; background-size:cover;">
+	<div class="col-xs-1 col-sm-1 col-md-8">
+	</div>
+	<div class="col-xs-10 col-sm-10 col-md-3" style="padding:20vh 0; text-align:center; background:whitesmoke; background:linear-gradient(rgba(211,211,211,1), rgba(255,0,0,0)); padding-left:5px; padding-right:5px;">  
+		<form class="form-signing" (ngSubmit) = "onSignIn(form)" #form = "ngForm">
+			<div class="container-fluid" style="padding:10px">
+				<div class="logo">
+					<img id = "logo" [src]="logo"/>
+				</div>
+		    </div>
+			<h2 class="h3 mb-3 font-weight-bold" style="color:#182853; font-size:30pt; text-decoration:underline;">Welcome</h2>
+			<p style="color:#182853; font-weight:800;">Please enter your details below <br> to gain access to Calgro M3 Connect</p>
+			<label for="name" class="sr-only" style = "">First Name</label>
+			<input 
+				type="text" 
+				id="name" 
+				class="form-control" 
+				placeholder="First Name" 
+				required 
+				autofocus="" 
+				style = "margin-bottom:20px;" 
+				ngModel 
+				name = "name">
+			<label for="surname" class="sr-only" style = "">Surname</label>
+			<input 
+				type="text" 
+				id="surname" 
+				class="form-control" 
+				placeholder="Surname" 
+				required="" 
+				autofocus="" 
+				style = "margin-bottom:20px;" 
+				ngModel 
+				name = "surname">
+			<label for="cell" class="sr-only" style = "">Cell Number</label>
+			<input 
+				type="number" 
+				id="cell" 
+				class="form-control" 
+				placeholder="Cell Number" 
+				required="" 
+				autofocus="" 
+				style = "margin-bottom:20px;" 
+				ngModel 
+				name = "cell">			
+			<label for="email" class="sr-only" style = "">Email Address</label>
+			<input 
+				type="email" 
+				id="email" 
+				class="form-control" 
+				placeholder="Email Address" 
+				required="" 
+				autofocus="" 
+				style = "margin-bottom:20px;" 
+				ngModel 
+				name = "email">					
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+		<div style="color:white;">
+			<br>
+			<input type="checkbox" id="POPIConfirmation" name="POPIConfirmation" [(ngModel)]="POPIConfirmation"> By ticking this tick box, <br> I confirm that I have read and agree to the Protection of Personal Information terms and conditions below. <br><br>
+			<p style="font-size:10pt; text-align:justified;"> 1. You agree to allow Calgro M3 Memorial Parks and it's marketing affiliate "BizExtend" to use your information for further Calgro M3 Memorial Parks product information. <br>
+				2. If you have any questions about the use of your information, or wish to withdraw please email info@calgrom3.com or call 0861 225 476. <br>
+				3. The Calgro M3 Memorial Parks executive in charge of data privacy is Waldi Joubert (waldi@calgrom3.com).  
+			</p>
+		</div>
+					
+		</form>
+
+	</div>
+</div>	
