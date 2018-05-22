@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 const alertify = require('alertify.js');
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-CM3Connectlogin',
   templateUrl: './connectLogin.component.html',
   styleUrls: ['./connectLogin.component.css']
 })
 export class ConnectLoginComponent {
-  POPIConfirmation = 'null';
+  POPIConfirmation = false;
 
 
   SignInData = {
@@ -26,8 +26,8 @@ export class ConnectLoginComponent {
   };
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private menusService: MenusService) { }
-  private login = require('../images/CalgroM3Connect.jpg');
-  private logo = require('../images/logo.png');
+  private login = require('../../../images/CalgroM3Connect.jpg');
+  private logo = require('../../../images/logo.png');
 
   onSignIn(form: NgForm) {
     const name    = form.value.name;

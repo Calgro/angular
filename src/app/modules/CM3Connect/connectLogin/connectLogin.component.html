@@ -1,4 +1,4 @@
-<div class="row" [ngStyle]="{'background-image': 'url('+login+')'}" *ngIf = "!authService.isAuthenticated()" style=" background-position:center; background-repeat:no-repeat; background-size:cover;">
+<div class="row" [ngStyle]="{'background-image': 'url('+login+')'}" *ngIf = "authService.isAuthenticated()" style=" background-position:center; background-repeat:no-repeat; background-size:cover;">
 	<div class="col-xs-1 col-sm-1 col-md-8">
 	</div>
 	<div class="col-xs-10 col-sm-10 col-md-3" style="padding:20vh 0; text-align:center; background:whitesmoke; background:linear-gradient(rgba(211,211,211,1), rgba(255,0,0,0)); padding-left:5px; padding-right:5px;">  
