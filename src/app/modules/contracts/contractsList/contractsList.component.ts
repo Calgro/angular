@@ -52,4 +52,8 @@ export class ContractsListComponent implements OnInit {
   loadFilter() {
 
   }
+
+  ngOnDestroy() {
+    this.contractsSubscription.unsubscribe();
+  }
 }
