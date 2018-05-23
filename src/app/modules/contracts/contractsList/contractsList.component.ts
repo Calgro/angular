@@ -49,6 +49,11 @@ export class ContractsListComponent implements OnInit {
     this.contractsService.fetchContracts(this.contractID, this.financeID, this.contractType);
   }
 
+  loadDetailed(contractID) {
+    this.contractsService.contractID = contractID;
+      this.router.navigate(['/admin/contracts/detail']);
+  }
+
   loadFilter() {
 
   }

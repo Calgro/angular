@@ -28,7 +28,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let contract of contracts.contracts;">
+					<tr *ngFor="let contract of contracts.contracts;" (click) = "loadDetailed(contract.contractID)">
 						<td>{{ contract.contractID }}</td>
 						<td>{{ contract.financeID }}</td>
 						<td>{{ contract.type }}</td>		

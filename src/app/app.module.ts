@@ -51,6 +51,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { ContractsListComponent } from './modules/contracts/contractsList/contractsList.component';
 import { ContractsService } from './services/contracts.service';
+import { ContractsDetailComponent } from './modules/contracts/contractsDetail/contractsDetail.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -83,10 +84,10 @@ const appRoutes: Routes = [
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
           { path: 'stock', component: StockComponent}
-
     ]},
     { path: 'contracts', children : [
           { path: 'list', component: ContractsListComponent},
+          { path: 'detail', component: ContractsDetailComponent}
     ]},
   ] },
 
@@ -111,7 +112,8 @@ const appRoutes: Routes = [
     OrdersDeliveryFormComponent,
     OrdersFilterComponent,
     StockComponent,
-    ContractsListComponent
+    ContractsListComponent,
+    ContractsDetailComponent
   ],
   imports: [
     BrowserModule,
