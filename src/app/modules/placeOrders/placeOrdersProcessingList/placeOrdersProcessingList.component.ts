@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 const alertify = require('alertify.js');
 
 @Component({
@@ -34,7 +35,7 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
     private router: Router,
     private devService: DevService
     ) { }
-
+    backgroundAlert;
     defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null);
     materials: Materials = new Materials([this.defaultMaterial]);
     defaultAddress: DeliveryAddressDetail = new DeliveryAddressDetail(null, null, null);
@@ -151,16 +152,20 @@ export class PlaceOrdersProcessingListComponent implements OnInit {
           }
         }
         console.log(this.orders);
+        this.backgroundAlert = Observable.interval(1000 * 60).subscribe(x => {
+          alertify.success("Upload to Buildsmart still running. This may take some time. Once completed you will be notified.");
+        });
         this.materialsService.fetchMaterials(this.buildingID, this.materialListType, this.materialID);
         this.http.post('https://' + this.devService.domain + '/api/v1/orders', this.orders).subscribe(
               (resp: Outcome) => {
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
-
+                  this.backgroundAlert.unsubscribe();
                  }
               },
               (error: HttpErrorResponse) => {
                 alertify.error(error.status + ' - ' + error.statusText);
+                this.backgroundAlert.unsubscribe();
                }
             );
         this.router.navigate(['/admin/placeOrders/filter']);

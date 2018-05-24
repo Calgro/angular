@@ -225,6 +225,8 @@ export class ProcessOrdersComponent implements OnInit {
                 console.log(resp);
                 if (resp.statusCode === '200') {
                   alertify.success(resp.message);
+                  this.ordersService.listMode = 'purchaseOrders';
+                  this.ordersService.detailMode = 'PurchaseOrder';
                   this.router.navigate(['/admin/orders/POlist']);
                  }
               },
@@ -232,6 +234,8 @@ export class ProcessOrdersComponent implements OnInit {
                 console.log(error);
                 alertify.error(error.status + ' - ' + error.statusText);
                 this.ordersLoaded = true;
+                this.ordersService.listMode = 'purchaseOrders';
+                this.ordersService.detailMode = 'PurchaseOrder';
                 this.router.navigate(['/admin/orders/POlist']);  
                }
             );
