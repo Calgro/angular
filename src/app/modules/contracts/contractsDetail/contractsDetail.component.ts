@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./contractsDetail.component.css']
 })
 export class ContractsDetailComponent implements OnInit {
-  defaultContracts: ContractsDetail = new ContractsDetail(null, null, null);
-  contracts: Contracts = new Contracts([this.defaultContracts]);
+  contracts: ContractsDetail;
   contractsLoaded = false;
   noContracts = false;
 
@@ -21,13 +20,13 @@ export class ContractsDetailComponent implements OnInit {
     private router: Router,
   ) { }
 
-  contractorSubscription;
+  contractsSubscription;
   contractID = this.contractsService.contractID;
 
   ngOnInit() {
     // Load the details of a specific contract
-    this.contractorSubscription = this.contractsService.contractsListChanged.subscribe(
-        (contracts: Contracts) => {
+    this.contractsSubscription = this.contractsService.contractsListChanged.subscribe(
+        (contracts: ContractsDetail) => {
             console.log(contracts);
             if (contracts !== null) {
               this.contracts = contracts;
@@ -40,13 +39,17 @@ export class ContractsDetailComponent implements OnInit {
     this.contractsService.fetchContracts(this.contractID, null, null);
   }
 
-  editContract() {
+  contractsEdit() {
 //    this.router.navigate(['/admin/orders/editSupplier']);
   }
-  
-  deleteContract() {
+
+  contractsDelete() {
 //    this.router.navigate(['/admin/orders/editDelivery']);
-  }  
+  }
+
+  ngOnDestroy() {
+    this.contractsSubscription.unsubscribe();
+  }
 
 }
 

@@ -3,9 +3,9 @@ export class ContractsDetail {
   public financeID: string;
   public type: string;
 
-  constructor (contractID: string, financeID: string, type: string) {
+  constructor (contractID: string, financeID: string, contractType: string) {
     this.contractID = contractID;
     this.financeID = financeID;
-    this.type = type;
+    this.type = contractType;
    }
 }
