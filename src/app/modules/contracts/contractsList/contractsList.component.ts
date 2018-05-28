@@ -54,8 +54,8 @@ export class ContractsListComponent implements OnInit {
       this.router.navigate(['/admin/contracts/detail']);
   }
 
-  loadFilter() {
-
+  addContract() {
+    this.router.navigate(['/admin/contracts/add']);
   }
 
   ngOnDestroy() {
