@@ -53,6 +53,7 @@ import { ContractsListComponent } from './modules/contracts/contractsList/contra
 import { ContractsService } from './services/contracts.service';
 import { ContractsDetailComponent } from './modules/contracts/contractsDetail/contractsDetail.component';
 import { ContractsAddComponent } from './modules/contracts/contractsAdd/contractsAdd.component';
+import { ContractsRemoveComponent } from './modules/contracts/contractsRemove/contractsRemove.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -90,6 +91,7 @@ const appRoutes: Routes = [
           { path: 'list', component: ContractsListComponent},
           { path: 'detail', component: ContractsDetailComponent},
           { path: 'add', component: ContractsAddComponent}
+          { path: 'delete', component: ContractsRemoveComponent}
     ]},
   ] },
 
@@ -116,7 +118,8 @@ const appRoutes: Routes = [
     StockComponent,
     ContractsListComponent,
     ContractsDetailComponent,
-    ContractsAddComponent
+    ContractsAddComponent,
+    ContractsRemoveComponent
   ],
   imports: [
     BrowserModule,
