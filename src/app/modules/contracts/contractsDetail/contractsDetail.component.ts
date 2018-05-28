@@ -44,7 +44,7 @@ export class ContractsDetailComponent implements OnInit {
   }
 
   contractsDelete() {
-//    this.router.navigate(['/admin/orders/editDelivery']);
+    this.router.navigate(['/admin/contracts/remove']);
   }
 
   ngOnDestroy() {

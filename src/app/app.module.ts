@@ -90,8 +90,8 @@ const appRoutes: Routes = [
     { path: 'contracts', children : [
           { path: 'list', component: ContractsListComponent},
           { path: 'detail', component: ContractsDetailComponent},
-          { path: 'add', component: ContractsAddComponent}
-          { path: 'delete', component: ContractsRemoveComponent}
+          { path: 'add', component: ContractsAddComponent},
+          { path: 'remove', component: ContractsRemoveComponent}
     ]},
   ] },
 
