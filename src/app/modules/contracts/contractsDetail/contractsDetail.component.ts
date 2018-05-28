@@ -1,6 +1,6 @@
+import { Contracts } from '../../../models/contracts.model';
+import { ContractsDetail } from '../../../models/contractsDetail.model';
 import { ContractsService } from '../../../services/contracts.service';
-import { FilterService } from '../../../services/filter.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -11,32 +11,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./contractsDetail.component.css']
 })
 export class ContractsDetailComponent implements OnInit {
-//  order: Order = new Order(null, null, null, null, null, null, null, null);
-//  orderLoaded = false;
-//  showDetail = false;
-//  listMode = this.ordersService.listMode;
+  defaultContracts: ContractsDetail = new ContractsDetail(null, null, null);
+  contracts: Contracts = new Contracts([this.defaultContracts]);
+  contractsLoaded = false;
+  noContracts = false;
+
   constructor(
     private contractsService: ContractsService,
-    private filterService: FilterService,
-    private http: HttpClient,
     private router: Router,
   ) { }
 
+  contractorSubscription;
+  contractID = this.contractsService.contractID;
+
   ngOnInit() {
-//     ORDERS
-//      this.ordersService.orderDetailLoader.subscribe(
-//          (order: Order) => {
-//              console.log(order);
-//              if (order !== null) {
-//                this.order = order;
-//              }
-//              this.orderLoaded = true;
-//           }
-//        );
-//      
-//      this.ordersService.fetchDetailedOrder();
+    // Load the details of a specific contract
+    this.contractorSubscription = this.contractsService.contractsListChanged.subscribe(
+        (contracts: Contracts) => {
+            console.log(contracts);
+            if (contracts !== null) {
+              this.contracts = contracts;
+            } else {
+              this.noContracts = true;
+            }
+            this.contractsLoaded = true;
+         }
+      );
+    this.contractsService.fetchContracts(this.contractID, null, null);
   }
-  
+
   editContract() {
 //    this.router.navigate(['/admin/orders/editSupplier']);
   }
