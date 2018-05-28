@@ -311,7 +311,7 @@ export class MaterialListUploadFilterComponent implements OnInit {
 
     // BUILDINGS
     updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
-      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset);
+      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, null, limit, offset);
       this.contractorsService.fetchContractors(null, null, erfID, PUAID, null);
     }
     buildingChange(buildingID, buildingName) {

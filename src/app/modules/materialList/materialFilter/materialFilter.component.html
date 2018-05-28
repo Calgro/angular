@@ -64,20 +64,6 @@
 				    </select>
 				</div>
 			</div>
-			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
-			    <div class="col-lg-12">
-				    <label for="buildingFilter"><strong>STEP 3</strong><br>Specify The Materials To Show</label>
-				</div>
-			</div>
-			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
-			    <div class="col-lg-12">
-				    <select class="custom-select mr-sm-2" id="materialsDD" (change)="materialChange(materialsDD.value)" #materialsDD [(ngModel)]="materialID" name = "materialID">
-				    	<option value = 'instruction' hidden>Select a Material</option>
-				    	<option value = ''>None</option>
-				    	<option *ngFor = "let material of materials.materials" value = "{{ material.materialID }}">{{ material.description }}</option>
-				    </select>
-				</div>
-			</div>
 			<div class = "row" style = "margin-bottom:20px;">
 			    <div class="col-lg-12">
 				    <button class="btn btn-lg btn-primary btn-block" type="submit">Load Material List</button>

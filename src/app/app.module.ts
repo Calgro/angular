@@ -116,7 +116,7 @@ const appRoutes: Routes = [
     OrdersDeliveryFormComponent,
     OrdersFilterComponent,
     StockComponent,
-    PurchaseOrderListComponent
+    PurchaseOrderListComponent,
     StockComponent,
     MaterialListComponent,
     MaterialFilterComponent,
