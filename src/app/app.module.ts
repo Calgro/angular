@@ -52,6 +52,7 @@ import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dr
 import { ContractsListComponent } from './modules/contracts/contractsList/contractsList.component';
 import { ContractsService } from './services/contracts.service';
 import { ContractsDetailComponent } from './modules/contracts/contractsDetail/contractsDetail.component';
+import { ContractsAddComponent } from './modules/contracts/contractsAdd/contractsAdd.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -87,7 +88,8 @@ const appRoutes: Routes = [
     ]},
     { path: 'contracts', children : [
           { path: 'list', component: ContractsListComponent},
-          { path: 'detail', component: ContractsDetailComponent}
+          { path: 'detail', component: ContractsDetailComponent},
+          { path: 'add', component: ContractsAddComponent}
     ]},
   ] },
 
@@ -113,7 +115,8 @@ const appRoutes: Routes = [
     OrdersFilterComponent,
     StockComponent,
     ContractsListComponent,
-    ContractsDetailComponent
+    ContractsDetailComponent,
+    ContractsAddComponent
   ],
   imports: [
     BrowserModule,
