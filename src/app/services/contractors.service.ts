@@ -1,15 +1,18 @@
+import { Injectable, EventEmitter } from '@angular/core';
+import { Contractors } from '../models/contractors.model';
 import { ContractorShort } from '../models/contractorShort.model';
 import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, EventEmitter } from '@angular/core';
 
 const alertify = require('alertify.js');
 
 @Injectable()
 export class ContractorsService {
   contractorListChanged = new EventEmitter<ContractorShort[]>();
+  contractorDetailLoader = new EventEmitter<ContractorShort[]>();
   query = '?';
+  contractorID = '3';
 
   constructor(private http: HttpClient, private devService: DevService) { }
 
@@ -57,6 +60,23 @@ export class ContractorsService {
       },
       (error: HttpErrorResponse) => {
        // alertify.error(error.status + ' - ' + error.statusText);
+       }
+    );
+  }
+
+  fetchContractor(contractorID) {
+    console.log('https://' + this.devService.domain + '/api/v1/contractors/' + contractorID);
+    this.http.get<ContractorShort[]>('https://' + this.devService.domain + '/api/v1/contractors/' + contractorID).subscribe(
+      resp => {
+        console.log(resp);
+        if (resp) {
+          this.contractorDetailLoader.emit(resp);
+        } else {
+          this.contractorDetailLoader.emit([new ContractorShort('', 'None Found')]);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        alertify.error(error.status + ' - ' + error.statusText);
        }
     );
   }

@@ -5,7 +5,7 @@ import { JwtHelper } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
   private jwtHelper: JwtHelper = new JwtHelper();
-  //token: string;
+//  token: string;
   
   // DEV TOKEN
   token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIxNTE5OTA3NTc0NDUxIiwiZW1haWxBZGRyZXNzIjoiZG9taW5pcXVlY0BjYWxncm9tMy5jb20iLCJleHAiOjE3MTYyMzkwMjIsInVzZXJUaXRsZSI6IkRldmVsb3BlciIsIm5hbWUiOiJEb21pbmlxdWUgQ29vcGVyIn0.LjFDn0fgP6q_Bbm_umDODouKyWsMYrlXxBp32GDwV3M";

@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
@@ -55,6 +54,11 @@ import { MaterialFilterComponent } from './modules/materialList/materialFilter/m
 import { MaterialUploadComponent } from './modules/materialList/materialUpload/materialUpload.component';
 import { MaterialListUploadFilterComponent } from './modules/materialList/materialListUploadFilter/materialListUploadFilter.component';
 import { OrderSelectFilterComponent } from './modules/orders/orderSelectFilter/orderSelectFilter.component';
+import { ContractorsListComponent } from './modules/contractors/contractorslist/contractorsList.component';
+import { ContractorsDetailComponent } from './modules/contractors/contractorsdetail/contractorsDetail.component';
+import { ContractorsAddComponent } from './modules/contractors/contractorsadd/contractorsAdd.component';
+import { ContractorsEditComponent } from './modules/contractors/contractorsedit/contractorsEdit.component';
+import { ContractorsRemoveComponent } from './modules/contractors/contractorsRemove/contractorsRemove.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -62,7 +66,6 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
   acceptedFiles: 'image/*'
 };
-
 
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
@@ -93,7 +96,17 @@ const appRoutes: Routes = [
           { path: 'list', component: MaterialListComponent},
           { path: 'filter', component: MaterialFilterComponent},
           { path: 'upload', component: MaterialUploadComponent},
-          { path: 'uploadFilter', component: MaterialListUploadFilterComponent}
+          { path: 'uploadFilter', component: MaterialListUploadFilterComponent},
+          { path: 'stock', component: StockComponent}
+
+    ]},
+    { path: 'contractors', children : [
+          { path: 'list', component: ContractorsListComponent},
+          { path: 'detail', component: ContractorsDetailComponent},
+          { path: 'add', component: ContractorsAddComponent},
+          { path: 'edit', component: ContractorsEditComponent},
+          { path: 'remove', component: ContractorsRemoveComponent},
+
     ]},
   ] },
 
@@ -126,6 +139,12 @@ const appRoutes: Routes = [
     MaterialListUploadFilterComponent
     StockComponent,
     OrderSelectFilterComponent
+    StockComponent,
+    ContractorsListComponent,
+    ContractorsDetailComponent,
+    ContractorsAddComponent,
+    ContractorsEditComponent,
+    ContractorsRemoveComponent,
   ],
   imports: [
     BrowserModule,
