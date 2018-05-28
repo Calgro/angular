@@ -54,6 +54,7 @@ import { MaterialListComponent } from './modules/materialList/materialList/mater
 import { MaterialFilterComponent } from './modules/materialList/materialFilter/materialFilter.component';
 import { MaterialUploadComponent } from './modules/materialList/materialUpload/materialUpload.component';
 import { MaterialListUploadFilterComponent } from './modules/materialList/materialListUploadFilter/materialListUploadFilter.component';
+import { OrderSelectFilterComponent } from './modules/orders/orderSelectFilter/orderSelectFilter.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -65,7 +66,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 
 const appRoutes: Routes = [
  // { path: '', component: LoginComponent},
-  //{ path: 'login', component: LoginComponent},
+ // { path: 'login', component: LoginComponent},
 //  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children :[
 //    { path: 'placeOrdersFilter', component: PlaceOrdersFilterComponent},
 //    { path: 'placeOrdersProcessingList', component: PlaceOrdersProcessingListComponent}
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
           { path: 'editSupplier', component: OrdersSupplierFormComponent},
           { path: 'editDelivery', component: OrdersDeliveryFormComponent},
           { path: 'filter', component: OrdersFilterComponent},
+          { path: 'selectFilter', component: OrderSelectFilterComponent},
           { path: 'stock', component: StockComponent},
     ]},
     { path: 'materialList', children : [
@@ -122,6 +124,8 @@ const appRoutes: Routes = [
     MaterialFilterComponent,
     MaterialUploadComponent,
     MaterialListUploadFilterComponent
+    StockComponent,
+    OrderSelectFilterComponent
   ],
   imports: [
     BrowserModule,
