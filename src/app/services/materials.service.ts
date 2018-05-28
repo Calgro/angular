@@ -1,4 +1,5 @@
 import { MaterialDetail } from '../models/materialDetail.model';
+import { Materials } from '../models/materials.model';
 import { DevService } from './dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +9,8 @@ const alertify = require('alertify.js');
 
 @Injectable()
 export class MaterialsService {
-  materialListChanged = new EventEmitter<MaterialDetail[]>();
+  materialListChanged = new EventEmitter<Materials>();
+  materialDetailChanged = new EventEmitter<MaterialDetail>();
   query = '';
 
   constructor(private http: HttpClient, private devService: DevService) { }
@@ -29,15 +31,17 @@ export class MaterialsService {
     if (this.query !== '') {
       this.query += '&limit=500&offset=0';
     }
+
     if (materialID === null) {
       console.log('https://' + this.devService.domain + '/api/v1/materials/?' + this.query);
-      this.http.get<MaterialDetail[]>('https://' + this.devService.domain + '/api/v1/materials/?' + this.query).subscribe(
+      this.http.get<Materials>('https://' + this.devService.domain + '/api/v1/materials/?' + this.query).subscribe(
         resp => {
           this.query = '';
+          console.log(resp);
           if (resp) {
             this.materialListChanged.emit(resp);
           } else {
-            this.materialListChanged.emit([new MaterialDetail(null, 'None Found', null, null, null, null, null, null)]);
+            this.materialListChanged.emit(new Materials(null));
           }
         },
         (error: HttpErrorResponse) => {
@@ -46,13 +50,14 @@ export class MaterialsService {
       );
     } else {
       console.log('https://' + this.devService.domain + '/api/v1/materials/' + materialID + '/' + this.query);
-      this.http.get<MaterialDetail[]>('https://' + this.devService.domain + '/api/v1/materials/' + materialID + '/' + this.query).subscribe(
+      this.http.get<MaterialDetail>('https://' + this.devService.domain + '/api/v1/materials/' + materialID + '/' + this.query).subscribe(
         resp => {
-          this.query = ''
+          this.query = '';
+          console.log(resp);
           if (resp) {
-            this.materialListChanged.emit(resp);
+            this.materialDetailChanged.emit(resp);
           } else {
-            this.materialListChanged.emit([new MaterialDetail(null, 'None Found', null, null, null, null, null, null)]);
+            this.materialDetailChanged.emit(new MaterialDetail(null, 'None Found', null, null, null, null, null, null, null, null));
           }
         },
         (error: HttpErrorResponse) => {

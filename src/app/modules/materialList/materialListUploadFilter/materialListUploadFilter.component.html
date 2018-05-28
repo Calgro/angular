@@ -1,0 +1,74 @@
+<div class="row align-items-center justify-content-center">
+	<div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6" style = "text-align:center;">
+		<form class="form-filter" (ngSubmit) = "applyFilter(form)" #form = "ngForm">
+			<h1 class="h3 mb-3 font-weight-normal">MATERIAL LIST UPLOAD FILTER</h1>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+				<div class="col-lg-12">
+					<label for="buildingFilter"><strong>STEP 1</strong><br>Show Buildings Belonging To</label>
+					<select class="custom-select mr-sm-2" id="projectsDD" (change)="projectChange(projectsDD.value,projectsDD.options[projectsDD.options.selectedIndex].text)" #projectsDD [(ngModel)]="projectID" name = "projectID">
+				    	<option value = 'instruction' hidden>Select a Project</option>
+				    	<option *ngFor = "let project of projects.projects" value = "{{ project.projectID }}">{{ project.projectName }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+				<div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="townshipsDD" (change)="townshipChange(townshipsDD.value,townshipsDD.options[townshipsDD.options.selectedIndex].text)" #townshipsDD [(ngModel)]="townshipID" name = "townshipID">
+				    	<option value = 'instruction' hidden>Select a Township</option>
+				    	<option value = 'none'>None</option>
+				    	<option *ngFor = "let township of townships.townships" value = "{{ township.townshipID }}">{{ township.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="ervenDD" (change)="erfChange(ervenDD.value,ervenDD.options[ervenDD.options.selectedIndex].text)" #ervenDD [(ngModel)]="erfID" name = "erfID">
+				    	<option value = 'instruction' hidden>Select an Erf</option>
+				    	<option value = 'none' selected>None</option>
+				    	<option *ngFor = "let erf of erven.erven" value = "{{ erf.erfID }}">{{ erf.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="PUADD" (change)="PUAChange(puaDD.value,puaDD.options[puaDD.options.selectedIndex].text)" #puaDD [(ngModel)]="PUAID" name = "PUAID">
+				    	<option value = 'instruction' hidden>Select a Private Use Area</option>
+				    	<option value = 'none' selected>None</option>
+				    	<option *ngFor = "let PUA of privateUseAreas.privateUseAreas" value = "{{ PUA.PUAID }}">{{ PUA.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="zoningsDD" (change)="zoningChange(zoningsDD.value)" #zoningsDD [(ngModel)]="zoningID" name = "zoningID">
+				    	<option value = 'instruction' hidden>Select a Zoning</option>
+				    	<option *ngFor = "let zoning of zonings.zonings" value = "{{ zoning.zoningID }}">{{ zoning.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+			    <div class="col-lg-12">
+				    <select class="custom-select mr-sm-2" id="contractorsDD"  (change)="contractorChange(contractorsDD.value)" #contractorsDD [(ngModel)]="contractorID" name = "contractorID">
+				    	<option value = 'instruction' hidden>Select a Contractor</option>
+				    	<option value = 'null' selected>None</option>
+				    	<option *ngFor = "let contractor of contractors.contractors" value = "{{ contractor.contractorID }}">{{ contractor.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+			    <div class="col-lg-12">
+					<label for="buildingFilter"><strong>STEP 2</strong><br>Select The Buildings To View Material For</label>
+					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingID,buildingsDD.options[buildingsDD.options.selectedIndex].text)" #buildingsDD [(ngModel)]="buildingID" name = "buildingID">
+				    	<option value = 'instruction' disabled>Select a Building</option>
+				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.name }}</option>
+				    </select>
+				</div>
+			</div>
+			<div class = "row" style = "margin-bottom:20px;">
+			    <div class="col-lg-12">
+				    <button class="btn btn-lg btn-primary btn-block" type="submit">Load Material List</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

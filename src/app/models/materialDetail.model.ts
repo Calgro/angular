@@ -7,8 +7,10 @@ export class MaterialDetail {
   public quantityAllowed: number;
   public quantityRemaining: number;
   public rate: number;
-  
-  constructor (materialID: string, buildingID: string, description: string, group: string, category: string, quantityAllowed: number, quantityRemaining: number, rate: number) {
+  public type: string;
+  public unit: number;
+
+  constructor (materialID: string, buildingID: string, description: string, group: string, category: string, quantityAllowed: number, quantityRemaining: number, rate: number, type: string, unit: number) {
     this.materialID = materialID;
     this.buildingID = buildingID;
     this.description = description;
@@ -17,5 +19,7 @@ export class MaterialDetail {
     this.quantityAllowed = quantityAllowed;
     this.quantityRemaining = quantityRemaining;
     this.rate = rate;
+    this.type = type;
+    this.unit = unit;
    }
 }
