@@ -44,8 +44,6 @@ export class ContractsAddComponent {
         'buildingID': buildingID.toString()
       };
 
-      console.log(contractsAdd);
-
       this.contractsSubscription = this.http.post('https://' + this.devService.domain + '/api/v1/contracts', contractsAdd).subscribe(
           (resp: Outcome) => {
             if (resp.statusCode === '200') {
