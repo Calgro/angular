@@ -15,7 +15,7 @@ const alertify = require('alertify.js');
   styleUrls: ['./contractsRemove.component.css']
 })
 export class ContractsRemoveComponent implements OnInit {
-  contracts: ContractsDetail;
+  contracts: ContractsDetail = new ContractsDetail(null, null, null);
   contractsLoaded = false;
   noContracts = false;
 
@@ -40,24 +40,27 @@ export class ContractsRemoveComponent implements OnInit {
         this.contractsLoaded = true;
       }
     );
-
     this.contractsService.fetchContracts(this.contractsID, null, null);
   }
 
   onDelete(form: NgForm) {
-    const contractorID = this.contracts.contractID;
+console.log('one');
+    const contractsID = this.contracts.contractID;
 
+console.log('two');
     alertify.success('Deleting contract.  You will be notified once complete.');
 
-    console.log(contractorID);
-    this.http.delete('https://' + this.devService.domain + '/api/v1/contracts/' + contractorID).subscribe(
+    this.http.delete('https://' + this.devService.domain + '/api/v1/contracts/' + contractsID).subscribe(
       (resp: Outcome) => {
-        if (resp.statusCode === '200') {
-            alertify.success(resp.message);
+console.log('three1');
+//        if (resp.statusCode === '200') {
+console.log('three');
+//            alertify.success(resp.message);
             this.router.navigate(['/admin/contracts/list']);
-        }
+//        }
       },
       (error: HttpErrorResponse) => {
+console.log('four');
        alertify.error(error.status + ' - ' + error.statusText);
       }
     );
