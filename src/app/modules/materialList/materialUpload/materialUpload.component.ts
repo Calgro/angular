@@ -35,6 +35,7 @@ export class MaterialUploadComponent implements OnInit {
 
   checked = '';
   MaterialListData = {
+    'requestType': 'Upload',
     'documentName': null,
     'documentLocation': this.documentLocation,
     'documentType': this.documentType,
