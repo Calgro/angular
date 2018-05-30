@@ -20,10 +20,10 @@ export class MaterialUploadComponent implements OnInit {
   materialsForm: FormGroup;
 
    // SETTING UP DOCUMENT PROPERTIES
-  documentLocation = 'Materials List';
+  documentLocation = 'Material List';
   documentUploaded = false;
   documentName: string = null;
-  documentType = 'Materials List';
+  documentType = 'Material List';
   buildingID = this.filterService.buildingID[0];
 
   // DROPZONE UPLOAD PROPERTY
@@ -60,6 +60,7 @@ export class MaterialUploadComponent implements OnInit {
     this.documentUploaded = true;
     this.documentName = event[0].name;
     alertify.success(this.documentName + ' Is Ready To Be Uploaded');
+    
   }
 
   onUploadError(event) {
@@ -68,13 +69,14 @@ export class MaterialUploadComponent implements OnInit {
     alertify.error(this.documentName + ' Upload Failed');
   }
 
-  onUpload(event) {
+  onUpload() {
     this.filterService.updateBreadcrumb();
     this.MaterialListData.documentName = this.documentName;
     this.MaterialListData.documentLocation = this.documentLocation;
     this.MaterialListData.documentType = this.documentType;
     this.MaterialListData.buildingID = this.buildingID;
     console.log(this.MaterialListData);
+    alertify.success('Uploading Material List. This may take a few minutes.');
     this.http.post('https://' + this.devService.domain + '/api/v1/materials', this.MaterialListData).subscribe(
       (resp: Outcome) => {
         if (resp.statusCode === '200') {
@@ -85,6 +87,6 @@ export class MaterialUploadComponent implements OnInit {
         alertify.error(error.status + ' - ' + error.statusText);
       }
     );
-    this.router.navigate(['/admin/materialList/list']);
+   // this.router.navigate(['/admin/materialList/list']);
   }
 }

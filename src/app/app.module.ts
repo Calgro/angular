@@ -62,9 +62,9 @@ import { ContractorsRemoveComponent } from './modules/contractors/contractorsRem
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
-  url: 'https://www.calgrois.com/api/v1/upload',
+  url: 'https://www.calgrois.co.za/api/v1/upload',
   maxFilesize: 50,
-  acceptedFiles: 'image/*'
+  acceptedFiles: 'image/*,.csv'
 };
 
 const appRoutes: Routes = [
