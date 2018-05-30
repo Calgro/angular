@@ -150,9 +150,9 @@ const appRoutes: Routes = [
     MaterialListComponent,
     MaterialFilterComponent,
     MaterialUploadComponent,
-    MaterialListUploadFilterComponent
+    MaterialListUploadFilterComponent,
     StockComponent,
-    OrderSelectFilterComponent
+    OrderSelectFilterComponent,
     StockComponent,
     ContractorsListComponent,
     ContractorsDetailComponent,
