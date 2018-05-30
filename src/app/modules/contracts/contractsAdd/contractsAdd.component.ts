@@ -39,9 +39,13 @@ export class ContractsAddComponent {
       alertify.success('Saving contract.  You will be notified once complete.');
 
       const contractsAdd = {
-        'financeID': financeID.toString(),
-        'type': contractType,
-        'buildingID': buildingID.toString()
+        contracts:[
+          {
+            'financeID': financeID.toString(),
+            'type': contractType,
+            'buildingID': buildingID.toString()
+          }
+        ]
       };
 
       this.contractsSubscription = this.http.post('https://' + this.devService.domain + '/api/v1/contracts', contractsAdd).subscribe(
