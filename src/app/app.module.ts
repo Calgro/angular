@@ -59,6 +59,13 @@ import { ContractorsDetailComponent } from './modules/contractors/contractorsdet
 import { ContractorsAddComponent } from './modules/contractors/contractorsadd/contractorsAdd.component';
 import { ContractorsEditComponent } from './modules/contractors/contractorsedit/contractorsEdit.component';
 import { ContractorsRemoveComponent } from './modules/contractors/contractorsRemove/contractorsRemove.component';
+import { ContractsListComponent } from './modules/contracts/contractsList/contractsList.component';
+import { ContractsService } from './services/contracts.service';
+import { ContractsDetailComponent } from './modules/contracts/contractsDetail/contractsDetail.component';
+import { ContractsAddComponent } from './modules/contracts/contractsAdd/contractsAdd.component';
+import { ContractsRemoveComponent } from './modules/contracts/contractsRemove/contractsRemove.component';
+import { ContractsEditComponent } from './modules/contracts/contractsEdit/contractsEdit.component';
+
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -108,6 +115,13 @@ const appRoutes: Routes = [
           { path: 'remove', component: ContractorsRemoveComponent},
 
     ]},
+    { path: 'contracts', children : [
+          { path: 'list', component: ContractsListComponent},
+          { path: 'detail', component: ContractsDetailComponent},
+          { path: 'add', component: ContractsAddComponent},
+          { path: 'remove', component: ContractsRemoveComponent},
+          { path: 'edit', component: ContractsEditComponent}
+    ]},
   ] },
 
 ];
@@ -145,6 +159,12 @@ const appRoutes: Routes = [
     ContractorsAddComponent,
     ContractorsEditComponent,
     ContractorsRemoveComponent,
+    StockComponent,
+    ContractsListComponent,
+    ContractsDetailComponent,
+    ContractsAddComponent,
+    ContractsRemoveComponent,
+    ContractsEditComponent
   ],
   imports: [
     BrowserModule,
@@ -181,6 +201,7 @@ const appRoutes: Routes = [
     DevService,
     OrderGroupsService,
     TrackingService,
+    ContractsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
