@@ -40,7 +40,7 @@ export class ContractsDetailComponent implements OnInit {
   }
 
   contractsEdit() {
-//    this.router.navigate(['/admin/orders/editSupplier']);
+    this.router.navigate(['/admin/contracts/edit']);
   }
 
   contractsDelete() {
