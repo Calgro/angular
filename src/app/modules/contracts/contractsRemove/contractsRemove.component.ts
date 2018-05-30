@@ -44,23 +44,18 @@ export class ContractsRemoveComponent implements OnInit {
   }
 
   onDelete(form: NgForm) {
-console.log('one');
     const contractsID = this.contracts.contractID;
 
-console.log('two');
     alertify.success('Deleting contract.  You will be notified once complete.');
 
-    this.http.delete('https://' + this.devService.domain + '/api/v1/contracts/' + contractsID).subscribe(
+    this.contractsSubscription = this.http.delete('https://' + this.devService.domain + '/api/v1/contracts/' + contractsID).subscribe(
       (resp: Outcome) => {
-console.log('three1');
-//        if (resp.statusCode === '200') {
-console.log('three');
-//            alertify.success(resp.message);
+        if (resp.statusCode === '200') {
+            alertify.success(resp.message);
             this.router.navigate(['/admin/contracts/list']);
-//        }
+        }
       },
       (error: HttpErrorResponse) => {
-console.log('four');
        alertify.error(error.status + ' - ' + error.statusText);
       }
     );
