@@ -40,7 +40,7 @@ export class OrdersFilterComponent implements OnInit {
     private router: Router,
     private trackingService: TrackingService,
   ) { }
-  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '');
+  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '', '');
   buildings: Buildings = new Buildings([this.defaultBuilding]);
 
   defaultPUA: PrivateUseAreaShort = new PrivateUseAreaShort('', 'Select an Erf First');

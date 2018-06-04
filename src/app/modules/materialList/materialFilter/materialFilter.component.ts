@@ -17,6 +17,7 @@ import { Contractors } from '../../../models/contractors.model';
 import { ContractorShort } from '../../../models/contractorShort.model';
 import { Materials } from '../../../models/materials.model';
 import { MaterialDetail } from '../../../models/materialDetail.model';
+import { OrderGroups } from '../../../models/orderGroups.model';
 import { ErvenService } from '../../../services/erven.service';
 import { PuaService } from '../../../services/pua.service';
 import { BuildingsService } from '../../../services/buildings.service';
@@ -24,6 +25,7 @@ import { TownplanningService } from '../../../services/townplanning.service';
 import { ContractorsService } from '../../../services/contractors.service';
 import { FilterService } from '../../../services/filter.service';
 import { MaterialsService } from '../../../services/materials.service';
+import { OrderGroupsService } from '../../../services/ordergroups.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -46,6 +48,7 @@ export class MaterialFilterComponent implements OnInit {
     private materialsService: MaterialsService,
     private contractorsService: ContractorsService,
     private filterService: FilterService,
+    private orderGroupsService: OrderGroupsService,
     private router: Router) { }
 
   defaultMaterial: MaterialDetail = new MaterialDetail('', 'Select a Building First', null, null, null, null, null, null, null, null);
@@ -57,7 +60,7 @@ export class MaterialFilterComponent implements OnInit {
   defaultZoning: ZoningShort = new ZoningShort('', 'Select a Township First');
   zonings: Zonings = new Zonings([this.defaultZoning]);
 
-  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '');
+  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '', '');
   buildings: Buildings = new Buildings([this.defaultBuilding]);
 
   defaultPUA: PrivateUseAreaShort = new PrivateUseAreaShort('', 'Select an Erf First');
@@ -72,6 +75,8 @@ export class MaterialFilterComponent implements OnInit {
   defaultProject: ProjectShort = new ProjectShort('', 'Loading Projects', '', '');
   projects: Projects = new Projects([this.defaultProject]);
 
+  orderGroups: OrderGroups = new OrderGroups(null);
+
   projectID = this.filterService.dropdownConvert(this.filterService.projectID);
   townshipID = this.filterService.dropdownConvert(this.filterService.townshipID);
   erfID = this.filterService.dropdownConvert(this.filterService.erfID);
@@ -81,6 +86,7 @@ export class MaterialFilterComponent implements OnInit {
   materialID = this.filterService.dropdownConvert(this.filterService.materialID);
   contractorID = this.filterService.dropdownConvert(this.filterService.contractorID);
   zoningID = this.filterService.dropdownConvert(this.filterService.zoningID);
+  orderGroupID = this.filterService.dropdownConvert(this.filterService.orderGroupID);
   buildingsArray;
   buildingMode = true;
 
@@ -88,6 +94,13 @@ export class MaterialFilterComponent implements OnInit {
     ngOnInit() {
       this.filterService.materialListType = 'combined';
       this.materialListType = 'combined';
+      // ORDER GROUPS
+      this.orderGroupsService.orderGroupsListChanged.subscribe(
+        (orderGroups: OrderGroups) => {
+          this.orderGroups = orderGroups;
+          }
+      );
+      this.orderGroupsService.fetchOrderGroups();
       // PROJECTS
       this.projectsService.projectListChanged.subscribe(
         (projects: Projects) => {
@@ -141,6 +154,7 @@ export class MaterialFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.PUAID),
         this.filterService.dropdownConvert(this.zoningID),
         this.filterService.dropdownConvert(this.contractorID),
+        null,
         500,
         0);
       }
@@ -170,8 +184,41 @@ export class MaterialFilterComponent implements OnInit {
       }
     }
 
+    // ORDER GROUPS
+    orderGroupChange(orderGroupID) {
+      this.filterService.projectID = null;
+      this.projectID = 'instruction';
+      this.filterService.townshipID = null;
+      this.townshipID = 'instruction';
+      this.filterService.erfID = null;
+      this.erfID = 'instruction';
+      this.filterService.PUAID = null;
+      this.PUAID = 'instruction';
+      this.filterService.buildingID = null;
+      this.buildingID = 'instruction';
+      this.filterService.zoningID = null;
+      this.zoningID = 'instruction';
+      this.filterService.contractorID = null;
+      this.contractorID = 'instruction';
+      this.filterService.materialID = null;
+      this.materialID = 'instruction';
+      this.updateBuildings(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        orderGroupID,
+        500,
+        0);
+      this.filterService.updateBreadcrumb();
+    }
+
     // PROJECTS
     projectChange(projectID, projectName) {
+      this.filterService.orderGroupID = null;
+      this.orderGroupID = 'instruction';
       this.updateTownships(projectID);
       this.filterService.projectID = projectID;
       this.filterService.updateProjectName(projectName);
@@ -197,6 +244,7 @@ export class MaterialFilterComponent implements OnInit {
         null,
         this.filterService.dropdownConvert(this.zoningID),
         this.filterService.dropdownConvert(this.contractorID),
+        null,
         500,
         0);
       this.filterService.updateBreadcrumb();
@@ -232,6 +280,7 @@ export class MaterialFilterComponent implements OnInit {
           null,
           this.filterService.dropdownConvert(this.zoningID),
           this.filterService.dropdownConvert(this.contractorID),
+          null,
           500,
           0);
        this.filterService.updateBreadcrumb();
@@ -265,6 +314,7 @@ export class MaterialFilterComponent implements OnInit {
             null,
             this.filterService.dropdownConvert(this.zoningID),
             this.filterService.dropdownConvert(this.contractorID),
+            null,
             500,
             0);
         this.erfID = erfID;
@@ -300,6 +350,7 @@ export class MaterialFilterComponent implements OnInit {
             PUAID,
             this.filterService.dropdownConvert(this.zoningID),
             this.filterService.dropdownConvert(this.contractorID),
+            null,
             500,
             0);
           this.filterService.updateBreadcrumb();
@@ -311,8 +362,8 @@ export class MaterialFilterComponent implements OnInit {
     }
 
     // BUILDINGS
-    updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, limit, offset) {
-      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, null, limit, offset);
+    updateBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, orderGroupID, limit, offset) {
+      this.buildingsService.fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, orderGroupID, limit, offset);
       this.contractorsService.fetchContractors(null, null, erfID, PUAID, null);
     }
     buildingChange(buildingID, buildingName) {
@@ -335,6 +386,7 @@ export class MaterialFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.PUAID),
         zoningID,
         this.filterService.dropdownConvert(this.contractorID),
+        null,
         500,
         0);
     }
@@ -353,6 +405,7 @@ export class MaterialFilterComponent implements OnInit {
         this.filterService.dropdownConvert(this.PUAID),
         this.filterService.dropdownConvert(this.zoningID),
         contractorID,
+        null,
         500,
         0);
     }

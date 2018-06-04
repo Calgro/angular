@@ -71,7 +71,7 @@ export class BuildingsService {
         if (resp) {
           this.buildingListChanged.emit(resp);
         } else {
-          this.buildingListChanged.emit([new BuildingShort('', 'None Found', '', '', '')]);
+          this.buildingListChanged.emit([new BuildingShort('', 'None Found', '', '', '', '')]);
         }
       },
       (error: HttpErrorResponse) => {

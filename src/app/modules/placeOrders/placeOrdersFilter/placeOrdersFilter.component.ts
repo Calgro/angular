@@ -66,7 +66,7 @@ export class PlaceOrdersFilterComponent implements OnInit {
   defaultZoning: ZoningShort = new ZoningShort('', 'Select a Township First');
   zonings: Zonings = new Zonings([this.defaultZoning]);
 
-  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '');
+  defaultBuilding: BuildingShort = new BuildingShort('', 'Select an Erf or PUA First', '', '', '', '');
   buildings: Buildings = new Buildings([this.defaultBuilding]);
 
   defaultPUA: PrivateUseAreaShort = new PrivateUseAreaShort('', 'Select an Erf First');

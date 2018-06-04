@@ -4,7 +4,16 @@
 			<h1 class="h3 mb-3 font-weight-normal">MATERIAL LIST UPLOAD FILTER</h1>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 				<div class="col-lg-12">
-					<label for="buildingFilter"><strong>STEP 1</strong><br>Show Buildings Belonging To</label>
+					<label for="buildingFilter"><strong>STEP 1</strong><br>Show Buildings Belonging To An Order Group Or Proceed To STEP 2</label>
+					<select class="custom-select mr-sm-2" id="orderGroupDD" (change)="orderGroupChange(orderGroupDD.value)" #orderGroupDD [(ngModel)]="orderGroupID" name = "orderGroupID">
+				    	<option value = 'instruction' hidden>Select Order Group</option>
+				    	<option *ngFor = "let orderGroup of orderGroups.orderGroups" value = "{{ orderGroup.orderGroupID }}">{{ orderGroup.name }}</option>
+				    </select>
+				</div>
+			</div>			
+			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
+				<div class="col-lg-12">
+					<label for="buildingFilter"><strong>STEP 2</strong><br>Show Buildings Belonging To</label>
 					<select class="custom-select mr-sm-2" id="projectsDD" (change)="projectChange(projectsDD.value,projectsDD.options[projectsDD.options.selectedIndex].text)" #projectsDD [(ngModel)]="projectID" name = "projectID">
 				    	<option value = 'instruction' hidden>Select a Project</option>
 				    	<option *ngFor = "let project of projects.projects" value = "{{ project.projectID }}">{{ project.projectName }}</option>
@@ -57,7 +66,7 @@
 			</div>
 			<div class = "row" style = "margin-bottom:20px;" *ngIf = buildingMode>
 			    <div class="col-lg-12">
-					<label for="buildingFilter"><strong>STEP 2</strong><br>Select The Buildings To View Material For</label>
+					<label for="buildingFilter"><strong>STEP 3</strong><br>Select The Buildings To View Material For</label>
 					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingID,buildingsDD.options[buildingsDD.options.selectedIndex].text)" #buildingsDD [(ngModel)]="buildingID" name = "buildingID">
 				    	<option value = 'instruction' disabled>Select a Building</option>
 				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.fullName }}</option>
