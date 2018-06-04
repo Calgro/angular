@@ -60,7 +60,7 @@
 					<label for="buildingFilter"><strong>STEP 2</strong><br>Select The Buildings To View Material For</label>
 					<select class="custom-select mr-sm-2" id="buildingsDD" multiple (change)="buildingChange(buildingID,buildingsDD.options[buildingsDD.options.selectedIndex].text)" #buildingsDD [(ngModel)]="buildingID" name = "buildingID">
 				    	<option value = 'instruction' disabled>Select a Building</option>
-				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.name }}</option>
+				    	<option *ngFor = "let building of buildings.buildings" value = "{{ building.buildingID }}">{{ building.fullName }}</option>
 				    </select>
 				</div>
 			</div>
