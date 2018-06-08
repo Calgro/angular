@@ -65,7 +65,7 @@ import { ContractsDetailComponent } from './modules/contracts/contractsDetail/co
 import { ContractsAddComponent } from './modules/contracts/contractsAdd/contractsAdd.component';
 import { ContractsRemoveComponent } from './modules/contracts/contractsRemove/contractsRemove.component';
 import { ContractsEditComponent } from './modules/contracts/contractsEdit/contractsEdit.component';
-
+import { ConnectLoginComponent } from './modules/CM3Connect/connectLogin/connectLogin.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -122,6 +122,9 @@ const appRoutes: Routes = [
           { path: 'remove', component: ContractsRemoveComponent},
           { path: 'edit', component: ContractsEditComponent}
     ]},
+    { path: 'CM3Connect', children : [
+          { path: 'login', component: ConnectLoginComponent}
+    ]},
   ] },
 
 ];
@@ -164,7 +167,9 @@ const appRoutes: Routes = [
     ContractsDetailComponent,
     ContractsAddComponent,
     ContractsRemoveComponent,
-    ContractsEditComponent
+    ContractsEditComponent,
+    PurchaseOrderListComponent,
+    ConnectLoginComponent,
   ],
   imports: [
     BrowserModule,
