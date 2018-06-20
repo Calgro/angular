@@ -66,6 +66,9 @@ import { ContractsAddComponent } from './modules/contracts/contractsAdd/contract
 import { ContractsRemoveComponent } from './modules/contracts/contractsRemove/contractsRemove.component';
 import { ContractsEditComponent } from './modules/contracts/contractsEdit/contractsEdit.component';
 import { ConnectLoginComponent } from './modules/CM3Connect/connectLogin/connectLogin.component';
+import { BuildingTypologiesListComponent } from './modules/buildingTypologies/buildingTypologiesList/buildingTypologiesList.component';
+import { BuildingtypologiesdetailComponent } from './modules/buildingTypologies/buildingtypologiesdetail/buildingtypologiesdetail.component';
+import { BuildingTypologiesService } from './services/buildingtypologies.service';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -125,6 +128,9 @@ const appRoutes: Routes = [
     { path: 'CM3Connect', children : [
           { path: 'login', component: ConnectLoginComponent}
     ]},
+    { path: 'buildingTypologies', children : [
+          { path: 'list', component: BuildingTypologiesListComponent}
+    ]},
   ] },
 
 ];
@@ -170,6 +176,8 @@ const appRoutes: Routes = [
     ContractsEditComponent,
     PurchaseOrderListComponent,
     ConnectLoginComponent,
+    BuildingTypologiesListComponent,
+    BuildingtypologiesdetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -207,6 +215,7 @@ const appRoutes: Routes = [
     OrderGroupsService,
     TrackingService,
     ContractsService,
+    BuildingTypologiesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

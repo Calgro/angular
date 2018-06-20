@@ -36,7 +36,7 @@ export class MaterialListComponent implements OnInit {
   materialsLoaded = false;
 
   ngOnInit() {
-    // CONTRACTS
+    // MATERIALS
     this.materialSubscription = this.materialsService.materialListChanged.subscribe(
         (materials: Materials) => {
           if (materials.materials !== null) {
