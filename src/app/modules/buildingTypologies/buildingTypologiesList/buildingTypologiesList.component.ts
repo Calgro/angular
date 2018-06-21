@@ -3,7 +3,6 @@ import { BuildingTypologiesShort } from '../../../models/buildingTypologiesShort
 import { BuildingTypologiesService } from '../../../services/buildingtypologies.service';
 import { FilterService } from '../../../services/filter.service';
 import { HttpClient } from '@angular/common/http';
-// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -23,9 +22,8 @@ export class BuildingTypologiesListComponent implements OnInit {
     private router: Router,
     ) { }
 
-   defaultBuildingTypologies: BuildingTypologiesShort = new BuildingTypologiesShort('', '');
-   buildingTypologies: BuildingTypologies = new BuildingTypologies([this.defaultBuildingTypologies]);
-  // buildingTypologies: BuildingTypologies = new BuildingTypologies(null);
+  defaultBuildingTypologies: BuildingTypologiesShort = new BuildingTypologiesShort('', '');
+  buildingTypologies: BuildingTypologies = new BuildingTypologies([this.defaultBuildingTypologies]);
   typologyID = null;
   name = null;
   buildingTypologiesSubscription;
@@ -45,6 +43,11 @@ export class BuildingTypologiesListComponent implements OnInit {
       );
 
     this.buildingTypologiesService.fetchBuildingTypologies(this.typologyID, this.name);
+  }
+
+  loadDetailed(typologyID) {
+    this.buildingTypologiesService.typologyID = typologyID;
+      this.router.navigate(['/admin/buildingTypologies/detail']);
   }
 
   ngOnDestroy() {

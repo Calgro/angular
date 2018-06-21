@@ -67,7 +67,7 @@ import { ContractsRemoveComponent } from './modules/contracts/contractsRemove/co
 import { ContractsEditComponent } from './modules/contracts/contractsEdit/contractsEdit.component';
 import { ConnectLoginComponent } from './modules/CM3Connect/connectLogin/connectLogin.component';
 import { BuildingTypologiesListComponent } from './modules/buildingTypologies/buildingTypologiesList/buildingTypologiesList.component';
-import { BuildingtypologiesdetailComponent } from './modules/buildingTypologies/buildingtypologiesdetail/buildingtypologiesdetail.component';
+import { BuildingTypologiesDetailComponent } from './modules/buildingTypologies/buildingTypologiesDetail/buildingTypologiesDetail.component';
 import { BuildingTypologiesService } from './services/buildingtypologies.service';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -129,7 +129,8 @@ const appRoutes: Routes = [
           { path: 'login', component: ConnectLoginComponent}
     ]},
     { path: 'buildingTypologies', children : [
-          { path: 'list', component: BuildingTypologiesListComponent}
+          { path: 'list', component: BuildingTypologiesListComponent},
+          { path: 'detail', component: BuildingTypologiesDetailComponent},
     ]},
   ] },
 
@@ -177,7 +178,7 @@ const appRoutes: Routes = [
     PurchaseOrderListComponent,
     ConnectLoginComponent,
     BuildingTypologiesListComponent,
-    BuildingtypologiesdetailComponent,
+    BuildingTypologiesDetailComponent,
   ],
   imports: [
     BrowserModule,

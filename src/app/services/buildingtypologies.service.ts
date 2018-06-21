@@ -9,9 +9,9 @@ const alertify = require('alertify.js');
 @Injectable()
 export class BuildingTypologiesService {
   buildingTypologiesListChanged = new EventEmitter<BuildingTypologiesShort>();
-  query = '';
-  typologyID = '';
-  name = '';
+  buildingTypologiesDetailLoader = new EventEmitter<BuildingTypologiesShort[]>();
+  query = '?';
+  typologyID = '3';
 
   constructor(private http: HttpClient, private devService: DevService) { }
 
@@ -62,5 +62,22 @@ export class BuildingTypologiesService {
          }
       );
     }
+  }
+
+  fetchBuildingTypology(typologyID) {
+    console.log('https://' + this.devService.domain + '/api/v1/buildingTypologies/' + typologyID);
+    this.http.get<BuildingTypologiesShort[]>('https://' + this.devService.domain + '/api/v1/buildingTypologies/' + typologyID).subscribe(
+      resp => {
+        console.log(resp);
+        if (resp) {
+          this.buildingTypologiesDetailLoader.emit(resp);
+        } else {
+          this.buildingTypologiesDetailLoader.emit([new BuildingTypologiesShort('', 'None Found')]);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        alertify.error(error.status + ' - ' + error.statusText);
+       }
+    );
   }
 }

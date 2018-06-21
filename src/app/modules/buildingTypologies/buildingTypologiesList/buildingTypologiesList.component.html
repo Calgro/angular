@@ -21,7 +21,7 @@
 	
 	<main role="main" class="container">
 		<div class="media text-muted pt-3 order" (click) = "loadDetailed(buildingTypologies.typologyID)" *ngFor="let buildingTypologies of buildingTypologies.buildingTypologies">
-			<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: purple;" *ngIf = "buildingTypologies.name !== ''"></div>
+			<div class="mr-2 rounded" style="width: 32px; height: 32px; background-color: lightblue;" *ngIf = "buildingTypologies.name !== ''"></div>
 			<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
 				<strong class="d-block text-gray-dark">{{ buildingTypologies.name }}</strong>
 			</p>
@@ -29,9 +29,3 @@
 	</main>
 </div>
  
-<!--  
-<p>
-  buildingtypologies works!
-</p>
- 
- --> 
