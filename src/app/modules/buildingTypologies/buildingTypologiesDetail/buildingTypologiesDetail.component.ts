@@ -43,6 +43,11 @@ export class BuildingTypologiesDetailComponent implements OnInit {
     this.router.navigate(['/admin/buildingTypologies/edit']);
   }
 
+  buildingTypologiesDelete(typologyID){
+    this.buildingTypologiesService.typologyID = typologyID;
+    this.router.navigate(['/admin/buildingTypologies/remove']);
+  }
+
   ngOnDestroy() {
     this.buildingTypologiesSubscription.unsubscribe();
   }
