@@ -38,6 +38,11 @@ export class BuildingTypologiesDetailComponent implements OnInit {
     this.buildingTypologiesService.fetchBuildingTypology(this.typologyID);
   }
 
+  buildingTypologiesEdit(typologyID) {
+    this.buildingTypologiesService.typologyID = typologyID;
+    this.router.navigate(['/admin/buildingTypologies/edit']);
+  }
+
   ngOnDestroy() {
     this.buildingTypologiesSubscription.unsubscribe();
   }

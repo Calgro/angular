@@ -69,6 +69,7 @@ import { ConnectLoginComponent } from './modules/CM3Connect/connectLogin/connect
 import { BuildingTypologiesListComponent } from './modules/buildingTypologies/buildingTypologiesList/buildingTypologiesList.component';
 import { BuildingTypologiesDetailComponent } from './modules/buildingTypologies/buildingTypologiesDetail/buildingTypologiesDetail.component';
 import { BuildingTypologiesService } from './services/buildingtypologies.service';
+import { BuildingTypologiesEditComponent } from './modules/buildingTypologies/buildingTypologiesEdit/buildingTypologiesEdit.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -131,6 +132,7 @@ const appRoutes: Routes = [
     { path: 'buildingTypologies', children : [
           { path: 'list', component: BuildingTypologiesListComponent},
           { path: 'detail', component: BuildingTypologiesDetailComponent},
+          { path: 'edit', component: BuildingTypologiesEditComponent},
     ]},
   ] },
 
@@ -179,6 +181,7 @@ const appRoutes: Routes = [
     ConnectLoginComponent,
     BuildingTypologiesListComponent,
     BuildingTypologiesDetailComponent,
+    BuildingTypologiesEditComponent,
   ],
   imports: [
     BrowserModule,
