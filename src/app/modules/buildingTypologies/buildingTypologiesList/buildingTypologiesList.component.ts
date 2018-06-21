@@ -50,6 +50,10 @@ export class BuildingTypologiesListComponent implements OnInit {
       this.router.navigate(['/admin/buildingTypologies/detail']);
   }
 
+  buildingTypologiesAdd() {
+    this.router.navigate(['/admin/buildingTypologies/add']);
+  }
+
   ngOnDestroy() {
     this.buildingTypologiesSubscription.unsubscribe();
   }
