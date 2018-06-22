@@ -45,4 +45,8 @@ export class BuildingsListComponent implements OnInit {
     this.buildingsService.fetchBuildings('', '', '', '', '', '', '', '', '');
   }
 
+  ngOnDestroy() {
+    this.buildingsSubscription.unsubscribe();
+  }
+
 }

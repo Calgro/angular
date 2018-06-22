@@ -4,6 +4,8 @@ import { BuildingTypologiesService } from '../../../services/buildingtypologies.
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+const alertify = require('alertify.js');
+
 @Component({
   selector: 'app-buildingtypologiesdetail',
   templateUrl: './buildingTypologiesDetail.component.html',
