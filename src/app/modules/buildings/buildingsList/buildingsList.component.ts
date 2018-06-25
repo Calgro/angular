@@ -45,6 +45,11 @@ export class BuildingsListComponent implements OnInit {
     this.buildingsService.fetchBuildings('', '', '', '', '', '', '', '', '');
   }
 
+  loadDetailed(buildingID) {
+    this.buildingsService.currentBuildingID = buildingID;
+      this.router.navigate(['/admin/buildings/detail']);
+  }
+
   ngOnDestroy() {
     this.buildingsSubscription.unsubscribe();
   }

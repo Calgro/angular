@@ -18,7 +18,7 @@ export class BuildingsDetailComponent implements OnInit {
   ) { }
 
   building: BuildingShort = new BuildingShort('', '', '', '', '', '');
-  buildingID = null;
+  buildingID = this.buildingsService.currentBuildingID;
   name = null;
   buildingsSubscription;
   buildingsLoaded = false;
@@ -26,18 +26,18 @@ export class BuildingsDetailComponent implements OnInit {
 
   ngOnInit() {
     this.buildingsSubscription = this.buildingsService.buildingListChanged.subscribe(
-        (building: BuildingShort) => {
-            console.log(building);
-            if (building !== null) {
-              this.building = building;
-            } else {
-              this.noBuildings = true;
-            }
-            this.buildingsLoaded = true;
-         }
-      );
+      (building: BuildingShort) => {
+        console.log(building);
+        if (building !== null) {
+          this.building = building;
+        } else {
+          this.noBuildings = true;
+        }
+        this.buildingsLoaded = true;
+      }
+    );
 
-    this.buildingsService.fetchBuildings('', '', '', '', '', '', '', '', '');
+    this.buildingsService.fetchBuilding(this.buildingID);
   }
 
   ngOnDestroy() {
