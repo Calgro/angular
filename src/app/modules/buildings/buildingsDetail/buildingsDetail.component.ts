@@ -40,6 +40,11 @@ export class BuildingsDetailComponent implements OnInit {
     this.buildingsService.fetchBuilding(this.buildingID);
   }
 
+  buildingDelete(buildingID)  {
+    this.buildingsSubscription = this.buildingsService.currentBuildingID = buildingID;
+    this.router.navigate(['/admin/buildings/remove']);
+  }
+
   ngOnDestroy() {
     this.buildingsSubscription.unsubscribe();
   }
