@@ -75,6 +75,7 @@ import { BuildingTypologiesRemoveComponent } from './modules/buildingTypologies/
 import { BuildingsListComponent } from './modules/buildings/buildingsList/buildingsList.component';
 import { BuildingsDetailComponent } from './modules/buildings/buildingsDetail/buildingsDetail.component';
 import { BuildingsRemoveComponent } from './modules/buildings/buildingsRemove/buildingsRemove.component';
+import { BuildingsEditComponent } from './modules/buildings/buildingsEdit/buildingsEdit.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -144,7 +145,7 @@ const appRoutes: Routes = [
     { path: 'buildings', children : [
           { path: 'list', component: BuildingsListComponent},
           { path: 'detail', component: BuildingsDetailComponent},
-          { path: 'edit', component: BuildingTypologiesEditComponent},
+          { path: 'edit', component: BuildingsEditComponent},
           { path: 'add', component: BuildingTypologiesAddComponent},
           { path: 'remove', component: BuildingsRemoveComponent},
     ]},
@@ -201,6 +202,7 @@ const appRoutes: Routes = [
     BuildingsListComponent,
     BuildingsDetailComponent,
     BuildingsRemoveComponent,
+    BuildingsEditComponent,
   ],
   imports: [
     BrowserModule,
