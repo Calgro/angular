@@ -42,7 +42,7 @@ export class BuildingsListComponent implements OnInit {
        }
       );
 
-    this.buildingsService.fetchBuildings('', '', '', '', '', '', '', '', '');
+    this.buildingsService.fetchBuildings(null, null, null, null, null, null, null, null, null);
   }
 
   loadDetailed(buildingID) {
