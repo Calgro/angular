@@ -48,7 +48,14 @@ export class BuildingsEditComponent implements OnInit {
 
   onSave(form: NgForm) {
     const name = form.value.BuildingName;
-    const contractorID = this.building.buildingID;
+    const typologyID = form.value.BuildingTypology;
+    const area = form.value.BuildingArea;
+    const coverage = form.value.BuildingCoverage;
+    const walkwayArea = form.value.BuildingWalkwayArea;
+    const staircaseArea = form.value.BuildingStaircaseArea;
+    const sectionalTitleArea = form.value.BuildingSectionalTitleArea;
+    const state = form.value.BuildingState;
+    const buildingID = this.building.buildingID;
 
     if (name === '') {
       alertify.error('Building name is required');
@@ -56,8 +63,15 @@ export class BuildingsEditComponent implements OnInit {
       alertify.success('Updating building.  You will be notified once complete.');
 
       const buildingsUpdate = {
+        'buildingID': buildingID,
         'name': name,
-        'contractorID': contractorID
+        'typologyID': typologyID,
+        'area': area,
+        'coverage': coverage,
+        'walkwayArea': walkwayArea,
+        'staircaseArea': staircaseArea,
+        'sectionalTitleArea': sectionalTitleArea,
+        'state': state
       };
 
       this.http.put('https://' + this.devService.domain + '/api/v1/buildings', buildingsUpdate).subscribe(

@@ -41,12 +41,12 @@ export class BuildingsDetailComponent implements OnInit {
   }
 
   buildingDelete(buildingID)  {
-    this.buildingsSubscription = this.buildingsService.currentBuildingID = buildingID;
+    this.buildingsService.currentBuildingID = buildingID;
     this.router.navigate(['/admin/buildings/remove']);
   }
 
   buildingEdit(buildingID) {
-    this.buildingsSubscription = this.buildingsService.currentBuildingID = buildingID;
+    this.buildingsService.currentBuildingID = buildingID;
     this.router.navigate(['/admin/buildings/edit']);
   }
 
