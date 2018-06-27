@@ -50,6 +50,10 @@ export class BuildingsListComponent implements OnInit {
       this.router.navigate(['/admin/buildings/detail']);
   }
 
+  buildingsAdd() {
+    this.router.navigate(['/admin/buildings/add']);
+  }
+
   ngOnDestroy() {
     this.buildingsSubscription.unsubscribe();
   }
