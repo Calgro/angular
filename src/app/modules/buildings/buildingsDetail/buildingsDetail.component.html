@@ -1,0 +1,49 @@
+<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!buildingsLoaded" style = "padding:10px;">
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+	</div>
+</div> 
+
+<div class="col-xs-12 col-sm-12 col-md-12" style="text-align:center; padding:10px">
+	<h1 class="h3 mb-3 font-weight-normal">Details of building {{ building.name }}</h1>
+</div>
+ 
+<div class="row" style = "padding:5px" *ngIf="buildingsLoaded" >
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+		<button class = "btn btn-primary btn-sm btn-block" (click) = 'buildingEdit(building.buildingID)'>EDIT</button> 
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+		<button class = "btn btn-danger btn-sm btn-block" (click) = 'buildingDelete(building.buildingID)'>DELETE</button> 
+	</div>	
+</div>
+
+<div *ngIf="buildingsLoaded" >
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="noBuildings" style = "padding-top:10px;">
+		<div class="alert alert-danger" role="alert">
+			<strong>No Building:</strong> There are no building details loaded at this time. 
+		</div>
+	</div>
+	
+	<main role="main" class="container">
+		<div class="media text-muted pt-3 order">
+			<div class="mr-2 rounded" style="width: 32px; height: 32px;"></div>
+			<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+				<strong class="d-block text-gray-dark">Typology: {{ building.typology }}</strong>
+				<br>
+				<strong class="d-block text-gray-dark">Area: {{ building.area }}</strong>
+				<br>
+				<strong class="d-block text-gray-dark">Coverage: {{ building.coverage }}</strong>
+				<br>
+				<strong class="d-block text-gray-dark">Walkway Area: {{ building.walkwayArea }}</strong>
+				<br>
+				<strong class="d-block text-gray-dark">Staircase Area: {{ building.staircaseArea }}</strong>
+				<br>
+				<strong class="d-block text-gray-dark">Sectional Title Area: {{ building.sectionalTitleArea }}</strong>
+				<br>
+				<strong class="d-block text-gray-dark">State: {{ building.state }}</strong>
+				<br>																								
+			</p>
+		</div>
+	</main>
+	
+</div>

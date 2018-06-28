@@ -72,6 +72,11 @@ import { BuildingTypologiesService } from './services/buildingtypologies.service
 import { BuildingTypologiesEditComponent } from './modules/buildingTypologies/buildingTypologiesEdit/buildingTypologiesEdit.component';
 import { BuildingTypologiesAddComponent } from './modules/buildingTypologies/buildingTypologiesAdd/buildingTypologiesAdd.component';
 import { BuildingTypologiesRemoveComponent } from './modules/buildingTypologies/buildingTypologiesRemove/buildingTypologiesRemove.component';
+import { BuildingsListComponent } from './modules/buildings/buildingsList/buildingsList.component';
+import { BuildingsDetailComponent } from './modules/buildings/buildingsDetail/buildingsDetail.component';
+import { BuildingsRemoveComponent } from './modules/buildings/buildingsRemove/buildingsRemove.component';
+import { BuildingsEditComponent } from './modules/buildings/buildingsEdit/buildingsEdit.component';
+import { BuildingsAddComponent } from './modules/buildings/buildingsAdd/buildingsAdd.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -138,6 +143,13 @@ const appRoutes: Routes = [
           { path: 'add', component: BuildingTypologiesAddComponent},
           { path: 'remove', component: BuildingTypologiesRemoveComponent},
     ]},
+    { path: 'buildings', children : [
+          { path: 'list', component: BuildingsListComponent},
+          { path: 'detail', component: BuildingsDetailComponent},
+          { path: 'edit', component: BuildingsEditComponent},
+          { path: 'add', component: BuildingsAddComponent},
+          { path: 'remove', component: BuildingsRemoveComponent},
+    ]},
   ] },
 
 ];
@@ -188,6 +200,11 @@ const appRoutes: Routes = [
     BuildingTypologiesEditComponent,
     BuildingTypologiesAddComponent,
     BuildingTypologiesRemoveComponent,
+    BuildingsListComponent,
+    BuildingsDetailComponent,
+    BuildingsRemoveComponent,
+    BuildingsEditComponent,
+    BuildingsAddComponent,
   ],
   imports: [
     BrowserModule,

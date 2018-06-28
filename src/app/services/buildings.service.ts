@@ -10,7 +10,7 @@ const alertify = require('alertify.js');
 export class BuildingsService {
   buildingListChanged = new EventEmitter<BuildingShort[]>();
   query = '?';
-  currentBuildingID = '';
+  currentBuildingID = '51';
   constructor(private http: HttpClient, private devService: DevService) { }
 
   fetchBuildings(projectID, townshipID, erfID, PUAID, zoningID, contractorID, orderGroupID, limit, offset) {
@@ -79,8 +79,26 @@ export class BuildingsService {
        }
     );
   }
+
   getBuilding() {
     return this.currentBuildingID;
+  }
+
+  fetchBuilding(currentBuildingID) {
+    console.log('https://' + this.devService.domain + '/api/v1/buildings/' + currentBuildingID);
+    this.http.get<BuildingShort[]>('https://' + this.devService.domain + '/api/v1/buildings/' + currentBuildingID).subscribe(
+      resp => {
+        console.log(resp);
+        if (resp) {
+          this.buildingListChanged.emit(resp);
+        } else {
+          this.buildingListChanged.emit([new BuildingShort('', 'None Found', '', '', '', '')]);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        alertify.error(error.status + ' - ' + error.statusText);
+       }
+    );
   }
 
   setBuilding(buildingID) {
