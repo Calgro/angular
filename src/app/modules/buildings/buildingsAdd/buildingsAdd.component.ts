@@ -1,5 +1,8 @@
+import { BuildingTypologies } from '../../../models/buildingTypologies.model';
+import { BuildingTypologiesShort } from '../../../models/buildingTypologiesShort.model';
 import { Outcome } from '../../../models/outcome.model';
 import { BuildingsService } from '../../../services/buildings.service';
+import { BuildingTypologiesService } from '../../../services/buildingtypologies.service';
 import { DevService } from '../../../services/dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -14,20 +17,37 @@ const alertify = require('alertify.js');
   templateUrl: './buildingsAdd.component.html',
   styleUrls: ['./buildingsAdd.component.css']
 })
-export class BuildingsAddComponent {
+export class BuildingsAddComponent implements OnInit {
+  [x: string]: any;
 
   constructor(
     private buildingsService: BuildingsService,
+    private buildingTypologiesService: BuildingTypologiesService,
     private router: Router,
     private http: HttpClient,
-    private devService: DevService
+    private devService: DevService,
   ) { }
 
   buildingsSubscription;
+  defaultBuildingTypologies: BuildingTypologiesShort = new BuildingTypologiesShort('', '');
+  buildingTypologies: BuildingTypologies = new BuildingTypologies([this.defaultBuildingTypologies]);
+  noBuildingTypologies = false;
+  buildingTypologiesLoaded = false;
+
+  typologyID = 'instruction';
+
+  ngOnInit() {
+    this.buildingsSubscription = this.buildingTypologiesService.buildingTypologiesListChanged.subscribe(
+      (buildingTypologies: BuildingTypologies) => {
+        this.buildingTypologies = buildingTypologies;
+      }
+    );
+    this.buildingTypologiesService.fetchBuildingTypologies(null, null);
+  }
 
   onSave(form: NgForm) {
     const name = form.value.BuildingName;
-    const typologyID = form.value.BuildingTypology;
+    const typologyID = form.value.typologyID;
     const area = form.value.BuildingArea;
     const coverage = form.value.BuildingCoverage;
     const walkwayArea = form.value.BuildingWalkwayArea;

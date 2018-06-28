@@ -1,110 +1,117 @@
-<div class="col-xs-12 col-sm-12 col-md-12" style="text-align:center; padding:10px">
-	<h1 class="h3 mb-3 font-weight-normal">Add Building</h1>
+<div class="row align-items-center justify-content-center">
+	<div class = "col-xs-12 col-sm-12 col-md-6 col-lg-12" style = "text-align:center;">
+		<div class="col-xs-12 col-sm-12 col-md-12" style="text-align:center; padding:10px">
+			<h1 class="h3 mb-3 font-weight-normal">Add Building</h1>
+		</div>
+		
+		<div class="row">				
+			<div class="col-xs-12 col-sm-12 col-md-12" style="text-align:center; padding-left:10px; padding-right:10px;">				
+				<div class="row" style="padding:5px" >
+					<div class="col-md-3 col-lg-3"></div>
+					<form class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-signing" (ngSubmit) = "onSave(form)" #form = "ngForm" style="padding:10px;">
+						<div class="row" style="padding:10px;">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="align-items:center;">
+								<label for="BuildingName" class="sr-only" style="padding-right:8px;">Name</label>
+								<input 
+									type="text"
+							  		id="BuildingName"
+							  		name="BuildingName"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel 
+							  		placeholder="Building name (e.g. House 123)"
+							  		aria-describedby="inputGroup-sizing-sm">
+						  		<br>
+				
+						  	</div>				  	
+						  	<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" style = "margin-bottom:20px; margin-left:0px;">
+								<div style="align-items:center;">	
+									<select class="custom-select mr-sm-2" id="typologyDD" #typologyDD [(ngModel)]="typologyID" name="typologyID">
+										<option value = 'instruction' hidden>Select a Typology</option>
+								    	<option *ngFor = "let buildingTypologies of buildingTypologies.buildingTypologies" value = "{{ buildingTypologies.typologyID }}">{{ buildingTypologies.name }}</option>
+								    </select>
+				    								    
+							  		<br>				    
+							  	</div>	
+						  	</div>
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="align-items:center;">				  		
+								<label for="BuildingArea" class="sr-only" style="padding-right:8px;">Area</label>
+								<input 
+									type="number"
+							  		id="BuildingArea"
+							  		name="BuildingArea"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel
+							  		placeholder="Area (e.g. 123)"
+							  		aria-describedby="inputGroup-sizing-sm">
+						  		<br>
+								<label for="BuildingCoverage" class="sr-only" style="padding-right:8px;">Coverage</label>
+								<input 
+									type="number"
+							  		id="BuildingCoverage"
+							  		name="BuildingCoverage"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel
+							  		placeholder="Coverage (e.g. 123)"
+							  		aria-describedby="inputGroup-sizing-sm">
+						  		<br>
+								<label for="BuildingWalkwayArea" class="sr-only" style="padding-right:8px;">WalkwayArea</label>
+								<input 
+									type="number"
+							  		id="BuildingWalkwayArea"
+							  		name="BuildingWalkwayArea"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel
+							  		placeholder="Walkway Area (e.g. 123)"
+							  		aria-describedby="inputGroup-sizing-sm">
+						  		<br>
+								<label for="BuildingStaircaseArea" class="sr-only" style="padding-right:8px;">StaircaseArea</label>
+								<input 
+									type="number"
+							  		id="BuildingStaircaseArea"
+							  		name="BuildingStaircaseArea"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel
+							  		placeholder="Staircase Area (e.g. 123)"
+							  		aria-describedby="inputGroup-sizing-sm">
+						  		<br>
+								<label for="BuildingSectionalTitleArea" class="sr-only" style="padding-right:8px;">SectionalTitleArea</label>
+								<input 
+									type="number"
+							  		id="BuildingSectionalTitleArea"
+							  		name="BuildingSectionalTitleArea"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel
+							  		placeholder="Sectional Title Area (e.g. 123)"
+							  		aria-describedby="inputGroup-sizing-sm">
+						  		<br>
+								<label for="BuildingState" class="sr-only" style="padding-right:8px;">State</label>
+								<input 
+									type="text"
+							  		id="BuildingState"
+							  		name="BuildingState"
+							  		class="form-control" 
+							  		aria-label="Small"
+							  		ngModel
+							  		placeholder="State (e.g. 123ABC)"
+							  		aria-describedby="inputGroup-sizing-sm">					  		
+						  	</div>
+						</div>
+						<div class="row" style="padding:10px">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="align-items:center;">
+								<button class="btn btn-primary btn-sm btn-block" type="submit">SAVE</button>
+							</div>
+						</div>		 
+					</form>
+					<div class="col-md-3 col-lg-3"></div>
+				</div>	
+			</div>	
+		</div>
+	</div>
 </div>
-
-<div class="row">				
-	<div class="col-xs-12 col-sm-12 col-md-12" style="text-align:center; padding-left:10px; padding-right:10px;">				
-		<div class="row" style="padding:5px" >
-			<div class="col-md-3 col-lg-3"></div>
-			<form class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-signing" (ngSubmit) = "onSave(form)" #form = "ngForm" style="padding:10px;">
-				<div class="row" style="padding:10px;">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="align-items:center;">
-						<label for="BuildingName" class="sr-only" style="padding-right:8px;">Name</label>
-						<input 
-							type="text"
-					  		id="BuildingName"
-					  		name="BuildingName"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel 
-					  		placeholder="Building name (e.g. House 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingTypology" class="sr-only" style="padding-right:8px;">TypologyID</label>
-						<input 
-							type="text"
-					  		id="BuildingTypology"
-					  		name="BuildingTypology"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Typology ID (e.g. 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingArea" class="sr-only" style="padding-right:8px;">Area</label>
-						<input 
-							type="number"
-					  		id="BuildingArea"
-					  		name="BuildingArea"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Area (e.g. 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingCoverage" class="sr-only" style="padding-right:8px;">Coverage</label>
-						<input 
-							type="number"
-					  		id="BuildingCoverage"
-					  		name="BuildingCoverage"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Coverage (e.g. 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingWalkwayArea" class="sr-only" style="padding-right:8px;">WalkwayArea</label>
-						<input 
-							type="number"
-					  		id="BuildingWalkwayArea"
-					  		name="BuildingWalkwayArea"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Walkway Area (e.g. 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingStaircaseArea" class="sr-only" style="padding-right:8px;">StaircaseArea</label>
-						<input 
-							type="number"
-					  		id="BuildingStaircaseArea"
-					  		name="BuildingStaircaseArea"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Staircase Area (e.g. 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingSectionalTitleArea" class="sr-only" style="padding-right:8px;">SectionalTitleArea</label>
-						<input 
-							type="number"
-					  		id="BuildingSectionalTitleArea"
-					  		name="BuildingSectionalTitleArea"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Sectional Title Area (e.g. 123)"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
-						<label for="BuildingState" class="sr-only" style="padding-right:8px;">State</label>
-						<input 
-							type="text"
-					  		id="BuildingState"
-					  		name="BuildingState"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="State (e.g. 123ABC)"
-					  		aria-describedby="inputGroup-sizing-sm">					  		
-				  	</div>
-				</div>
-				<div class="row" style="padding:10px">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="align-items:center;">
-						<button class="btn btn-primary btn-sm btn-block" type="submit">SAVE</button>
-					</div>
-				</div>		 
-			</form>
-			<div class="col-md-3 col-lg-3"></div>
-		</div>	
-	</div>	
-</div>
+		
