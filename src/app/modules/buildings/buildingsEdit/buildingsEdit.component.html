@@ -34,17 +34,17 @@
 					  		placeholder="Name:   eg. {{building.name}}"
 					  		aria-describedby="inputGroup-sizing-sm">
 				  		<br>
-						<label for="BuildingTypology" class="sr-only" style="padding-right:8px;">TypologyID</label>
-						<input 
-							type="text"
-					  		id="BuildingTypology"
-					  		name="BuildingTypology"
-					  		class="form-control" 
-					  		aria-label="Small"
-					  		ngModel
-					  		placeholder="Typology ID:   eg. {{building.typology}}"
-					  		aria-describedby="inputGroup-sizing-sm">
-				  		<br>
+					  	</div>				  	
+					  	<div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" style = "margin-bottom:20px; margin-left:0px;">
+							<div style="align-items:center;">	
+								<select class="custom-select mr-sm-2" id="typologyDD" #typologyDD [(ngModel)]="typologyID" name="typologyID">
+									<option value = 'instruction' hidden>Select a Typology</option>
+							    	<option *ngFor = "let buildingTypologies of buildingTypologies.buildingTypologies" value = "{{ buildingTypologies.typologyID }}">{{ buildingTypologies.name }}</option>
+							    </select>
+						  		<br>				    
+						  	</div>	
+					  	</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="align-items:center;">
 						<label for="BuildingArea" class="sr-only" style="padding-right:8px;">Area</label>
 						<input 
 							type="number"

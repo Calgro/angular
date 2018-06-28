@@ -1,6 +1,9 @@
 import { BuildingShort } from '../../../models/buildingShort.model';
+import { BuildingTypologies } from '../../../models/buildingTypologies.model';
+import { BuildingTypologiesShort } from '../../../models/buildingTypologiesShort.model';
 import { Outcome } from '../../../models/outcome.model';
 import { BuildingsService } from '../../../services/buildings.service';
+import { BuildingTypologiesService } from '../../../services/buildingtypologies.service';
 import { DevService } from '../../../services/dev.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +23,7 @@ export class BuildingsEditComponent implements OnInit {
 
   constructor(
     private buildingsService: BuildingsService,
+    private buildingTypologiesService: BuildingTypologiesService,
     private router: Router,
     private http: HttpClient,
     private devService: DevService
@@ -30,6 +34,9 @@ export class BuildingsEditComponent implements OnInit {
   buildingLoaded = false;
   noBuilding = false;
   buildingSubscription;
+  defaultBuildingTypologies: BuildingTypologiesShort = new BuildingTypologiesShort('', '');
+  buildingTypologies: BuildingTypologies = new BuildingTypologies([this.defaultBuildingTypologies]);
+  typologyID = 'instruction';
 
   ngOnInit() {
     this.buildingSubscription = this.buildingsService.buildingListChanged.subscribe(
@@ -42,13 +49,19 @@ export class BuildingsEditComponent implements OnInit {
         this.buildingLoaded = true;
       }
     );
-
     this.buildingsService.fetchBuilding(this.buildingID);
+
+    this.buildingSubscription = this.buildingTypologiesService.buildingTypologiesListChanged.subscribe(
+      (buildingTypologies: BuildingTypologies) => {
+        this.buildingTypologies = buildingTypologies;
+      }
+    );
+    this.buildingTypologiesService.fetchBuildingTypologies(null, null);
   }
 
   onSave(form: NgForm) {
     const name = form.value.BuildingName;
-    const typologyID = form.value.BuildingTypology;
+    const typologyID = form.value.typologyID;
     const area = form.value.BuildingArea;
     const coverage = form.value.BuildingCoverage;
     const walkwayArea = form.value.BuildingWalkwayArea;
